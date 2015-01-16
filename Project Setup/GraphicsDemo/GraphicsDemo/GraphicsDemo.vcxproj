@@ -73,6 +73,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Shader_Loader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\Shader_Loader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
