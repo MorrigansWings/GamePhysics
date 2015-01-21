@@ -9,6 +9,10 @@ projects in Game Physics.
 
 //#include "Dependencies\glew\glew.h"
 //#include "Dependencies\freeglut\freeglut.h"
+#pragma once
+
+#include "Core/Shader_Loader.h"
+#include "Core/GameModels.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -18,15 +22,16 @@ projects in Game Physics.
 
 #include "Core/Shader_Loader.h"
 
-using namespace Core;
-
+Models::GameModels *gameModels;
 GLuint program;
 
 void renderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(1.0, 0.0, 0.0, 1.0);
+	glClearColor(0.5, 0.3, 1.0, 1.0);
 
+	glBindVertexArray(gameModels->GetModel("triangle1"));
+	
 	// use created program
 	glUseProgram(program);
 
@@ -36,12 +41,22 @@ void renderScene(void)
 	glutSwapBuffers();
 }
 
+void closeCallback()
+{
+	std::cout << "GLUT:\t Finished" << std::endl;
+	glutLeaveMainLoop();
+}
+
 void Init()
 {
 	glEnable(GL_DEPTH_TEST);
 
+	// create new GameModels object and make a triangle
+	gameModels = new Models::GameModels();
+	gameModels->CreateTriangleModel("triangle1");
+
 	// load shaders
-	Shader_Loader shaderLoader;
+	Core::Shader_Loader shaderLoader;
 	program = shaderLoader.CreateProgram("Shaders\\Vertex_Shader.glsl",
 										"Shaders\\Fragment_Shader.glsl");
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -55,6 +70,7 @@ int main(int argc, char ** argv)
 	glutInitWindowPosition(500, 500);
 	glutInitWindowSize(800, 600);
 	glutCreateWindow("OpenGL Test Window");
+	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 
 	// Initialize glew if supported
 	glewInit();
@@ -65,10 +81,13 @@ int main(int argc, char ** argv)
 
 	Init();
 
-//	glEnable(GL_DEPTH_TEST);
-
+	// Register callbacks
 	glutDisplayFunc(renderScene);
+	glutCloseFunc(closeCallback);
+
 	glutMainLoop();
+
+	delete gameModels;
 	glDeleteProgram(program);
 
 	return 0;
