@@ -1,25 +1,30 @@
 #ifndef VERTEX_H
 #define VERTEX_H
 
-#include "glm\glm.hpp"
+#include "..\Dependencies\glm\glm\glm.hpp"
+#include "..\Dependencies\glm\glm\gtx\string_cast.hpp"
+#include <iostream>
 
 // Position-only vertex struct declaration
 struct VertexP
 {
+private:
+	glm::vec3 position;
+
 public:
-	VertexP()
+/*	VertexP()
 		:position(glm::vec3(0.0f, 0.0f, 0.0f))
 	{}
 
 	VertexP(const float x, const float y, const float z)
 		:position(glm::vec3(x, y, z))
 	{}
-
+*/
 	VertexP(const glm::vec3 &pos)
 		:position(pos)
 	{}
 
-	void setPosition(const float x, const float y, const float z) { position = glm::vec3(x, y, z); }
+/*	void setPosition(const float x, const float y, const float z) { position = glm::vec3(x, y, z); }
 	void setPosition(const glm::vec3 &pos) { position = pos; }
 
 	void setPositionX(const float x) { position.x = x; }
@@ -29,9 +34,25 @@ public:
 	const float getPositionX() { return position.x; }
 	const float getPositionY() { return position.y; }
 	const float getPositionZ() { return position.z; }
+	*/
+};
 
+// Vertex struct declaration including position and color info
+struct VertexPC
+{
 private:
 	glm::vec3 position;
+	glm::vec4 color;
+
+public:
+	VertexPC(const glm::vec3 &pos, const glm::vec4 &col)
+		:position(pos)
+		, color(col)
+	{
+//		std::cout << "Creating VertexPC of size: " << sizeof(VertexPC) << std::endl;
+//		std::cout << "\tposition size: " << sizeof(glm::vec3) << " position: " << glm::to_string(position).c_str() << std::endl;
+//		std::cout << "\tcolor size: " << sizeof(glm::vec4) << " color: " << glm::to_string(color).c_str() << std::endl;
+	}
 };
 
 // Vertex struct declaration including position and UV information

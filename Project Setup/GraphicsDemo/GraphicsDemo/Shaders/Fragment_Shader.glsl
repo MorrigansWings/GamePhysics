@@ -1,8 +1,11 @@
 #version 430 core
-out vec4 color;
 
-void main(void){
+layout(location = 0) out vec4 out_color;
 
-color = vec4(0.0, 1.0, 0.0, 1.0);
+in vec4 color;
 
+void main(void)
+{
+	//out_color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+	out_color = color;
 }

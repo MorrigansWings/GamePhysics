@@ -28,7 +28,7 @@ GLuint program;
 void renderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.5, 0.3, 1.0, 1.0);
+	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
 	glBindVertexArray(gameModels->GetModel("triangle1"));
 	
@@ -67,7 +67,7 @@ int main(int argc, char ** argv)
 	// Initialize application window with GLUT
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowPosition(500, 500);
+	glutInitWindowPosition(20, 20);
 	glutInitWindowSize(800, 600);
 	glutCreateWindow("OpenGL Test Window");
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);

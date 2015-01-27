@@ -27,20 +27,22 @@ void GameModels::CreateTriangleModel(const std::string &gameModelName)
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
-	vector<VertexP> vertices;
+	vector<VertexPC> vertices;
+	vertices.push_back((VertexPC(glm::vec3(0.25, -0.25, 0.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f))));
+	vertices.push_back((VertexPC(glm::vec3(-0.25, -0.25, 0.0), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f))));
+	vertices.push_back((VertexPC(glm::vec3(0.25, 0.25, 0.0), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f))));
+//	vector<VertexP> vertices;
 //	vertices.push_back((VertexP(glm::vec3(0.25, -0.25, 0.0))));
 //	vertices.push_back((VertexP(glm::vec3(-0.25, -0.25, 0.0))));
 //	vertices.push_back((VertexP(glm::vec3(0.25, 0.25, 0.0))));
 
-	vertices.push_back((VertexP(glm::vec3(0.5, -0.25, 0.0))));
-	vertices.push_back((VertexP(glm::vec3(-0.5, -0.25, 0.0))));
-	vertices.push_back((VertexP(glm::vec3(0.5, 0.25, 0.0))));
-
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexP) * 3, &vertices[0], GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexP), (void*)0);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexPC) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0); // Set up position pipe
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexPC), (void*)0);
+	glEnableVertexAttribArray(1); // Set up color pipe
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(VertexPC), (void*)16);
 
 	Model myModel;
 	myModel.vao = vao;
