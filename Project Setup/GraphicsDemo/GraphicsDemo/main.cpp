@@ -72,12 +72,11 @@ int main(int argc, char ** argv)
 	glutCreateWindow("OpenGL Test Window");
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 
-	// Initialize glew if supported
+	// Initialize glew
 	glewInit();
-	if (glewIsSupported("GL_VERSION_4_5"))
-		std::cout << "OpenGL Version is 4.5\n";
-	else
-		std::cout << "OpenGL Version 4.5 is not supported.\n";
+
+	// Display current version of OpenGL
+	std::cout << "OpenGL Version: " << glGetString(GL_VERSION);
 
 	Init();
 

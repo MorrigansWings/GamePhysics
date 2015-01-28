@@ -73,11 +73,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameModels.cpp" />
+    <ClCompile Include="Core\Objects\Object.cpp" />
     <ClCompile Include="Core\Shader_Loader.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\GameModels.h" />
+    <ClInclude Include="Core\Objects\Cube.h" />
+    <ClInclude Include="Core\Objects\Object.h" />
     <ClInclude Include="Core\Shader_Loader.h" />
     <ClInclude Include="Core\Vertex.h" />
   </ItemGroup>
