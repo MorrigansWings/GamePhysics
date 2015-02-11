@@ -39,19 +39,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <NuGetPackageImportStamp>3ec11a9e</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>4dba7307</NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\GraphicsDemo\Dependencies\glfw-3.1\include;..\GraphicsDemo\Dependencies\glew;..\GraphicsDemo\Dependencies\freeglut;%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;freeglut.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>Dependencies\glew;Dependencies\glm;Dependencies\freeglut;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;freeglut.lib;glew32.lib;glfw3.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\GraphicsDemo\Dependencies\freeglut;..\GraphicsDemo\Dependencies\glfw-3.1\lib-vc2013;..\GraphicsDemo\Dependencies\glew;Dependencies\glm;Dependencies\freeglut;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -61,27 +61,35 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\GraphicsDemo\Dependencies\glfw-3.1\include;..\GraphicsDemo\Dependencies\glew;..\GraphicsDemo\Dependencies\freeglut;%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>Dependencies\glew;Dependencies\freeglut;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;freeglut.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\GraphicsDemo\Dependencies\freeglut;..\GraphicsDemo\Dependencies\glfw-3.1\lib-vc2013;..\GraphicsDemo\Dependencies\glew;Dependencies\freeglut;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;freeglut.lib;glew32.lib;glfw3.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Core\GameModels.cpp" />
+    <ClCompile Include="Core\Camera.cpp" />
+    <ClCompile Include="Core\InputManager.cpp" />
+    <ClCompile Include="Core\Matrix.cpp" />
+    <ClCompile Include="Core\ModelGenerator.cpp" />
     <ClCompile Include="Core\Objects\Object.cpp" />
     <ClCompile Include="Core\Shader_Loader.cpp" />
+    <ClCompile Include="Core\Vectors.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core\GameModels.h" />
+    <ClInclude Include="Core\Camera.h" />
+    <ClInclude Include="Core\InputManager.h" />
+    <ClInclude Include="Core\Matrix.h" />
+    <ClInclude Include="Core\ModelGenerator.h" />
     <ClInclude Include="Core\Objects\Cube.h" />
     <ClInclude Include="Core\Objects\Object.h" />
     <ClInclude Include="Core\Shader_Loader.h" />
+    <ClInclude Include="Core\Vectors.h" />
     <ClInclude Include="Core\Vertex.h" />
   </ItemGroup>
   <ItemGroup>

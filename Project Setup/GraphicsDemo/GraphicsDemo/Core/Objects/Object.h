@@ -5,7 +5,6 @@
 
 #include "../../Dependencies/glew/glew.h"
 #include "../../Dependencies/freeglut/freeglut.h"
-#include "../../Dependencies/glm/glm/glm.hpp"
 
 class Object
 {
@@ -13,7 +12,7 @@ protected:
 	int m_numVertices;
 	int m_numTriangles;
 
-	glm::mat4 m_world;
+//	glm::mat4 m_world;
 
 	
 

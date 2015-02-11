@@ -28,11 +28,23 @@
     <ClCompile Include="Core\Shader_Loader.cpp">
       <Filter>Core\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\GameModels.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Objects\Object.cpp">
       <Filter>Core\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\ModelGenerator.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Vectors.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Matrix.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Camera.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\InputManager.cpp">
+      <Filter>Core\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -42,14 +54,26 @@
     <ClInclude Include="Core\Vertex.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\GameModels.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Objects\Cube.h">
       <Filter>Core\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Core\Objects\Object.h">
       <Filter>Core\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\ModelGenerator.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Vectors.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Matrix.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Camera.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\InputManager.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
