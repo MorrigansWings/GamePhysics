@@ -57,6 +57,18 @@ public:
 		, z(0.0f)
 	{}
 
+	Vector3(int value)
+		: x((float)value)
+		, y((float)value)
+		, z((float)value)
+	{}
+
+	Vector3(float value)
+		: x(value)
+		, y(value)
+		, z(value)
+	{}
+
 	// Float constructor for Vector3
 	Vector3(float inX, float inY, float inZ)
 		: x(inX)
@@ -90,12 +102,18 @@ public:
 	const Vector3 operator+=(const float modifier);
 	const Vector3 operator+=(const Vector3 &rhs);
 
+	Vector3 operator-(const float modifier);
+	Vector3 operator-(const Vector3 &rhs);
+
 	const Vector3 operator=(const Vector3 &rhs);
 
 	const Vector3 operator*(const float rhs);
 	const Vector3 operator*=(const float rhs);
 
 	const std::string ToString();
+
+	static Vector3 cross(const Vector3 &first, const Vector3 &second);
+	static float dot(const Vector3 &first, const Vector3 &second);
 };
 
 class Vector4

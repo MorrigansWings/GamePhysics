@@ -5,37 +5,16 @@
 
 const float Camera::TO_RADIANS = (float)M_PI / 180.0f;
 
-Camera::Camera(float wWidth, float wHeight , GLFWwindow * wind)
-{
-	windowLink = wind;
-	initCamera();
-	windowWidth = (int)wWidth;
-	windowHeight = (int)wHeight;
-
-	windowMidX = windowWidth / 2;
-	windowMidY = windowHeight / 2;
-	
-	glfwSetCursorPos(windowLink, (double)windowMidX, (double)windowMidY);
-}
-
 Camera::~Camera()
 {}
 
 void Camera::initCamera()
 {
-	position = Vector3::ZERO;
-	rotation = Vector3::ZERO;
-	speed = Vector3::ZERO;
+	m_Position = Vector3::ZERO;
+	m_Rotation = Vector3::ZERO;
 
-	movementSpeed = 100.0f;
-
-	pitchSensitivity = 0.2f;
-	yawSensitivity = 0.2f;
-
-	holdingForward = false;
-	holdingBackward = false;
-	holdingLeftStrafe = false;
-	holdingRightStrafe = false;
+	m_Pitch = 0.2f;
+	m_Yaw = 0.2f;
 }
 
 const float Camera::toRadians(const float &angleDegrees) const
@@ -43,69 +22,19 @@ const float Camera::toRadians(const float &angleDegrees) const
 	return angleDegrees * TO_RADIANS;
 }
 
-void Camera::handleMouseMove(int mouseX, int mouseY)
+Matrix4 Camera::getViewMatrix()
 {
-	float horizMovement = (mouseX - windowMidX + 1) * yawSensitivity;
-	float vertMovement = (mouseY - windowMidY) * pitchSensitivity;
+	m_View = Matrix4::lookAt(getPosition(), getPosition() + getDirection(), getUp());
 
-	rotation.x += vertMovement;
-	rotation.y += horizMovement;
-
-	// Limit looking to vertically up or down
-	if (rotation.x < -90)
-		rotation.x = -90;
-	if (rotation.x > 90)
-		rotation.x = 90;
-
-	if (rotation.y < 0)
-		rotation.y += 360;
-	if (rotation.y > 360)
-		rotation.y -= 360;
-
-	glfwSetCursorPos(windowLink, (double)windowMidX, (double)windowMidY);
+	return m_View;
 }
 
-void Camera::move(float deltaTime)
+Matrix4 Camera::getProjectionMatrix()
 {
-	Vector3 movement = Vector3::ZERO;
+	if (m_AspectWidth <= 0.0f || m_AspectHeight <= 0.0f || m_FOV <= 0.0f)
+		return Matrix4(1.0f);
 
-	float sinXRot = sin(toRadians(rotation.x));
-	float cosXRot = cos(toRadians(rotation.x));
+	m_Proj = Matrix4::perspectiveFOV(m_FOV, m_AspectWidth, m_AspectHeight, m_Near, m_Far);
 
-	float sinYRot = sin(toRadians(rotation.y));
-	float cosYRot = sin(toRadians(rotation.y));
-
-	float pitchLimit = cosXRot;
-
-	if (holdingForward)
-	{
-		movement.x += -sinYRot * pitchLimit;
-		movement.y += -sinXRot;
-		movement.z += -cosYRot * pitchLimit;
-	}
-	if (holdingBackward)
-	{
-		movement.x += -sinYRot * pitchLimit;
-		movement.y += sinXRot;
-		movement.z += cosYRot * pitchLimit;
-	}
-	if (holdingLeftStrafe)
-	{
-		movement.x += -cosYRot;
-		movement.z += -sinYRot;
-	}
-	if (holdingRightStrafe)
-	{
-		movement.x += cosYRot;
-		movement.z += sinYRot;
-	}
-
-	movement.normalize();
-
-	float framerateIndependentFactor = movementSpeed * deltaTime;
-
-	movement *= framerateIndependentFactor;
-
-	position += movement;
-
+	return m_Proj;
 }

@@ -36,8 +36,8 @@ Camera *cam;
 #undef near
 #undef far
 GLfloat fieldOfView = 45.0f;
-GLfloat near = 2.0f;
-GLfloat far = 1500.0f;
+GLfloat near = 0.1f;
+GLfloat far = 10000.0f;
 GLFWwindow * gpWindow;
 
 using namespace std;
@@ -124,7 +124,10 @@ void Init()
 	glEnable(GL_DEPTH_TEST);
 
 	// Initialize camera
-	cam = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT, gpWindow);
+//	cam = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT, gpWindow);
+	cam = new Camera((float)WINDOW_WIDTH, (float)WINDOW_HEIGHT,
+		Vector3(5.0f), Vector3(-1.0f), Vector3(0.0f, 1.0f, 0.0f), 45.0f, 0.1f, 10000.0f);
+
 
 	// create new GameModels object and make a triangle
 	generator = new Models::ModelGenerator();
@@ -150,11 +153,11 @@ Matrix4 getPerspectiveFOV(float fov, float aspectWidth, float aspectHeight, floa
 	float const w = h * aspectHeight / aspectWidth; ///todo max(width , Height) / min(width , Height)?
 
 	Matrix4 Result(0.0f);
-	Result[0][0] = w;
-	Result[1][1] = h;
-	Result[2][2] = -(inFar + inNear) / (inFar - inNear);
-	Result[2][3] = -1.0f;
-	Result[3][2] = -(2.0f * inFar * inNear) / (inFar - inNear);
+	Result.insert(0, 0, w);
+	Result.insert(1, 1, h);
+	Result.insert(2, 2, -(inFar + inNear) / (inFar - inNear));
+	Result.insert(2, 3, -1.0f);
+	Result.insert(3, 2, -(2.0f * inFar * inNear) / (inFar - inNear));
 	return Result;
 }
 
@@ -162,19 +165,18 @@ void renderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//	glBindVertexArray(generator->GetModel("triangle1"));
-	//	glBindVertexArray(generator->GetModel("cube1"));
+	Matrix4 modelTemp = Matrix4::IDENTITY;
+
+	Matrix4 view = cam->getViewMatrix();
+	Matrix4 proj = cam->getProjectionMatrix();
+	Matrix4 viewProj = proj * view;
+
+	cout << "viewProj: " << viewProj.ToString() << endl;
 
 	// use created program
 	glUseProgram(program);
 
-	// draw 3 vertices as triangles
-	//	glDrawArrays(GL_TRIANGLES, 0, generator->GetModelNumVertices("cube1"));
-
-//	drawGround(-100.0f);
-
-	Matrix4 mat = Matrix4(1.0f);
-	glUniformMatrix4fv(glGetUniformLocation(program, "uModelViewProj"), 1, GL_FALSE, (GLfloat*)&mat);
+	glUniformMatrix4fv(glGetUniformLocation(program, "uModelViewProj"), 1, GL_FALSE, (GLfloat*)&viewProj);
 
 	// Draw all models
 	generator->Draw();

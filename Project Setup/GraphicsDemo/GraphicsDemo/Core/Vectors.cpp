@@ -125,6 +125,22 @@ const Vector3 Vector3::operator+=(const Vector3 &rhs)
 	return *this;
 }
 
+Vector3 Vector3::operator-(const float modifier)
+{
+	this->x -= modifier;
+	this->y -= modifier;
+	this->z -= modifier;
+	return *this;
+}
+
+Vector3 Vector3::operator-(const Vector3 &rhs)
+{
+	this->x -= rhs.x;
+	this->y -= rhs.y;
+	this->z -= rhs.z;
+	return *this;
+}
+
 const Vector3 Vector3::operator=(const Vector3 &rhs)
 {
 	this->x = rhs.x;
@@ -158,6 +174,23 @@ const std::string Vector3::ToString()
 	output << this->y << ", ";
 	output << this->z << "}" << std::endl;
 	return output.str();
+}
+
+Vector3 Vector3::cross(const Vector3 &first, const Vector3 &second)
+{
+	return Vector3(
+		first.y * second.z - second.y * first.z,
+		first.z * second.x - second.z * first.x,
+		first.x * second.y - second.x * first.y);
+}
+
+float Vector3::dot(const Vector3 &first, const Vector3 &second)
+{
+	float result = 0.0f;
+	result += first.x * second.x;
+	result += first.y * second.y;
+	result += first.z * second.z;
+	return result;
 }
 
 /********************** Vector4 ****************************/

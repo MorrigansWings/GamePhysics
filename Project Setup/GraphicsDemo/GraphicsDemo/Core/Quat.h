@@ -51,3 +51,5 @@ public:
 	{}
 
 };
+
+#endif // _QUAT_H_

@@ -7,6 +7,7 @@
 #include <math.h>
 
 #include "Vectors.h"
+#include "Matrix.h"
 #include "Quat.h"
 #include "GLFW/glfw3.h"
 
@@ -15,25 +16,33 @@ class Camera
 public:
 	static const float TO_RADIANS;
 
-	bool holdingForward;
-	bool holdingBackward;
-	bool holdingLeftStrafe;
-	bool holdingRightStrafe;
+	Camera(	const float windowWidth, const float windowHeight, 
+			const Vector3 position, const Vector3 direction, const Vector3 up,
+			const float fov, const float near, const float far)
+		: m_AspectWidth(windowWidth)
+		, m_AspectHeight(windowHeight)
+		, m_Position(position)
+		, m_Direction(direction)
+		, m_Up(up)
+		, m_FOV(fov)
+		, m_Near(near)
+		, m_Far(far)
+		{}
 
-	Camera(float windowWidth, float windowHeight, GLFWwindow *wind);
 	~Camera();
-
-	void handleMouseMove(int mouseX, int mouseY);
+	
+	Matrix4 getViewMatrix();
+	Matrix4 getProjectionMatrix();
 
 	const float toRadians(const float &angleDegrees) const;
-
-	void move(float deltaTime);
 
 	// INLINE GETTERS
 	inline float getPitch() { return m_Pitch; }
 	inline float getYaw() { return m_Yaw; }
 	inline Vector3 getPosition() { return m_Position; }
 	inline Vector3 getRotation() { return m_Rotation; }
+	inline Vector3 getDirection() { return m_Direction; }
+	inline Vector3 getUp() { return m_Up; }
 
 	// INLINE SETTERS
 	inline void setPitch(float inVal){ m_Pitch = inVal; }
@@ -45,12 +54,12 @@ private:
 	GLFWwindow *windowLink;
 
 	Vector3 m_Position,
-			m_Rotation;
+			m_Rotation,
+			m_Direction,
+			m_Up;
 
-	int		m_WindowWidth, 
-			m_WindowHeight,
-			m_WindowMidX, 
-			m_WindowMidY;
+	int		m_WindowWidth,
+			m_WindowHeight;
 
 	float	m_FOV,
 			m_AspectWidth,

@@ -3,6 +3,11 @@
 
 const Matrix4 Matrix4::IDENTITY = Matrix4(1.0f);
 
+Matrix4::Matrix4()
+{
+	memset(matrix, 0, sizeof(float) * 16);
+}
+
 Matrix4::Matrix4(int value)
 {
 	for (int i = 0; i < 4; ++i)
@@ -66,6 +71,43 @@ void Matrix4::fill(int value)
 	}
 }
 
+Matrix4 Matrix4::lookAt(Vector3 eye, Vector3 center, Vector3 up)
+{
+	Vector3 f = (center - eye).normalize();
+	Vector3 s = (Vector3::cross(f, up)).normalize();
+	Vector3 u = Vector3::cross(s, f);
+
+	Matrix4 Result = IDENTITY;
+	Result.insert(0, 0, s.x);
+	Result.insert(1, 0, s.y);
+	Result.insert(2, 0, s.z);
+	Result.insert(0, 1, u.x);
+	Result.insert(1, 1, u.y);
+	Result.insert(2, 1, u.z);
+	Result.insert(0, 2, -f.x);
+	Result.insert(1, 2, -f.y);
+	Result.insert(2, 2, -f.z);
+	Result.insert(3, 0, -(Vector3::dot(s, eye)));
+	Result.insert(3, 1, -(Vector3::dot(u, eye)));
+	Result.insert(3, 2, Vector3::dot(f, eye));
+	return Result;
+}
+
+Matrix4 Matrix4::perspectiveFOV(float fov, float width, float height, float zNear, float zFar)
+{
+	float rad = fov;
+	float h = cos(0.5f * rad) / sin(0.5f * rad);
+	float w = h * height / width;
+
+	Matrix4 result;
+	result.insert(0, 0, w);
+	result.insert(1, 1, h);
+	result.insert(2, 2, -(zFar + zNear) / (zFar - zNear));
+	result.insert(2, 3, 1.0f);
+	result.insert(3, 2, -(2.0f * zFar * zNear) / (zFar / zNear));
+	return result;
+}
+
 const Vector4 Matrix4::operator*(const Vector4 &rhs)
 {
 	float result[4];
@@ -86,6 +128,7 @@ const Matrix4 Matrix4::operator*(const Matrix4 &rhs)
 	{
 		for (int column = 0; column < 4; ++column)
 		{
+			result[row][column] = 0.0f;
 			for (int i = 0; i < 4; ++i)
 			{
 				result[row][column] += matrix[row][i] * rhs.matrix[i][column];

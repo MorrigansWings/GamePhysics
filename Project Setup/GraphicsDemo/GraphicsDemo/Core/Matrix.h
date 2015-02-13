@@ -14,6 +14,7 @@ public:
 	// Rows, then columns
 	float matrix[4][4];
 
+	Matrix4();
 	Matrix4(int value);
 	Matrix4(float value);
 	Matrix4(float list[16]);
@@ -21,6 +22,10 @@ public:
 	Matrix4(float list[4][4]);
 
 	void fill(int value);
+	inline void insert(int row, int column, float value){ matrix[row][column] = value; }
+	
+	static Matrix4 lookAt(Vector3 eye, Vector3 center, Vector3 up);
+	static Matrix4 perspectiveFOV(float fov, float width, float height, float zNear, float zFar);
 
 	const Vector4 operator*(const Vector4 &rhs);
 	const Matrix4 operator*(const Matrix4 &rhs);
