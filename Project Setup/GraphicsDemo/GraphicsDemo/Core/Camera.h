@@ -7,28 +7,13 @@
 #include <math.h>
 
 #include "Vectors.h"
+#include "Quat.h"
 #include "GLFW/glfw3.h"
 
 class Camera
 {
-protected:
-	GLFWwindow *windowLink;
-
-	Vector3 position;
-	Vector3 rotation;
-	Vector3 speed;
-
-	int windowWidth, windowHeight;
-	int windowMidX, windowMidY;
-
-	float movementSpeed;
-	float pitchSensitivity;
-	float yawSensitivity;
-
-	void initCamera();
-
 public:
-	static const double TO_RADIANS;
+	static const float TO_RADIANS;
 
 	bool holdingForward;
 	bool holdingBackward;
@@ -45,16 +30,42 @@ public:
 	void move(float deltaTime);
 
 	// INLINE GETTERS
-	inline float getPitchSensitivity() { return pitchSensitivity; }
-	inline float getYawSensitivity() { return yawSensitivity; }
-	inline Vector3 getPosition() { return position; }
-	inline Vector3 getRotation() { return rotation; }
-	inline Vector3 getSpeed() { return speed; }
+	inline float getPitch() { return m_Pitch; }
+	inline float getYaw() { return m_Yaw; }
+	inline Vector3 getPosition() { return m_Position; }
+	inline Vector3 getRotation() { return m_Rotation; }
 
 	// INLINE SETTERS
-	inline void setPitchSensitivity(float inVal){ pitchSensitivity = inVal; }
-	inline void setYawSensitivity(float inVal){ yawSensitivity = inVal; }
-	inline void setPosition(Vector3 newPos){ position = newPos; }
+	inline void setPitch(float inVal){ m_Pitch = inVal; }
+	inline void setYaw(float inVal){ m_Yaw = inVal; }
+	inline void setPosition(Vector3 newPos){ m_Position = newPos; }
+	inline void setRotation(Vector3 newRot){ m_Rotation = newRot; }
+
+private:
+	GLFWwindow *windowLink;
+
+	Vector3 m_Position,
+			m_Rotation;
+
+	int		m_WindowWidth, 
+			m_WindowHeight,
+			m_WindowMidX, 
+			m_WindowMidY;
+
+	float	m_FOV,
+			m_AspectWidth,
+			m_AspectHeight,
+			m_Near,
+			m_Far,
+			m_Pitch,
+			m_Yaw;
+
+	Matrix4	m_View,
+			m_Proj;
+
+	Quat	m_Orient;
+
+	void initCamera();
 };
 
 

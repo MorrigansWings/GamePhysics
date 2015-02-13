@@ -20,9 +20,11 @@ projects in Game Physics.
 #include <stdlib.h>
 #include <fstream>
 #include <vector>
+#include <cmath>
 
 #include "Core/Shader_Loader.h"
 #include <GLFW/glfw3.h>
+#include "Core/Matrix.h"
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
@@ -36,149 +38,24 @@ Camera *cam;
 GLfloat fieldOfView = 45.0f;
 GLfloat near = 2.0f;
 GLfloat far = 1500.0f;
+GLFWwindow * gpWindow;
 
 using namespace std;
 
-void drawground(float groundLevel);
+void glfwError(int error, const char* description);
+void glfwResize(GLFWwindow* pGLFWWindow, int width, int height);
+void glfwKey(GLFWwindow* pGLFWWindow, int key, int scancode, int action, int mods);
+void glfwMouseMove(GLFWwindow* pGLFWWindow, double x, double y);
+void glfwMouse(GLFWwindow* pGLFWWindow, int button, int action, int mods);
+void glfwMouseScroll(GLFWwindow* pGLFWWindow, double x, double y);
 
-void renderScene(void)
-{
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-
-//	glBindVertexArray(generator->GetModel("triangle1"));
-//	glBindVertexArray(generator->GetModel("cube1"));
-
-	// use created program
-	glUseProgram(program);
-
-	// draw 3 vertices as triangles
-//	glDrawArrays(GL_TRIANGLES, 0, generator->GetModelNumVertices("cube1"));
-
-	//Reset the matrix
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	// Move camera to location
-	glRotatef(cam->getRotation().x, 1.0f, 0.0f, 0.0f);
-	glRotatef(cam->getRotation().y, 0.0f, 1.0f, 0.0f);
-
-	Vector3 pos = cam->getPosition();
-	glTranslatef(-pos.x, -pos.y, -pos.z);
-
-	drawground(-100.0f);
-
-
-	// Draw all models
-	generator->Draw();
-
-	glutSwapBuffers();
-}
-
-void closeCallback()
-{
-	cout << "GLUT:\t Finished" << endl;
-	glutLeaveMainLoop();
-}
-
-void Init()
-{
-	// GLFW Settings
-	glfwSwapInterval(0); // disable vsync
-
-	// Projection Settings
-	glViewport(0, 0, (GLsizei)WINDOW_WIDTH, (GLsizei)WINDOW_HEIGHT);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	GLfloat aspectRatio = (WINDOW_WIDTH > WINDOW_HEIGHT) ? float(WINDOW_WIDTH) / float(WINDOW_HEIGHT) : float(WINDOW_HEIGHT) / float(WINDOW_WIDTH);
-	GLfloat fH = tan(float(fieldOfView / 360.0f * 3.14159f)) * near;
-	GLfloat fW = fH * aspectRatio;
-	glFrustum(-fW, fW, -fH, fH, near, far);
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	glEnable(GL_DEPTH_TEST);
-
-	// create new GameModels object and make a triangle
-	generator = new Models::ModelGenerator();
-	if (! generator->CreateTriangleModel("triangle1"))
-		cout << "Could not create triangle1... " << endl;
-	if (! generator->CreateCubeModel("cube1"))
-		cout << "Could not create cube..." << endl;
-
-	// load shaders
-	Core::Shader_Loader shaderLoader;
-	program = shaderLoader.CreateProgram("Shaders\\Vertex_Shader.glsl",
-										"Shaders\\Fragment_Shader.glsl");
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-}
-
-void handleKeyPress(int key, int action)
-{
-	if (action == GLFW_PRESS)
-	{
-		switch (key)
-		{
-		case 'w':
-			cam->holdingForward = true;
-			break;
-		case 's':
-			cam->holdingBackward = true;
-			break;
-		case 'a':
-			cam->holdingLeftStrafe = true;
-			break;
-		case 'd':
-			cam->holdingRightStrafe = true;
-			break;
-		}
-	}
-	else
-	{
-		switch (key)
-		{
-		case 'w':
-			cam->holdingForward = false;
-			break;
-		case 's':
-			cam->holdingBackward = false;
-			break;
-		case 'a':
-			cam->holdingLeftStrafe = false;
-			break;
-		case 'd':
-			cam->holdingRightStrafe = false;
-			break;
-		}
-	}
-}
-
-void handleMouseMove(int mouseX, int mouseY)
-{
-	cam->handleMouseMove(mouseX, mouseY);
-}
+//void drawGround(float groundLevel);
+void Init();
+void renderScene(void);
+void closeCallback();
 
 int main(int argc, char ** argv)
 {
-	// Initialize application window with GLUT
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowPosition(20, 20);
-	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-//	glutInitContextVersion(4, 3);
-//	glutInitContextProfile(GLUT_CORE_PROFILE);
-	glutCreateWindow(argv[0]);
-	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
-
-	// Initialize glew
-	if (!glewInit())
-	{
-		cout << "Could not initialize GLEW." << endl;
-		exit(EXIT_FAILURE);
-	}
-
 	// Initialize GLFW
 	if (!glfwInit())
 	{
@@ -186,26 +63,132 @@ int main(int argc, char ** argv)
 		exit(EXIT_FAILURE);
 	}
 
+	glfwSetErrorCallback(glfwError);
+
+	glfwWindowHint(GLFW_DEPTH_BITS, 16);
+
+	gpWindow = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "A cat is fine too desu desu", NULL, NULL);
+	
+	if (!gpWindow)
+	{
+		// bad things
+	}
+
+	glfwMakeContextCurrent(gpWindow);
+
+	glfwSwapInterval(0); // vsync
+
+	glewExperimental = GL_TRUE;
+	// Initialize glew
+	if (!glewInit())
+	{
+		cout << "Could not initialize GLEW." << endl;
+		//exit(EXIT_FAILURE);
+	}
+
+	glfwSetFramebufferSizeCallback(gpWindow, glfwResize);
+	glfwSetKeyCallback(gpWindow, glfwKey);
+	glfwSetMouseButtonCallback(gpWindow, glfwMouse);
+	glfwSetCursorPosCallback(gpWindow, glfwMouseMove);
+	glfwSetScrollCallback(gpWindow, glfwMouseScroll);
+
 	// Display current version of OpenGL
 	cout << "OpenGL Version: " << glGetString(GL_VERSION) << endl;
 
 	Init();
 
-	// Register callbacks
-	glutDisplayFunc(renderScene);
-	glutCloseFunc(closeCallback);
+	while ( ! glfwWindowShouldClose(gpWindow))
+	{
+		renderScene();
 
-	glutMainLoop();
+		glfwPollEvents();
+	}
+
+	glfwHideWindow(gpWindow);
 
 	delete generator;
 	glDeleteProgram(program);
 
 	glfwTerminate();
 
+	//char exiting;
+	//cin >> exiting;
 	return 0;
 }
 
-// Function to draw a grid of lines
+void Init()
+{
+	// Projection Settings
+
+	
+	glEnable(GL_DEPTH_TEST);
+
+	// Initialize camera
+	cam = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT, gpWindow);
+
+	// create new GameModels object and make a triangle
+	generator = new Models::ModelGenerator();
+	if (!generator->CreateTriangleModel("triangle1"))
+		cout << "Could not create triangle1... " << endl;
+	if (!generator->CreateCubeModel("cube1"))
+		cout << "Could not create cube..." << endl;
+
+	// load shaders
+	Core::Shader_Loader shaderLoader;
+	program = shaderLoader.CreateProgram("Shaders\\Vertex_Shader.glsl",
+		"Shaders\\Fragment_Shader.glsl");
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+}
+
+Matrix4 getPerspectiveFOV(float fov, float aspectWidth, float aspectHeight, float inNear, float inFar)
+{
+
+	float const rad = fov;
+	float const h = cos(0.5f * rad) / sin(0.5f * rad);
+	float const w = h * aspectHeight / aspectWidth; ///todo max(width , Height) / min(width , Height)?
+
+	Matrix4 Result(0.0f);
+	Result[0][0] = w;
+	Result[1][1] = h;
+	Result[2][2] = -(inFar + inNear) / (inFar - inNear);
+	Result[2][3] = -1.0f;
+	Result[3][2] = -(2.0f * inFar * inNear) / (inFar - inNear);
+	return Result;
+}
+
+void renderScene(void)
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	//	glBindVertexArray(generator->GetModel("triangle1"));
+	//	glBindVertexArray(generator->GetModel("cube1"));
+
+	// use created program
+	glUseProgram(program);
+
+	// draw 3 vertices as triangles
+	//	glDrawArrays(GL_TRIANGLES, 0, generator->GetModelNumVertices("cube1"));
+
+//	drawGround(-100.0f);
+
+	Matrix4 mat = Matrix4(1.0f);
+	glUniformMatrix4fv(glGetUniformLocation(program, "uModelViewProj"), 1, GL_FALSE, (GLfloat*)&mat);
+
+	// Draw all models
+	generator->Draw();
+
+	glfwSwapBuffers(gpWindow);
+}
+
+void closeCallback()
+{
+	cout << "GLUT:\t Finished" << endl;
+	
+}
+
+/*// Function to draw a grid of lines
 void drawGround(float groundLevel)
 {
 	GLfloat extent = 600.0f; // How far on the Z-Axis and X-Axis the ground extends
@@ -227,4 +210,54 @@ void drawGround(float groundLevel)
 		glVertex3f(extent, groundLevel, loop);
 	}
 	glEnd();
+}*/
+
+
+void glfwError(int error, const char* description)
+{
+	printf("%s (%d)", description, error);
 }
+
+void glfwResize(GLFWwindow* pGLFWWindow, int width, int height)
+{
+}
+
+void glfwKey(GLFWwindow* pGLFWWindow, int key, int scancode, int action, int mods)
+{
+	switch (action)
+	{
+	case GLFW_PRESS:
+
+		break;
+	case GLFW_RELEASE:
+
+		break;
+	case GLFW_REPEAT:
+
+
+		break;
+	}
+}
+
+void glfwMouseMove(GLFWwindow* pGLFWWindow, double x, double y)
+{
+}
+
+void glfwMouse(GLFWwindow* pGLFWWindow, int button, int action, int mods)
+{
+	switch (action)
+	{
+	case GLFW_PRESS:
+
+		break;
+	case GLFW_RELEASE:
+
+
+		break;
+	}
+}
+
+void glfwMouseScroll(GLFWwindow* pGLFWWindow, double x, double y)
+{
+}
+

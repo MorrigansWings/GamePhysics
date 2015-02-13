@@ -4,7 +4,6 @@
 #pragma once
 
 #include "../Dependencies/glew/glew.h"
-#include "../Dependencies/freeglut/freeglut.h"
 
 #include "Vertex.h"
 
@@ -25,6 +24,10 @@ namespace Models
 	class ModelGenerator
 	{
 	public:
+
+		static const GLuint ATTR_VERTEX;
+		static const GLuint ATTR_COLOR;
+
 		ModelGenerator();
 		~ModelGenerator();
 		bool CreateTriangleModel(const std::string &gameModelName);

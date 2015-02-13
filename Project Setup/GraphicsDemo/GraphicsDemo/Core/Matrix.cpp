@@ -1,12 +1,13 @@
 #include "Matrix.h"
 #include <sstream>
 
+const Matrix4 Matrix4::IDENTITY = Matrix4(1.0f);
+
 Matrix4::Matrix4(int value)
 {
 	for (int i = 0; i < 4; ++i)
 	{
-		for (int j = 0; j < 4; ++j)
-			matrix[i][j] = (float)value;
+		matrix[i][i] = (float)value;
 	}
 }
 
@@ -14,8 +15,7 @@ Matrix4::Matrix4(float value)
 {
 	for (int i = 0; i < 4; ++i)
 	{
-		for (int j = 0; j < 4; ++j)
-			matrix[i][j] = value;
+		matrix[i][i] = value;
 	}
 }
 

@@ -6,6 +6,10 @@ using namespace std;
 #include "Vectors.h"
 #include <iostream>
 
+const GLuint Models::ModelGenerator::ATTR_VERTEX = 0;
+const GLuint Models::ModelGenerator::ATTR_COLOR = 1;
+
+
 ModelGenerator::ModelGenerator(){}
 
 ModelGenerator::~ModelGenerator()
@@ -45,10 +49,10 @@ bool ModelGenerator::CreateTriangleModel(const std::string &gameModelName)
 		glGenBuffers(1, &vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(VertexPC) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
-		glEnableVertexAttribArray(0); // Set up position pipe
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexPC), (void*)0);
-		glEnableVertexAttribArray(1); // Set up color pipe
-		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(VertexPC), (void*)12);
+		glEnableVertexAttribArray(ATTR_VERTEX); // Set up position pipe
+		glVertexAttribPointer(ATTR_VERTEX, 3, GL_FLOAT, GL_FALSE, 0, 0);
+		glEnableVertexAttribArray(ATTR_COLOR); // Set up color pipe
+		glVertexAttribPointer(ATTR_COLOR, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
 //		cout << "Size of VertexPC: " << sizeof(VertexPC) << endl;
 //		cout << "\tVertexPC.position: " << sizeof(Vector3) << endl;
@@ -93,7 +97,7 @@ bool ModelGenerator::CreateCubeModel(const std::string &gameModelName)
 		vertices.push_back(VertexPC(Vector3(-0.25f, 0.25f, -0.25f), Vector4(1.0f, 1.0f, 0.0f, 1.0f)));
 		
 		//R size 2 triangles
-/*		vertices.push_back(VertexPC(Vector3(-0.25f, -0.25f, -0.25f), Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(Vector3(-0.25f, -0.25f, -0.25f), Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
 		vertices.push_back(VertexPC(Vector3(-0.25f, -0.25f, -0.25f), Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
 		vertices.push_back(VertexPC(Vector3(-0.25f, -0.25f, -0.25f), Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
 
@@ -106,9 +110,6 @@ bool ModelGenerator::CreateCubeModel(const std::string &gameModelName)
 		vertices.push_back(VertexPC(Vector3(0.25f, 0.25f, -0.25f), Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
 		vertices.push_back(VertexPC(Vector3(0.25f, -0.25f, 0.25f), Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
 		vertices.push_back(VertexPC(Vector3(0.25f, 0.25f, 0.25f), Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
-		
-		*/
-
 
 		unsigned int vbo;
 		glGenBuffers(1, &vbo);

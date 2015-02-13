@@ -10,6 +10,7 @@
 class Matrix4
 {
 public:
+	static const Matrix4 IDENTITY;
 	// Rows, then columns
 	float matrix[4][4];
 

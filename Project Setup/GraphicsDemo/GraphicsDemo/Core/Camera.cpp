@@ -3,9 +3,9 @@
 #include "Camera.h"
 #include <GLFW/glfw3.h>
 
-const double Camera::TO_RADIANS = M_PI / 180.0;
+const float Camera::TO_RADIANS = (float)M_PI / 180.0f;
 
-Camera::Camera(float wWidth, float wHeight, GLFWwindow * wind)
+Camera::Camera(float wWidth, float wHeight , GLFWwindow * wind)
 {
 	windowLink = wind;
 	initCamera();
@@ -40,7 +40,7 @@ void Camera::initCamera()
 
 const float Camera::toRadians(const float &angleDegrees) const
 {
-	return angleDegrees * (float)TO_RADIANS;
+	return angleDegrees * TO_RADIANS;
 }
 
 void Camera::handleMouseMove(int mouseX, int mouseY)
@@ -69,13 +69,13 @@ void Camera::move(float deltaTime)
 {
 	Vector3 movement = Vector3::ZERO;
 
-	double sinXRot = sin(toRadians(rotation.x));
-	double cosXRot = cos(toRadians(rotation.x));
+	float sinXRot = sin(toRadians(rotation.x));
+	float cosXRot = cos(toRadians(rotation.x));
 
-	double sinYRot = sin(toRadians(rotation.y));
-	double cosYRot = sin(toRadians(rotation.y));
+	float sinYRot = sin(toRadians(rotation.y));
+	float cosYRot = sin(toRadians(rotation.y));
 
-	double pitchLimit = cosXRot;
+	float pitchLimit = cosXRot;
 
 	if (holdingForward)
 	{

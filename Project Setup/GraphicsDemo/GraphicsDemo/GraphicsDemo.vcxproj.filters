@@ -75,6 +75,9 @@
     <ClInclude Include="Core\InputManager.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Quat.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Vertex_Shader.glsl">
