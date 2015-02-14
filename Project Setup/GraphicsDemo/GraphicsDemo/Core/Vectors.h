@@ -89,6 +89,12 @@ public:
 		, z(values[2])
 	{}
 
+	Vector3(const Vector3 &orig)
+		: x(orig.x)
+		, y(orig.y)
+		, z(orig.z)
+	{}
+
 	const float length();
 	const Vector3 normalize();
 	const Vector3 getNormalized();
@@ -104,6 +110,7 @@ public:
 
 	Vector3 operator-(const float modifier);
 	Vector3 operator-(const Vector3 &rhs);
+	Vector3 operator-(const Vector3 &rhs) const;
 
 	const Vector3 operator=(const Vector3 &rhs);
 

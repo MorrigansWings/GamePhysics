@@ -190,31 +190,6 @@ void closeCallback()
 	
 }
 
-/*// Function to draw a grid of lines
-void drawGround(float groundLevel)
-{
-	GLfloat extent = 600.0f; // How far on the Z-Axis and X-Axis the ground extends
-	GLfloat stepSize = 20.0f;  // The size of the separation between points
-
-	// Set colour to white
-	glColor3ub(255, 255, 255);
-
-	// Draw our ground grid
-	glBegin(GL_LINES);
-	for (GLfloat loop = -extent; loop < extent; loop += stepSize)
-	{
-		// Draw lines along Z-Axis
-		glVertex3f(loop, groundLevel, extent);
-		glVertex3f(loop, groundLevel, -extent);
-
-		// Draw lines across X-Axis
-		glVertex3f(-extent, groundLevel, loop);
-		glVertex3f(extent, groundLevel, loop);
-	}
-	glEnd();
-}*/
-
-
 void glfwError(int error, const char* description)
 {
 	printf("%s (%d)", description, error);

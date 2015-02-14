@@ -84,7 +84,7 @@ const Vector4 Vector3::ConvertToHomogeneous()
 
 const Vector3 Vector3::operator+(const Vector3 &rhs)
 {
-	Vector3 result = *this;
+	Vector3 result = Vector3(*this);
 	result.x += rhs.x;
 	result.y += rhs.y;
 	result.z += rhs.z;
@@ -93,7 +93,7 @@ const Vector3 Vector3::operator+(const Vector3 &rhs)
 
 const Vector3 Vector3::operator+(const int modifier)
 {
-	Vector3 result = *this;
+	Vector3 result = Vector3(*this);
 	result.x += modifier;
 	result.y += modifier;
 	result.z += modifier;
@@ -102,7 +102,7 @@ const Vector3 Vector3::operator+(const int modifier)
 
 const Vector3 Vector3::operator+(const float modifier)
 {
-	Vector3 result = *this;
+	Vector3 result = Vector3(*this);
 	result.x += modifier;
 	result.y += modifier;
 	result.z += modifier;
@@ -127,18 +127,29 @@ const Vector3 Vector3::operator+=(const Vector3 &rhs)
 
 Vector3 Vector3::operator-(const float modifier)
 {
-	this->x -= modifier;
-	this->y -= modifier;
-	this->z -= modifier;
-	return *this;
+	Vector3 result = Vector3(*this);
+	result.x -= modifier;
+	result.y -= modifier;
+	result.z -= modifier;
+	return result;
 }
 
 Vector3 Vector3::operator-(const Vector3 &rhs)
 {
-	this->x -= rhs.x;
-	this->y -= rhs.y;
-	this->z -= rhs.z;
-	return *this;
+	Vector3 result = Vector3(*this);
+	result.x -= rhs.x;
+	result.y -= rhs.y;
+	result.z -= rhs.z;
+	return result;
+}
+
+Vector3 Vector3::operator-(const Vector3 &rhs) const
+{
+	Vector3 result = Vector3(*this);
+	result.x -= rhs.x;
+	result.y -= rhs.y;
+	result.z -= rhs.z;
+	return result;
 }
 
 const Vector3 Vector3::operator=(const Vector3 &rhs)
@@ -151,7 +162,7 @@ const Vector3 Vector3::operator=(const Vector3 &rhs)
 
 const Vector3 Vector3::operator*(const float rhs)
 {
-	Vector3 result = *this; 
+	Vector3 result = Vector3(*this);
 	result.x *= rhs;
 	result.y *= rhs;
 	result.z *= rhs;

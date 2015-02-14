@@ -50,6 +50,25 @@ public:
 		, w(q.w)
 	{}
 
+	Quat operator=(Quat &rhs)
+	{
+		Quat result;
+		result.x = rhs.x;
+		result.y = rhs.y;
+		result.z = rhs.z;
+		result.w = rhs.w;
+		return result;
+	}
+
+	bool operator==(const Quat &rhs)
+	{
+		if (this->x != rhs.x)  return false;
+		if (this->y != rhs.y)  return false;
+		if (this->z != rhs.z)  return false;
+		if (this->w != rhs.w)  return false;
+		return true;
+	}
+
 };
 
 #endif // _QUAT_H_

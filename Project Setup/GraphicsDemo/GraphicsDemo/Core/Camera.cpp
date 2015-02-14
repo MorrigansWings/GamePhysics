@@ -8,15 +8,6 @@ const float Camera::TO_RADIANS = (float)M_PI / 180.0f;
 Camera::~Camera()
 {}
 
-void Camera::initCamera()
-{
-	m_Position = Vector3::ZERO;
-	m_Rotation = Vector3::ZERO;
-
-	m_Pitch = 0.2f;
-	m_Yaw = 0.2f;
-}
-
 const float Camera::toRadians(const float &angleDegrees) const
 {
 	return angleDegrees * TO_RADIANS;
@@ -37,4 +28,13 @@ Matrix4 Camera::getProjectionMatrix()
 	m_Proj = Matrix4::perspectiveFOV(m_FOV, m_AspectWidth, m_AspectHeight, m_Near, m_Far);
 
 	return m_Proj;
+}
+
+void Camera::setPerspective(const float& fov, const float& width, const float& height, const float& vNear, const float& vFar)
+{
+	m_FOV = fov;
+	m_AspectWidth = width;
+	m_AspectHeight = height;
+	m_Near = vNear;
+	m_Far = vFar;
 }
