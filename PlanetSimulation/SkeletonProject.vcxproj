@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7C6D7006-A81C-4A51-92F8-AD16F3B5F084}</ProjectGuid>
+    <RootNamespace>CubeDemo</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>d3d9.lib;d3dx9d.lib;dxguid.lib;DxErr.lib;dinput8.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>d3d9.lib;d3dx9d.lib;dxguid.lib;DxErr.lib;dinput8.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="GraphicsEngine\3DClasses\BaseObject3D.cpp" />
+    <ClCompile Include="GraphicsEngine\3DClasses\BoxObject3D.cpp" />
+    <ClCompile Include="GraphicsEngine\3DClasses\ConeObject3D.cpp" />
+    <ClCompile Include="GraphicsEngine\3DClasses\CylinderObject3D.cpp" />
+    <ClCompile Include="GraphicsEngine\3DClasses\SphereObject3D.cpp" />
+    <ClCompile Include="GraphicsEngine\3DClasses\TeapotObject3D.cpp" />
+    <ClCompile Include="GraphicsEngine\3DClasses\TorusObject3D.cpp" />
+    <ClCompile Include="GraphicsEngine\d3dApp.cpp" />
+    <ClCompile Include="GraphicsEngine\GfxStats.cpp" />
+    <ClCompile Include="GraphicsEngine\GraphicsManager.cpp" />
+    <ClCompile Include="GraphicsEngine\Materials\BaseMaterial.cpp" />
+    <ClCompile Include="GraphicsEngine\Materials\NormalEnvironmentMaterial.cpp" />
+    <ClCompile Include="GraphicsEngine\Materials\NormalMaterial.cpp" />
+    <ClCompile Include="GraphicsEngine\Materials\PhongMaterial.cpp" />
+    <ClCompile Include="GraphicsEngine\Vertex.cpp" />
+    <ClCompile Include="Input\DirectInput.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="PhysicsEngine\Vectors.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GraphicsEngine\3DClasses\BaseObject3D.h" />
+    <ClInclude Include="GraphicsEngine\3DClasses\BoxObject3D.h" />
+    <ClInclude Include="GraphicsEngine\3DClasses\ConeObject3D.h" />
+    <ClInclude Include="GraphicsEngine\3DClasses\CylinderObject3D.h" />
+    <ClInclude Include="GraphicsEngine\3DClasses\SphereObject3D.h" />
+    <ClInclude Include="GraphicsEngine\3DClasses\TeapotObject3D.h" />
+    <ClInclude Include="GraphicsEngine\3DClasses\TorusObject3D.h" />
+    <ClInclude Include="GraphicsEngine\d3dApp.h" />
+    <ClInclude Include="GraphicsEngine\d3dUtil.h" />
+    <ClInclude Include="GraphicsEngine\GfxStats.h" />
+    <ClInclude Include="GraphicsEngine\GraphicsManager.h" />
+    <ClInclude Include="GraphicsEngine\Materials\BaseMaterial.h" />
+    <ClInclude Include="GraphicsEngine\Materials\NormalEnvironmentMaterial.h" />
+    <ClInclude Include="GraphicsEngine\Materials\NormalMaterial.h" />
+    <ClInclude Include="GraphicsEngine\Materials\PhongMaterial.h" />
+    <ClInclude Include="GraphicsEngine\resource.h" />
+    <ClInclude Include="GraphicsEngine\Vertex.h" />
+    <ClInclude Include="Input\DirectInput.h" />
+    <ClInclude Include="PhysicsEngine\PhysicsManager.h" />
+    <ClInclude Include="PhysicsEngine\Vectors.h" />
+    <ClInclude Include="PlanetSimulation\Planet.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="default.fx" />
+    <None Include="phong-normal-env.fx" />
+    <None Include="phong-normal.fx" />
+    <None Include="phong.fx" />
+    <None Include="Textures\env.dds" />
+    <None Include="Textures\rock.jpg" />
+    <None Include="Textures\upholstry.png" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

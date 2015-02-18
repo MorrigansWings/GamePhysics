@@ -50,9 +50,9 @@ bool ModelGenerator::CreateTriangleModel(const std::string &gameModelName)
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(VertexPC) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
 		glEnableVertexAttribArray(ATTR_VERTEX); // Set up position pipe
-		glVertexAttribPointer(ATTR_VERTEX, 3, GL_FLOAT, GL_FALSE, 0, 0);
+		glVertexAttribPointer(ATTR_VERTEX, 3, GL_FLOAT, GL_FALSE, sizeof(VertexPC), (void*)0);
 		glEnableVertexAttribArray(ATTR_COLOR); // Set up color pipe
-		glVertexAttribPointer(ATTR_COLOR, 4, GL_FLOAT, GL_FALSE, 0, 0);
+		glVertexAttribPointer(ATTR_COLOR, 4, GL_FLOAT, GL_FALSE, sizeof(VertexPC), (void*)12);
 
 //		cout << "Size of VertexPC: " << sizeof(VertexPC) << endl;
 //		cout << "\tVertexPC.position: " << sizeof(Vector3) << endl;
@@ -68,7 +68,7 @@ bool ModelGenerator::CreateTriangleModel(const std::string &gameModelName)
 	}
 }
 
-bool ModelGenerator::CreateCubeModel(const std::string &gameModelName)
+bool ModelGenerator::CreateCubeModel(const std::string &gameModelName, float width)
 {
 	// Check if model name already exists in map
 	if (GameModelList.find(gameModelName) != GameModelList.end())
@@ -82,34 +82,70 @@ bool ModelGenerator::CreateCubeModel(const std::string &gameModelName)
 		glGenVertexArrays(1, &vao);
 		glBindVertexArray(vao);
 
+		// Set up coords
+		Vector3 front[4] = { Vector3(-width, width, -width),
+							 Vector3(-width, -width, -width),
+							 Vector3(width, -width, -width),
+							 Vector3(width, width, -width) };
+		Vector3 back[4] = { Vector3(width, width, width),
+							Vector3(width, -width, width),
+							Vector3(-width, -width, width),
+							Vector3(-width, width, width) };
+
 		vector<VertexPC> vertices;
-/*		vertices.push_back((VertexPC(Vector3(0.25f, -0.25f, 0.0f), Vector4(1.0f, 0.0f, 0.0f, 1.0f))));
-		vertices.push_back((VertexPC(Vector3(-0.25f, -0.25f, 0.0f), Vector4(0.0f, 1.0f, 0.0f, 1.0f))));
-		vertices.push_back((VertexPC(Vector3(0.25f, 0.25f, 0.0f), Vector4(0.0f, 0.0f, 1.0f, 1.0f))));
-		*/
 		//Front 2 triangles
-		vertices.push_back(VertexPC(Vector3(-0.25f, -0.25f, -0.25f), Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
-		vertices.push_back(VertexPC(Vector3(-0.25f, 0.25f, -0.25f), Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
-		vertices.push_back(VertexPC(Vector3(0.25f, -0.25f, -0.25f), Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(front[0], Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(front[1], Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(front[2], Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
 
-		vertices.push_back(VertexPC(Vector3(0.25f, 0.25f, -0.25f), Vector4(1.0f, 1.0f, 0.0f, 1.0f)));
-		vertices.push_back(VertexPC(Vector3(0.25f, -0.25f, -0.25f), Vector4(1.0f, 1.0f, 0.0f, 1.0f)));
-		vertices.push_back(VertexPC(Vector3(-0.25f, 0.25f, -0.25f), Vector4(1.0f, 1.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(front[0], Vector4(1.0f, 1.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(front[2], Vector4(1.0f, 1.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(front[3], Vector4(1.0f, 1.0f, 0.0f, 1.0f)));
 		
-		//R size 2 triangles
-		vertices.push_back(VertexPC(Vector3(-0.25f, -0.25f, -0.25f), Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
-		vertices.push_back(VertexPC(Vector3(-0.25f, -0.25f, -0.25f), Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
-		vertices.push_back(VertexPC(Vector3(-0.25f, -0.25f, -0.25f), Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
+		//back 2 triangles
+		vertices.push_back(VertexPC(back[0], Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(back[1], Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(back[2], Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
 
-		vertices.push_back(VertexPC(Vector3(-0.25f, 0.25f, -0.25f), Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
-		vertices.push_back(VertexPC(Vector3(-0.25f, -0.25f, 0.25f), Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
-		vertices.push_back(VertexPC(Vector3(-0.25f, 0.25f, 0.25f), Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(back[0], Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(back[2], Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(back[3], Vector4(0.0f, 1.0f, 0.0f, 1.0f)));
 
 		//Top
-		vertices.push_back(VertexPC(Vector3(0.25f, -0.25f, -0.25f), Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
-		vertices.push_back(VertexPC(Vector3(0.25f, 0.25f, -0.25f), Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
-		vertices.push_back(VertexPC(Vector3(0.25f, -0.25f, 0.25f), Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
-		vertices.push_back(VertexPC(Vector3(0.25f, 0.25f, 0.25f), Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(back[3], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(front[0], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(front[3], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+
+		vertices.push_back(VertexPC(back[3], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(front[3], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(back[0], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+
+		// Bottom
+		vertices.push_back(VertexPC(front[1], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(back[2], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(back[1], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+
+		vertices.push_back(VertexPC(front[1] , Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(back[1], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(front[2], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+
+		// Left
+		vertices.push_back(VertexPC(back[3], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(back[2], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(front[1], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+
+		vertices.push_back(VertexPC(back[3], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(front[1], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(front[0], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+
+		// Right
+		vertices.push_back(VertexPC(front[3], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(front[2], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(back[1], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+
+		vertices.push_back(VertexPC(front[3], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(back[1], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+		vertices.push_back(VertexPC(back[0], Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
 
 		unsigned int vbo;
 		glGenBuffers(1, &vbo);
@@ -156,7 +192,18 @@ void ModelGenerator::Draw()
 	for (it = GameModelList.begin(); it != GameModelList.end(); ++it)
 	{
 		glBindVertexArray(it->second.vao);
-		cout << "Drawing " << it->first.c_str()  << " with " << it->second.vertexCount << " vertices" << endl;
+		//cout << "Drawing " << it->first.c_str()  << " with " << it->second.vertexCount << " vertices" << endl;
+		glDrawArrays(GL_TRIANGLES, 0, it->second.vertexCount);
+	}
+}
+
+void ModelGenerator::Draw(const std::string &gameModelName)
+{
+	map<string, Model>::iterator it;
+	if ((it = GameModelList.find(gameModelName)) != GameModelList.end())
+	{
+		glBindVertexArray(it->second.vao);
+		//cout << "Drawing " << it->first.c_str() << " with " << it->second.vertexCount << " vertices" << endl;
 		glDrawArrays(GL_TRIANGLES, 0, it->second.vertexCount);
 	}
 }

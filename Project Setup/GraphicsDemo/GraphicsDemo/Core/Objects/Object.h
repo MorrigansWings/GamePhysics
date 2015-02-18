@@ -19,9 +19,6 @@ public:
 	Object(void);
 	~Object(void);
 
-//	virtual void Init() = 0;
-//	virtual void Render();
-
 };
 
 #endif // _OBJECT_H_

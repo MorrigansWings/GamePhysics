@@ -31,12 +31,13 @@ namespace Models
 		ModelGenerator();
 		~ModelGenerator();
 		bool CreateTriangleModel(const std::string &gameModelName);
-		bool CreateCubeModel(const std::string &gameModelName);
+		bool CreateCubeModel(const std::string &gameModelName, float width);
 		void DeleteModel(const std::string &gameModelName);
 		unsigned int GetModel(const std::string &gameModelName);
 		unsigned int GetModelNumVertices(const std::string &gameModelName);
 
 		void Draw();
+		void Draw(const std::string &gameModelName);
 
 	private:
 		std::map<std::string, Model> GameModelList;

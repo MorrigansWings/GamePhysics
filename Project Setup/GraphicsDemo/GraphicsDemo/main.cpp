@@ -33,8 +33,6 @@ Models::ModelGenerator *generator;
 GLuint program;
 Camera *cam;
 
-#undef near
-#undef far
 GLfloat fieldOfView = 45.0f;
 GLfloat near = 0.1f;
 GLfloat far = 10000.0f;
@@ -111,8 +109,6 @@ int main(int argc, char ** argv)
 
 	glfwTerminate();
 
-	//char exiting;
-	//cin >> exiting;
 	return 0;
 }
 
@@ -126,26 +122,28 @@ void Init()
 	// Initialize camera
 //	cam = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT, gpWindow);
 	cam = new Camera((float)WINDOW_WIDTH, (float)WINDOW_HEIGHT,
-		Vector3(5.0f), Vector3(-1.0f), Vector3(0.0f, 1.0f, 0.0f), 45.0f, 0.1f, 10000.0f);
-
+		Vector3(0.0f, 0.0f, -10.0f), Vector3(0.0f, 0.0f, 1.0f), Vector3(0.0f, 1.0f, 0.0f), 
+		45.0f, 0.1f, 1000.0f);
+	cam->lookAt(Vector3::ZERO);
 
 	// create new GameModels object and make a triangle
 	generator = new Models::ModelGenerator();
 	if (!generator->CreateTriangleModel("triangle1"))
 		cout << "Could not create triangle1... " << endl;
-	if (!generator->CreateCubeModel("cube1"))
+	if (!generator->CreateCubeModel("cube1", 1.0f))
 		cout << "Could not create cube..." << endl;
 
 	// load shaders
 	Core::Shader_Loader shaderLoader;
 	program = shaderLoader.CreateProgram("Shaders\\Vertex_Shader.glsl",
 		"Shaders\\Fragment_Shader.glsl");
+
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 }
 
-Matrix4 getPerspectiveFOV(float fov, float aspectWidth, float aspectHeight, float inNear, float inFar)
+/*Matrix4 getPerspectiveFOV(float fov, float aspectWidth, float aspectHeight, float inNear, float inFar)
 {
 
 	float const rad = fov;
@@ -159,7 +157,7 @@ Matrix4 getPerspectiveFOV(float fov, float aspectWidth, float aspectHeight, floa
 	Result.insert(2, 3, -1.0f);
 	Result.insert(3, 2, -(2.0f * inFar * inNear) / (inFar - inNear));
 	return Result;
-}
+}*/
 
 void renderScene(void)
 {
@@ -171,22 +169,28 @@ void renderScene(void)
 	Matrix4 proj = cam->getProjectionMatrix();
 	Matrix4 viewProj = proj * view;
 
+	cout << "view: " << proj.ToString() << endl;
 	cout << "viewProj: " << viewProj.ToString() << endl;
-
+	
 	// use created program
 	glUseProgram(program);
 
-	glUniformMatrix4fv(glGetUniformLocation(program, "uModelViewProj"), 1, GL_FALSE, (GLfloat*)&viewProj);
+	glUniformMatrix4fv(glGetUniformLocation(program, "uModelViewProj"), 1, GL_FALSE, (GLfloat*)&viewProj);//viewProj);
+
+	// Draw Colored Triangle
+//	generator->Draw("triangle1");
+
+	// Draw cube only
+	generator->Draw("cube1");
 
 	// Draw all models
-	generator->Draw();
+	//	generator->Draw();
 
 	glfwSwapBuffers(gpWindow);
 }
 
 void closeCallback()
 {
-	cout << "GLUT:\t Finished" << endl;
 	
 }
 

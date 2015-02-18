@@ -1,5 +1,6 @@
 #include "Matrix.h"
 #include <sstream>
+#include <iomanip>
 
 const Matrix4 Matrix4::IDENTITY = Matrix4(1.0f);
 
@@ -71,6 +72,8 @@ void Matrix4::fill(int value)
 	}
 }
 
+// Gives a perspective projection matrix looking at center from eye
+// where up is the up direction
 Matrix4 Matrix4::lookAt(Vector3 eye, Vector3 center, Vector3 up)
 {
 	Vector3 f = (center - eye).normalize();
@@ -141,17 +144,17 @@ const Matrix4 Matrix4::operator*(const Matrix4 &rhs)
 const std::string Matrix4::ToString()
 {
 	std::stringstream output;
-	output << "{ ";
+	output << "\n{ ";
 	for (int i = 0; i < 4; ++i)
 	{
 		for (int j = 0; j < 4; ++j)
 		{
-			output << matrix[i][j];
+			output << std::setprecision(5) << matrix[i][j];
 			if (j != 3)
 				output << "\t";
 		}
 		if (i != 3)
-			output << std::endl;
+			output << std::endl << "  ";
 		else
 			output << "}" << std::endl;
 	}
