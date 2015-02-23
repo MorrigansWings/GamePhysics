@@ -107,6 +107,7 @@
     <ClCompile Include="GraphicsEngine\Vertex.cpp" />
     <ClCompile Include="Input\DirectInput.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PhysicsEngine\Particle.cpp" />
     <ClCompile Include="PhysicsEngine\Vectors.cpp" />
   </ItemGroup>
   <ItemGroup>

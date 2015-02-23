@@ -63,7 +63,7 @@ Vector3 Vector3::getInverted()
 	return result;
 }
 
-const float Vector3::length()
+float Vector3::magnitude()
 {
 	float squareX = this->x * this->x;
 	float squareY = this->y * this->y;
@@ -71,25 +71,66 @@ const float Vector3::length()
 	return sqrt(squareX + squareY + squareZ);
 }
 
-// Normalize this vector3 and return result
-const Vector3 Vector3::normalize()
+float Vector3::squareMagnitude()
 {
-	float len = this->length();
-	this->x = this->x / len;
-	this->y = this->y / len;
-	this->z = this->z / len;
+	float squareX = this->x * this->x;
+	float squareY = this->y * this->y;
+	float squareZ = this->z * this->z;
+	return squareX + squareY + squareZ;
+}
+
+// Normalize this vector3 and return result
+Vector3 Vector3::normalize()
+{
+	float len = this->magnitude();
+	if (len > 0)
+	{
+		*this *= 1.0f / len;
+	}
+//	this->x = this->x / len;
+//	this->y = this->y / len;
+//	this->z = this->z / len;
 	return *this;
 }
 
 // Return normalized copy of this vector3
-const Vector3 Vector3::getNormalized()
+Vector3 Vector3::getNormalized()
 {
-	Vector3 result = *this;
-	float len = this->length();
-	result.x = result.x / len;
+	Vector3 result = Vector3(*this);
+	float len = this->magnitude();
+	if (len > 0)
+	{
+		result *= 1.0f / len;
+	}
+/*	result.x = result.x / len;
 	result.y = result.y / len;
-	result.z = result.z / len;
+	result.z = result.z / len;*/
 	return result;
+}
+
+Vector3 Vector3::addScaledVector(const Vector3 &v, float t)
+{
+	this->x += (v.x * t);
+	this->y += (v.y * t);
+	this->z += (v.z * t);
+	return *this;
+}
+
+float Vector3::dot(const Vector3 &second)
+{
+	float result = 0.0f;
+	result += this->x * second.x;
+	result += this->y * second.y;
+	result += this->z * second.z;
+	return result;
+}
+
+Vector3 Vector3::cross(const Vector3 &second)
+{
+	return Vector3(
+		this->y * second.z - this->z * second.y,
+		this->z * second.x - this->x * second.z,
+		this->x * second.y - this->y * second.x);
 }
 
 const Vector4 Vector3::ConvertToHomogeneous()

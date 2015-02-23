@@ -53,6 +53,9 @@
     <ClCompile Include="PhysicsEngine\Vectors.cpp">
       <Filter>PhysicsEngine</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsEngine\Particle.cpp">
+      <Filter>PhysicsEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Input\DirectInput.h">

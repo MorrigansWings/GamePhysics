@@ -97,9 +97,14 @@ public:
 
 	void invert();
 	Vector3 getInverted();
-	const float length();
-	const Vector3 normalize();
-	const Vector3 getNormalized();
+	float magnitude();
+	float squareMagnitude();
+	Vector3 normalize();
+	Vector3 getNormalized();
+	Vector3 addScaledVector(const Vector3 &velocity, float t);
+
+	float dot(const Vector3 &second);
+	Vector3 cross(const Vector3 &second);
 
 	const Vector4 ConvertToHomogeneous();
 
