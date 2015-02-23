@@ -103,7 +103,6 @@
     <ClInclude Include="GraphicsEngine\Vertex.h">
       <Filter>GraphicsEngine</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="PhysicsEngine\PhysicsManager.h">
       <Filter>PhysicsEngine</Filter>
     </ClInclude>
@@ -117,6 +116,9 @@
       <Filter>PlanetSimulation</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsEngine\Vectors.h">
+      <Filter>PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Particle.h">
       <Filter>PhysicsEngine</Filter>
     </ClInclude>
   </ItemGroup>

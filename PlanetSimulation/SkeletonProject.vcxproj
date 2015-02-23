@@ -128,6 +128,7 @@
     <ClInclude Include="GraphicsEngine\resource.h" />
     <ClInclude Include="GraphicsEngine\Vertex.h" />
     <ClInclude Include="Input\DirectInput.h" />
+    <ClInclude Include="PhysicsEngine\Particle.h" />
     <ClInclude Include="PhysicsEngine\PhysicsManager.h" />
     <ClInclude Include="PhysicsEngine\Vectors.h" />
     <ClInclude Include="PlanetSimulation\Planet.h" />

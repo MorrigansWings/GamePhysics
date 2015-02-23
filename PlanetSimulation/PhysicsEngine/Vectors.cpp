@@ -47,6 +47,22 @@ const Vector2 Vector2::operator=(const Vector2 &rhs)
 /********************** Vector3 ****************************/
 const Vector3 Vector3::ZERO = Vector3(0.0f, 0.0f, 0.0f);
 
+void Vector3::invert()
+{
+	this->x = -this->x;
+	this->y = -this->y;
+	this->z = -this->z;
+}
+
+Vector3 Vector3::getInverted()
+{
+	Vector3 result = Vector3();
+	result.x = -this->x;
+	result.y = -this->y;
+	result.z = -this->z;
+	return result;
+}
+
 const float Vector3::length()
 {
 	float squareX = this->x * this->x;

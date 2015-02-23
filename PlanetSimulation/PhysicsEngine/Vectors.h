@@ -2,7 +2,7 @@
 #define _VECTORS_H_
 
 #pragma once
-#include "..\Dependencies\glew\glew.h"
+//#include "..\Dependencies\glew\glew.h"
 #include <string>
 
 class Vector2;
@@ -95,6 +95,8 @@ public:
 		, z(orig.z)
 	{}
 
+	void invert();
+	Vector3 getInverted();
 	const float length();
 	const Vector3 normalize();
 	const Vector3 getNormalized();
