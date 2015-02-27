@@ -19,6 +19,7 @@
 #pragma once
 //=============================================================================
 #include "d3dApp.h"
+#include "Camera.h"
 
 #include <vector>
 #include <map>
@@ -48,10 +49,15 @@ public:
 	bool createBox(std::string &modelName, float scale);
 	bool createBox(std::string &modelName, float width, float height, float depth);
 
+	bool createSphere(std::string &modelName);
+	bool createSphere(std::string &modelName, float radius);
+
 private:
-	float mCameraRotationX;
+/*	float mCameraRotationX;
 	float mCameraRotationY;
 	float mCameraRadius;
+*/
+	Camera cam;
 
 	const float mCamMoveSpeed = 1.0f;
 	const float mCamRotationSpeed = 1.0f;

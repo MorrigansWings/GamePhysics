@@ -2,10 +2,12 @@
 #define _PLANET_H_
 
 #pragma once
+#include <string>
+
 
 class Planet
 {
-
+	
 };
 
 

@@ -33,7 +33,7 @@ private:
 	IDirectInput8*       mDInput;
 
 	IDirectInputDevice8* mKeyboard;
-	char                 mKeyboardState[256]; 
+	char                 mKeyboardState[256];
 
 	IDirectInputDevice8* mMouse;
 	DIMOUSESTATE2        mMouseState;

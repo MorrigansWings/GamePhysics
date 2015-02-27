@@ -22,5 +22,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance,
 		return -1;
 	}*/
 
+	if (!gManager.createSphere((std::string)"sphere", 1.0f))
+	{
+		printf("GraphicsManager could not create SPHERE. Exiting...\n");
+		return -1;
+	}
+
 	return gd3dApp->run();
 }

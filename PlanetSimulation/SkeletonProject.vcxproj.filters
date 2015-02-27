@@ -53,8 +53,17 @@
     <ClCompile Include="PhysicsEngine\Vectors.cpp">
       <Filter>PhysicsEngine</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsEngine\Particle.cpp">
+    <ClCompile Include="PhysicsEngine\Particles\Particle.cpp">
+      <Filter>PhysicsEngine\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\PhysicsManager.cpp">
       <Filter>PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Particles\GravityForceGenerator.cpp">
+      <Filter>PhysicsEngine\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Particles\DragForceGenerator.cpp">
+      <Filter>PhysicsEngine\Particles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,9 +115,6 @@
     <ClInclude Include="GraphicsEngine\Vertex.h">
       <Filter>GraphicsEngine</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsEngine\PhysicsManager.h">
-      <Filter>PhysicsEngine</Filter>
-    </ClInclude>
     <ClInclude Include="GraphicsEngine\GraphicsManager.h">
       <Filter>GraphicsEngine</Filter>
     </ClInclude>
@@ -118,11 +124,26 @@
     <ClInclude Include="PlanetSimulation\Planet.h">
       <Filter>PlanetSimulation</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsEngine\PhysicsManager.h">
+      <Filter>PhysicsEngine</Filter>
+    </ClInclude>
     <ClInclude Include="PhysicsEngine\Vectors.h">
       <Filter>PhysicsEngine</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsEngine\Particle.h">
-      <Filter>PhysicsEngine</Filter>
+    <ClInclude Include="PhysicsEngine\Particles\Particle.h">
+      <Filter>PhysicsEngine\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Particles\ParticleForceGenerator.h">
+      <Filter>PhysicsEngine\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Particles\GravityForceGenerator.h">
+      <Filter>PhysicsEngine\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Particles\DragForceGenerator.h">
+      <Filter>PhysicsEngine\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Camera.h">
+      <Filter>GraphicsEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +176,9 @@
     </Filter>
     <Filter Include="PhysicsEngine">
       <UniqueIdentifier>{07df8e93-36f8-4321-ba50-b21039346ce2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicsEngine\Particles">
+      <UniqueIdentifier>{4dfbb1fc-bde3-40a6-be65-bb7c22f98e50}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

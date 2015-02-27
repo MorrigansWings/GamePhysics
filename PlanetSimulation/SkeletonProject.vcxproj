@@ -107,7 +107,10 @@
     <ClCompile Include="GraphicsEngine\Vertex.cpp" />
     <ClCompile Include="Input\DirectInput.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PhysicsEngine\Particle.cpp" />
+    <ClCompile Include="PhysicsEngine\Particles\DragForceGenerator.cpp" />
+    <ClCompile Include="PhysicsEngine\Particles\GravityForceGenerator.cpp" />
+    <ClCompile Include="PhysicsEngine\Particles\Particle.cpp" />
+    <ClCompile Include="PhysicsEngine\PhysicsManager.cpp" />
     <ClCompile Include="PhysicsEngine\Vectors.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +121,7 @@
     <ClInclude Include="GraphicsEngine\3DClasses\SphereObject3D.h" />
     <ClInclude Include="GraphicsEngine\3DClasses\TeapotObject3D.h" />
     <ClInclude Include="GraphicsEngine\3DClasses\TorusObject3D.h" />
+    <ClInclude Include="GraphicsEngine\Camera.h" />
     <ClInclude Include="GraphicsEngine\d3dApp.h" />
     <ClInclude Include="GraphicsEngine\d3dUtil.h" />
     <ClInclude Include="GraphicsEngine\GfxStats.h" />
@@ -129,7 +133,10 @@
     <ClInclude Include="GraphicsEngine\resource.h" />
     <ClInclude Include="GraphicsEngine\Vertex.h" />
     <ClInclude Include="Input\DirectInput.h" />
-    <ClInclude Include="PhysicsEngine\Particle.h" />
+    <ClInclude Include="PhysicsEngine\Particles\DragForceGenerator.h" />
+    <ClInclude Include="PhysicsEngine\Particles\GravityForceGenerator.h" />
+    <ClInclude Include="PhysicsEngine\Particles\Particle.h" />
+    <ClInclude Include="PhysicsEngine\Particles\ParticleForceGenerator.h" />
     <ClInclude Include="PhysicsEngine\PhysicsManager.h" />
     <ClInclude Include="PhysicsEngine\Vectors.h" />
     <ClInclude Include="PlanetSimulation\Planet.h" />

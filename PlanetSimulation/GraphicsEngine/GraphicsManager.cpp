@@ -43,9 +43,15 @@ GraphicsManager::GraphicsManager(HINSTANCE hInstance, std::string winCaption, D3
 		PostQuitMessage(0);
 	}
 
-	mCameraRadius    = 10.0f;
-	mCameraRotationX = -D3DX_PI * 0.5;//1.2;
-	mCameraRotationY = 0.0f;
+//	mCameraRadius    = 10.0f;
+//	mCameraRotationX = -D3DX_PI * 0.5;//1.2;
+//	mCameraRotationY = 0.0f;
+
+	cam = Camera();
+	cam.setRadius(10.0f);
+	cam.setRotateX(-D3DX_PI * 0.5);//1.2;
+	cam.setRotateY(0.0f);
+
 
 	mSwapObjectFlag = false;
 	mTextureToggleFlag = false;
@@ -150,19 +156,15 @@ void GraphicsManager::updateScene(float dt)
 	}
 
 	// Divide by 100 to make mouse less sensitive.
-	mCameraRotationX -= gDInput->mouseDY() / 100.0f;
-	mCameraRotationY -= gDInput->mouseDX() / 100.0f;
-	mCameraRadius	 -= gDInput->mouseDZ() / 100.0f;
+	cam.setRotateX(-(gDInput->mouseDY() / 100.0f));
+	cam.setRotateY(-(gDInput->mouseDX() / 100.0f));
+	cam.setRadius(cam.getRadius()-(gDInput->mouseDZ() / 100.0f));
 
 	// If we rotate over 360 degrees, just roll back to 0
-	if( fabsf(mCameraRotationX) >= 2.0f * D3DX_PI ) 
-		mCameraRotationX = 0.0f;
-	if( fabsf(mCameraRotationY) >= 2.0f * D3DX_PI ) 
-		mCameraRotationY = 0.0f;
-
-	// Don't let radius get too small.
-	if( mCameraRadius < 5.0f )
-		mCameraRadius = 5.0f;
+	if( fabsf(cam.getRotation().x) >= 2.0f * D3DX_PI ) 
+		cam.setRotateX(0.0f);
+	if( fabsf(cam.getRotation().y) >= 2.0f * D3DX_PI ) 
+		cam.setRotateY(0.0f);
 
 	// The camera position/orientation relative to world space can 
 	// change every frame based on input, so we need to rebuild the
@@ -195,13 +197,15 @@ void GraphicsManager::drawScene()
 void GraphicsManager::buildViewMtx()
 {
 	D3DXMatrixIdentity(&mView);
-	D3DXMatrixTranslation(&mView, 0, 0, mCameraRadius);
+//	D3DXMatrixTranslation(&mView, 0, 0, mCameraRadius);
+	D3DXMatrixTranslation(&mView, 0, 0, cam.getRadius());
 }
 
 void GraphicsManager::buildObjectMtx()
 {
+	Vector2 rotation = cam.getRotation();
 	D3DXMATRIX rotationMatrix; 
-	D3DXMatrixRotationYawPitchRoll(&rotationMatrix, mCameraRotationY, mCameraRotationX, 0);
+	D3DXMatrixRotationYawPitchRoll(&rotationMatrix, rotation.y, rotation.x, 0);
 
 	std::map<std::string, BaseObject3D*>::iterator objIter;
 	for (objIter = m_Objects.begin(); objIter != m_Objects.end(); ++objIter)
@@ -232,6 +236,36 @@ bool GraphicsManager::createBox(std::string &modelName, float width, float heigh
 	{
 		BoxObject3D* box = new BoxObject3D(width, height, depth);
 		m_Objects[modelName] = box;
+		m_Objects[modelName]->Create(gd3dDevice);
+		m_Objects[modelName]->SetMaterial(m_Material);
+		return true;
+	}
+	// Otherwise, return false - cannot create new object
+	else return false;
+}
+
+bool GraphicsManager::createSphere(std::string &modelName)
+{
+	// If name doesn't exist in the map already, create new
+	if (m_Objects.find(modelName) == m_Objects.end())
+	{
+		SphereObject3D* sphere = new SphereObject3D(1.0f, 5, 5);
+		m_Objects[modelName] = sphere;
+		m_Objects[modelName]->Create(gd3dDevice);
+		m_Objects[modelName]->SetMaterial(m_Material);
+		return true;
+	}
+	// Otherwise, return false - cannot create new object
+	else return false;
+}
+
+bool GraphicsManager::createSphere(std::string &modelName, float radius)
+{
+	// If name doesn't exist in the map already, create new
+	if (m_Objects.find(modelName) == m_Objects.end())
+	{
+		SphereObject3D* sphere = new SphereObject3D(radius, 10, 10);
+		m_Objects[modelName] = sphere;
 		m_Objects[modelName]->Create(gd3dDevice);
 		m_Objects[modelName]->SetMaterial(m_Material);
 		return true;
