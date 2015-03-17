@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Input\DirectInput.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\3DClasses\BaseObject3D.cpp">
+      <Filter>GraphicsEngine\Object3D\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\3DClasses\BoxObject3D.cpp">
+      <Filter>GraphicsEngine\Object3D\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\3DClasses\ConeObject3D.cpp">
+      <Filter>GraphicsEngine\Object3D\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\3DClasses\CylinderObject3D.cpp">
+      <Filter>GraphicsEngine\Object3D\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\3DClasses\SphereObject3D.cpp">
+      <Filter>GraphicsEngine\Object3D\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\3DClasses\TeapotObject3D.cpp">
+      <Filter>GraphicsEngine\Object3D\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\3DClasses\TorusObject3D.cpp">
+      <Filter>GraphicsEngine\Object3D\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Materials\BaseMaterial.cpp">
+      <Filter>GraphicsEngine\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Materials\NormalEnvironmentMaterial.cpp">
+      <Filter>GraphicsEngine\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Materials\NormalMaterial.cpp">
+      <Filter>GraphicsEngine\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Materials\PhongMaterial.cpp">
+      <Filter>GraphicsEngine\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\d3dApp.cpp">
+      <Filter>GraphicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\GfxStats.cpp">
+      <Filter>GraphicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Vertex.cpp">
+      <Filter>GraphicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\GraphicsManager.cpp">
+      <Filter>GraphicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Vectors.cpp">
+      <Filter>PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Particles\Particle.cpp">
+      <Filter>PhysicsEngine\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\PhysicsManager.cpp">
+      <Filter>PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Particles\GravityForceGenerator.cpp">
+      <Filter>PhysicsEngine\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Particles\DragForceGenerator.cpp">
+      <Filter>PhysicsEngine\Particles</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Input\DirectInput.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\3DClasses\BaseObject3D.h">
+      <Filter>GraphicsEngine\Object3D\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\3DClasses\BoxObject3D.h">
+      <Filter>GraphicsEngine\Object3D\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\3DClasses\ConeObject3D.h">
+      <Filter>GraphicsEngine\Object3D\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\3DClasses\CylinderObject3D.h">
+      <Filter>GraphicsEngine\Object3D\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\3DClasses\SphereObject3D.h">
+      <Filter>GraphicsEngine\Object3D\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\3DClasses\TeapotObject3D.h">
+      <Filter>GraphicsEngine\Object3D\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\3DClasses\TorusObject3D.h">
+      <Filter>GraphicsEngine\Object3D\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Materials\BaseMaterial.h">
+      <Filter>GraphicsEngine\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Materials\NormalEnvironmentMaterial.h">
+      <Filter>GraphicsEngine\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Materials\NormalMaterial.h">
+      <Filter>GraphicsEngine\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Materials\PhongMaterial.h">
+      <Filter>GraphicsEngine\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\d3dApp.h">
+      <Filter>GraphicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\d3dUtil.h">
+      <Filter>GraphicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\GfxStats.h">
+      <Filter>GraphicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Vertex.h">
+      <Filter>GraphicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\GraphicsManager.h">
+      <Filter>GraphicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\resource.h">
+      <Filter>GraphicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="PlanetSimulation\Planet.h">
+      <Filter>PlanetSimulation</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\PhysicsManager.h">
+      <Filter>PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Vectors.h">
+      <Filter>PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Particles\Particle.h">
+      <Filter>PhysicsEngine\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Particles\ParticleForceGenerator.h">
+      <Filter>PhysicsEngine\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Particles\GravityForceGenerator.h">
+      <Filter>PhysicsEngine\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Particles\DragForceGenerator.h">
+      <Filter>PhysicsEngine\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Camera.h">
+      <Filter>GraphicsEngine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="GraphicsEngine">
+      <UniqueIdentifier>{6d21c3b5-abaa-47f8-8833-13eb16f1258a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GraphicsEngine\Object3D">
+      <UniqueIdentifier>{4bac25a4-16fb-4c92-a645-0971b4576033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GraphicsEngine\Materials">
+      <UniqueIdentifier>{17ca1c30-60a4-41b6-a519-303a50421c1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GraphicsEngine\Materials\Shaders">
+      <UniqueIdentifier>{f32e5ee6-2bfe-4f1c-abe9-787782151623}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GraphicsEngine\Materials\Textures">
+      <UniqueIdentifier>{0b07572e-275b-4592-b0a4-950c2c3fcdd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlanetSimulation">
+      <UniqueIdentifier>{abc52a9a-fbf4-4f44-a52e-fa04eb695959}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{b4b4a5b0-b24c-4c2c-a11a-50f455f74fda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GraphicsEngine\Object3D\Headers">
+      <UniqueIdentifier>{c4e637fc-5b3b-4b7c-a1b5-ce61a3856b23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GraphicsEngine\Object3D\Source">
+      <UniqueIdentifier>{0737635a-741f-445a-b9ae-f17e6113c0e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicsEngine">
+      <UniqueIdentifier>{07df8e93-36f8-4321-ba50-b21039346ce2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicsEngine\Particles">
+      <UniqueIdentifier>{4dfbb1fc-bde3-40a6-be65-bb7c22f98e50}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="phong.fx">
+      <Filter>GraphicsEngine\Materials\Shaders</Filter>
+    </None>
+    <None Include="Textures\rock.jpg">
+      <Filter>GraphicsEngine\Materials\Textures</Filter>
+    </None>
+    <None Include="default.fx">
+      <Filter>GraphicsEngine\Materials\Shaders</Filter>
+    </None>
+    <None Include="Textures\upholstry.png">
+      <Filter>GraphicsEngine\Materials\Textures</Filter>
+    </None>
+    <None Include="phong-normal.fx">
+      <Filter>GraphicsEngine\Materials\Shaders</Filter>
+    </None>
+    <None Include="Textures\env.dds">
+      <Filter>GraphicsEngine\Materials\Textures</Filter>
+    </None>
+    <None Include="phong-normal-env.fx">
+      <Filter>GraphicsEngine\Materials\Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>
