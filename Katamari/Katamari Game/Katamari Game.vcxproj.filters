@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Project">
+      <UniqueIdentifier>{126fb6d4-ae2a-43fa-ae53-b3c9167258ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Util">
+      <UniqueIdentifier>{e6aac566-302a-4ce0-b5db-2384483114f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Managers">
+      <UniqueIdentifier>{01f88dbe-971a-4e29-9263-e94193ef433f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Resources">
+      <UniqueIdentifier>{66e0bb3a-1b18-4cc5-8133-183dc7d5f8a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Shaders">
+      <UniqueIdentifier>{d3ccabe6-106c-4fbc-add2-c7d2a787923c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Scene">
+      <UniqueIdentifier>{bfaa07a1-0e10-4c42-82ee-792a258e9fec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Managers\Loaders">
+      <UniqueIdentifier>{6dc1fc1e-9e69-4bf0-85de-83b712c78c94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Logs">
+      <UniqueIdentifier>{a804a601-cdf5-4d3a-a825-67733bf82b7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Scene\Entities">
+      <UniqueIdentifier>{7ed57d13-e7b0-457a-9c47-eda877c1f8c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Config">
+      <UniqueIdentifier>{73f792ae-587c-435b-8a91-a8362461d38b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Project</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Project</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>Project\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>Project\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Project\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Project\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Project\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Functions.cpp">
+      <Filter>Project\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Project\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Project\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Project\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Project\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceLoader.cpp">
+      <Filter>Project\Managers\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceLoader3DS.cpp">
+      <Filter>Project\Managers\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceLoaderOBJ.cpp">
+      <Filter>Project\Managers\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug.cpp">
+      <Filter>Project\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>Project\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Project\Scene\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="HeightMap.cpp">
+      <Filter>Project\Scene\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Skybox.cpp">
+      <Filter>Project\Scene\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Project\Scene\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Project\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Project\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderData.cpp">
+      <Filter>Project\Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h">
+      <Filter>Project</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Project\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>Project\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Project\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Project\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Project\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Project\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions.h">
+      <Filter>Project\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Project\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Project\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Project\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceLoader.h">
+      <Filter>Project\Managers\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceLoader3DS.h">
+      <Filter>Project\Managers\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceLoaderOBJ.h">
+      <Filter>Project\Managers\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>Project\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL.h">
+      <Filter>Project\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry.h">
+      <Filter>Project\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderData.h">
+      <Filter>Project\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Project\Scene\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="HeightMap.h">
+      <Filter>Project\Scene\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Skybox.h">
+      <Filter>Project\Scene\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Project\Scene\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Project\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Project\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Project\Config</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\flat.fs.glsl">
+      <Filter>Project\Shaders</Filter>
+    </None>
+    <None Include="Shaders\flat.vs.glsl">
+      <Filter>Project\Shaders</Filter>
+    </None>
+    <None Include="Shaders\entity.fs.glsl">
+      <Filter>Project\Shaders</Filter>
+    </None>
+    <None Include="Shaders\entity.vs.glsl">
+      <Filter>Project\Shaders</Filter>
+    </None>
+    <None Include="Config\scene.cfg">
+      <Filter>Project\Config</Filter>
+    </None>
+    <None Include="Config\settings.cfg">
+      <Filter>Project\Config</Filter>
+    </None>
+    <None Include="Config\shaders.cfg">
+      <Filter>Project\Config</Filter>
+    </None>
+    <None Include="Config\resources.cfg">
+      <Filter>Project\Config</Filter>
+    </None>
+    <None Include="Shaders\skybox.fs.glsl">
+      <Filter>Project\Shaders</Filter>
+    </None>
+    <None Include="Shaders\skybox.vs.glsl">
+      <Filter>Project\Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="info.log">
+      <Filter>Project\Logs</Filter>
+    </Text>
+    <Text Include="program.log">
+      <Filter>Project\Logs</Filter>
+    </Text>
+    <Text Include="error.log">
+      <Filter>Project\Logs</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

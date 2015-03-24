@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Katamari Game", "Katamari Game\Katamari Game.vcxproj", "{D4F2C127-EFC4-440C-85C8-E3279169551C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4F2C127-EFC4-440C-85C8-E3279169551C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D4F2C127-EFC4-440C-85C8-E3279169551C}.Debug|Win32.Build.0 = Debug|Win32
+		{D4F2C127-EFC4-440C-85C8-E3279169551C}.Release|Win32.ActiveCfg = Release|Win32
+		{D4F2C127-EFC4-440C-85C8-E3279169551C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
