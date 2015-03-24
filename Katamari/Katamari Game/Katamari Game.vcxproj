@@ -21,6 +21,11 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Log.cpp" />
+    <ClCompile Include="PhysicsEngine\ForceGenerators\DragForceGenerator.cpp" />
+    <ClCompile Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.cpp" />
+    <ClCompile Include="PhysicsEngine\Particle.cpp" />
+    <ClCompile Include="PhysicsEngine\PhysicsManager.cpp" />
+    <ClCompile Include="PhysicsEngine\Vectors.cpp" />
     <ClCompile Include="RenderData.cpp" />
     <ClCompile Include="ResourceLoaderOBJ.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
@@ -37,6 +42,12 @@
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="HeightMap.h" />
+    <ClInclude Include="PhysicsEngine\ForceGenerators\DragForceGenerator.h" />
+    <ClInclude Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.h" />
+    <ClInclude Include="PhysicsEngine\ForceGenerators\ParticleForceGenerator.h" />
+    <ClInclude Include="PhysicsEngine\Particle.h" />
+    <ClInclude Include="PhysicsEngine\PhysicsManager.h" />
+    <ClInclude Include="PhysicsEngine\Vectors.h" />
     <ClInclude Include="RenderData.h" />
     <ClInclude Include="ResourceLoaderOBJ.h" />
     <ClInclude Include="ResourceLoader.h" />

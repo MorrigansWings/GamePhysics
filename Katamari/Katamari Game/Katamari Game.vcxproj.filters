@@ -31,6 +31,12 @@
     <Filter Include="Project\Config">
       <UniqueIdentifier>{73f792ae-587c-435b-8a91-a8362461d38b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\PhysicsEngine">
+      <UniqueIdentifier>{85eac253-51aa-4dec-bfb9-0c8cf19e6402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\PhysicsEngine\ForceGenerators">
+      <UniqueIdentifier>{16a3b901-5283-4e51-ade6-2f0b679e57c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -104,6 +110,21 @@
     </ClCompile>
     <ClCompile Include="RenderData.cpp">
       <Filter>Project\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\PhysicsManager.cpp">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Vectors.cpp">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Particle.cpp">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\ForceGenerators\DragForceGenerator.cpp">
+      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.cpp">
+      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +202,24 @@
     </ClInclude>
     <ClInclude Include="Config.h">
       <Filter>Project\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\PhysicsManager.h">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Vectors.h">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Particle.h">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\ForceGenerators\DragForceGenerator.h">
+      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.h">
+      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\ForceGenerators\ParticleForceGenerator.h">
+      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
