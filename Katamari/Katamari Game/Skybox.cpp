@@ -1,12 +1,12 @@
 #include "Skybox.h"
 
-#include "Game.h"
+#include "GraphicsManager.h"
 #include "ResourceManager.h"
 #include "RenderData.h"
 
 void Skybox::preRender( const RenderData* pData )
 {
-	ShaderManager* pShaderManager = Game::GetInstance()->getShaderManager();
+	ShaderManager* pShaderManager = GraphicsManager::GetInstance()->getShaderManager();
 
 	pShaderManager->useProgram("skybox");
 
@@ -43,11 +43,11 @@ bool Skybox::load( const string& filename )
 {
 	removeModels(); 
 
-	mp_Tex = Game::GetInstance()->getResourceManager()->loadTexture(filename, GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE);
+	mp_Tex = GraphicsManager::GetInstance()->getResourceManager()->loadTexture(filename, GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE);
 
 	if ( ! mp_Tex )
 	{
-		Game::GetInstance()->getResourceManager()->releaseTexture(mp_Tex);
+		GraphicsManager::GetInstance()->getResourceManager()->releaseTexture(mp_Tex);
 		return false;
 	}
 
@@ -80,13 +80,13 @@ bool Skybox::load( const string& filename )
 	for (int i = 0; i < 24; ++i)
 		skyboxVerts[i] *= SKYBOX_SCALE;
 
-	Mesh* pMesh = Game::GetInstance()->getResourceManager()->addMesh("skybox-quads");
+	Mesh* pMesh = GraphicsManager::GetInstance()->getResourceManager()->addMesh("skybox-quads");
 	pMesh->begin(GL_QUADS, 24);
 	pMesh->copyVertexData(skyboxVerts);
 	pMesh->copyTextureCoordData(skyboxTxcrds);
 	pMesh->end();
 
-	Model* pModel = Game::GetInstance()->getResourceManager()->addModel("skybox");
+	Model* pModel = GraphicsManager::GetInstance()->getResourceManager()->addModel("skybox");
 	pModel->addMesh(pMesh);
 
 	addModel(pModel);

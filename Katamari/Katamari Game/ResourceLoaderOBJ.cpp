@@ -1,6 +1,6 @@
 #include "ResourceLoaderOBJ.h"
 
-#include "Game.h"
+#include "GraphicsManager.h"
 #include "ResourceManager.h"
 
 bool ResourceLoaderOBJ::loadFromFile( const string& filename )
@@ -177,8 +177,8 @@ bool ResourceLoaderOBJ::loadFromFile( const string& filename )
 		{
 			if (pCurrModel != nullptr)
 			{
-				Mesh* pTriMesh  = Game::GetInstance()->getResourceManager()->addMesh(modelName + "_tris");
-				Mesh* pQuadMesh = Game::GetInstance()->getResourceManager()->addMesh(modelName + "_quads");
+				Mesh* pTriMesh = GraphicsManager::GetInstance()->getResourceManager()->addMesh(modelName + "_tris");
+				Mesh* pQuadMesh = GraphicsManager::GetInstance()->getResourceManager()->addMesh(modelName + "_quads");
 
 				if (triColors.isEmpty())
 					triColors.resize(triVertTotal,   vec4(-1.0f, -1.0f, -1.0f, -1.0f));
@@ -241,11 +241,11 @@ bool ResourceLoaderOBJ::loadFromFile( const string& filename )
 
 			if (data.size() != 0)
 			{
-				while (Game::GetInstance()->getResourceManager()->hasModel(data))
+				while (GraphicsManager::GetInstance()->getResourceManager()->hasModel(data))
 					data += '0';
 
 				modelName = data;
-				pCurrModel = Game::GetInstance()->getResourceManager()->addModel(modelName);
+				pCurrModel = GraphicsManager::GetInstance()->getResourceManager()->addModel(modelName);
 			}
 		}
 		else if (cmd == "mtllib")
@@ -254,7 +254,7 @@ bool ResourceLoaderOBJ::loadFromFile( const string& filename )
 		}
 		else if (cmd == "usemtl")
 		{
-			pCurrModel->setMaterial(Game::GetInstance()->getResourceManager()->getMaterial(data));
+			pCurrModel->setMaterial(GraphicsManager::GetInstance()->getResourceManager()->getMaterial(data));
 		}
 
 		endOfBuffer = buffer.endOfBuffer();
@@ -269,7 +269,7 @@ bool ResourceLoaderOBJ::loadFromFile( const string& filename )
 				// If the file had no objects, shove everything in a "Default" object
 				if (pCurrModel == nullptr)
 				{
-					pCurrModel = Game::GetInstance()->getResourceManager()->addModel("Default");
+					pCurrModel = GraphicsManager::GetInstance()->getResourceManager()->addModel("Default");
 				}
 			}
 		}
@@ -312,13 +312,13 @@ bool ResourceLoaderOBJ::loadMTLFile( const string& filename )
 
 		if (cmd == "newmtl")
 		{
-			pCurrMtl = Game::GetInstance()->getResourceManager()->addMaterial(data);
+			pCurrMtl = GraphicsManager::GetInstance()->getResourceManager()->addMaterial(data);
 		}
 		else 
 		{
 			if (pCurrMtl == nullptr)
 			{
-				pCurrMtl = Game::GetInstance()->getResourceManager()->addMaterial("Default");
+				pCurrMtl = GraphicsManager::GetInstance()->getResourceManager()->addMaterial("Default");
 			}
 
 			if (cmd == "Ka")
@@ -374,35 +374,35 @@ bool ResourceLoaderOBJ::loadMTLFile( const string& filename )
 			}
 			else if (cmd == "map_Ka")
 			{
-				pCurrMtl->setAmbientMap(Game::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + data, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT));
+				pCurrMtl->setAmbientMap(GraphicsManager::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + data, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT));
 			}
 			else if (cmd == "map_Kd")
 			{
-				pCurrMtl->setDiffuseMap(Game::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + data, GL_LINEAR, GL_LINEAR, GL_REPEAT));
+				pCurrMtl->setDiffuseMap(GraphicsManager::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + data, GL_LINEAR, GL_LINEAR, GL_REPEAT));
 			}
 			else if (cmd == "map_Ks")
 			{
-				pCurrMtl->setSpecularMap(Game::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + data, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT));
+				pCurrMtl->setSpecularMap(GraphicsManager::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + data, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT));
 			}
 			else if (cmd == "map_Ns")
 			{
-				pCurrMtl->setSpecularHilightMap(Game::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + data, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT));
+				pCurrMtl->setSpecularHilightMap(GraphicsManager::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + data, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT));
 			}
 			else if (cmd == "map_d")
 			{
-				pCurrMtl->setAlphaMap(Game::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + data, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT));
+				pCurrMtl->setAlphaMap(GraphicsManager::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + data, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT));
 			}
 			else if (cmd == "map_bump" || cmd == "bump")
 			{
-				pCurrMtl->setBumpMap(Game::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + data, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT));
+				pCurrMtl->setBumpMap(GraphicsManager::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + data, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT));
 			}
 			else if (cmd == "disp")
 			{
-				pCurrMtl->setDisplacementMap(Game::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + data, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT));
+				pCurrMtl->setDisplacementMap(GraphicsManager::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + data, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT));
 			}
 			else if (cmd == "decal")
 			{
-				pCurrMtl->setDecalMap(Game::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + data, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT));
+				pCurrMtl->setDecalMap(GraphicsManager::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + data, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT));
 			}
 		}
 	}

@@ -3,7 +3,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
-#include "Game.h"
+#include "GraphicsManager.h"
 
 #include "ResourceManager.h"
 #include "SceneManager.h"
@@ -104,21 +104,21 @@ void Config::LoadFile( const string& filename )
 				const string& filename = ReadString(line, lineStartInd, offset);
 				lineStartInd += offset;
 
-				Game::GetInstance()->getResourceManager()->loadModelFile(filename);
+				GraphicsManager::GetInstance()->getResourceManager()->loadModelFile(filename);
 			}
 			else if (cmd == "Scene")
 			{
 				const string& name = ReadString(line, lineStartInd, offset);
 				lineStartInd += offset;
 
-				Game::GetInstance()->getSceneManager()->addScene(name, ReadScene(name, file, dirname));
+				GraphicsManager::GetInstance()->getSceneManager()->addScene(name, ReadScene(name, file, dirname));
 			}
 			else if (cmd == "InitialScene")
 			{
 				const string& name = ReadString(line, lineStartInd, offset);
 				lineStartInd += offset;
 
-				Game::GetInstance()->getSceneManager()->setCurrentScene(name);
+				GraphicsManager::GetInstance()->getSceneManager()->setCurrentScene(name);
 			}
 			else if (cmd == "Shader")
 			{
@@ -264,7 +264,7 @@ Scene* Config::ReadScene( const string& name, Buffer& file, const string& dirnam
 			{
 				const string& filename = ReadString(line, lineStartInd, offset);
 
-				Game::GetInstance()->getResourceManager()->loadModelFile(filename);
+				GraphicsManager::GetInstance()->getResourceManager()->loadModelFile(filename);
 			}
 			else if (cmd == "Skybox")
 			{
@@ -418,7 +418,7 @@ Camera* Config::ReadCamera( const string& name, Buffer& file, const string& dirn
 		}
 	}
 
-	return New Camera((GLfloat)Game::GetInstance()->getWidth(), (GLfloat)Game::GetInstance()->getHeight(), pos, dir, up, fov, vNear, vFar, speed);
+	return New Camera((GLfloat)GraphicsManager::GetInstance()->getWidth(), (GLfloat)GraphicsManager::GetInstance()->getHeight(), pos, dir, up, fov, vNear, vFar, speed);
 }
 
 Entity* Config::ReadEntity( const string& name, Buffer& file, const string& dirname )
@@ -521,7 +521,7 @@ Entity* Config::ReadEntity( const string& name, Buffer& file, const string& dirn
 
 	for (unsigned int i = 0; i < modelNames.getSize(); ++i)
 	{
-		pEntity->addModel(Game::GetInstance()->getResourceManager()->getModel(modelNames[i]));
+		pEntity->addModel(GraphicsManager::GetInstance()->getResourceManager()->getModel(modelNames[i]));
 	}
 
 	return pEntity;
@@ -737,7 +737,7 @@ void Config::ReadShader( const string& name, Buffer& file, const string& dirname
 		}
 	}
 
-	Game::GetInstance()->getShaderManager()->loadProgram(name, shaders);
+	GraphicsManager::GetInstance()->getShaderManager()->loadProgram(name, shaders);
 }
 
 string Config::ReadUntilWhitespace( const string& str, const int& start, int& offset )

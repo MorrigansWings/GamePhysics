@@ -1,5 +1,5 @@
-#ifndef GRAPHICS_II_GAME_H
-#define GRAPHICS_II_GAME_H
+#ifndef GRAPHICSMANAGER_H
+#define GRAPHICSMANAGER_H
 
 #include <Arc/ManagedObject.h>
 
@@ -13,18 +13,18 @@ class Entity;
 
 using namespace Arc;
 
-class Game :
+class GraphicsManager :
 	public ManagedObject
 {
 public:
 
-	static Game* GetInstance( void ) { return s_Instance; }
+	static GraphicsManager* GetInstance( void ) { return s_Instance; }
 
-	Game( int argc, char* argv[] );
+	GraphicsManager( int argc, char* argv[] );
 
-	virtual inline ~Game( void ) { term(); }
+	virtual inline ~GraphicsManager( void ) { term(); }
 
-	virtual inline string getClassName( void ) const { return "Game"; }
+	virtual inline string getClassName( void ) const { return "GraphicsManager"; }
 
 	SceneManager*    getSceneManager   ( void );
 	ResourceManager* getResourceManager( void );
@@ -87,7 +87,7 @@ private:
 	void initGL( void );
 	void initWindow( void );
 
-	static Game*		s_Instance;
+	static GraphicsManager*		s_Instance;
 
 	int					m_Width, 
 						m_Height;
@@ -112,4 +112,4 @@ private:
 
 };
 
-#endif // GRAPHICS_II_GAME_H
+#endif // GRAPHICSMANAGER_H

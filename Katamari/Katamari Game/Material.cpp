@@ -1,11 +1,11 @@
 #include "Material.h"
 
-#include "Game.h"
+#include "GraphicsManager.h"
 #include "ResourceManager.h"
 
 void Material::bind( void )
 {
-	ShaderManager* pShaderManager = Game::GetInstance()->getShaderManager();
+	ShaderManager* pShaderManager = GraphicsManager::GetInstance()->getShaderManager();
 
 	pShaderManager->setUniform3f(pShaderManager->getUniformLocation("v3Diffuse"),  m_DiffuseColor);
 	pShaderManager->setUniform3f(pShaderManager->getUniformLocation("v3Ambient"),  m_AmbientColor);

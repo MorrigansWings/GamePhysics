@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-#include "Game.h"
+#include "GraphicsManager.h"
 #include "ResourceManager.h"
 #include "RenderData.h"
 #include "Camera.h"
@@ -19,7 +19,7 @@ void Entity::update( const double& deltaTime )
 
 void Entity::preRender( const RenderData* pData )
 {
-	ShaderManager* pShaderManager = Game::GetInstance()->getShaderManager();
+	ShaderManager* pShaderManager = GraphicsManager::GetInstance()->getShaderManager();
 
 	pShaderManager->useProgram("entity");
 
@@ -75,7 +75,7 @@ void Entity::removeModels( void )
 	{
 		Model* pModel = (*it);
 
-		Game::GetInstance()->getResourceManager()->releaseModel(pModel);
+		GraphicsManager::GetInstance()->getResourceManager()->releaseModel(pModel);
 	}
 	m_Models.clear();
 }

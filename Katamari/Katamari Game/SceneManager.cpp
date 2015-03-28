@@ -1,6 +1,6 @@
 #include "SceneManager.h"
 
-#include "Game.h"
+#include "GraphicsManager.h"
 
 SceneManager::SceneManager( void )
 	: m_Scenes(),

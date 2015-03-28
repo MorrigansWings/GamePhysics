@@ -1,6 +1,6 @@
 #include "HeightMap.h"
 
-#include "Game.h"
+#include "GraphicsManager.h"
 #include "ResourceManager.h"
 
 HeightMap::HeightMap( void )
@@ -131,7 +131,7 @@ bool HeightMap::load( const string& heightMapFilename, const string& textureFile
 
 	SDL_FreeSurface(pSurface);
 
-	Mesh* pMesh = Game::GetInstance()->getResourceManager()->addMesh("ground-triangle-strip");
+	Mesh* pMesh = GraphicsManager::GetInstance()->getResourceManager()->addMesh("ground-triangle-strip");
 
 	pMesh->begin(GL_TRIANGLE_STRIP, numVerts);
 
@@ -140,11 +140,11 @@ bool HeightMap::load( const string& heightMapFilename, const string& textureFile
 
 	pMesh->end();
 
-	Model* pModel = Game::GetInstance()->getResourceManager()->addModel("ground");
+	Model* pModel = GraphicsManager::GetInstance()->getResourceManager()->addModel("ground");
 	pModel->addMesh(pMesh);
 
-	Material* pMat = Game::GetInstance()->getResourceManager()->addMaterial("ground");
-	pMat->setDiffuseMap(Game::GetInstance()->getResourceManager()->loadTexture(textureFilename, GL_LINEAR, GL_LINEAR, GL_REPEAT));
+	Material* pMat = GraphicsManager::GetInstance()->getResourceManager()->addMaterial("ground");
+	pMat->setDiffuseMap(GraphicsManager::GetInstance()->getResourceManager()->loadTexture(textureFilename, GL_LINEAR, GL_LINEAR, GL_REPEAT));
 	pModel->setMaterial(pMat);
 
 	addModel(pModel);

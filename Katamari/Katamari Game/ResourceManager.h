@@ -1,5 +1,5 @@
-#ifndef GRAPHICS_II_RESOURCE_MANAGER_H
-#define GRAPHICS_II_RESOURCE_MANAGER_H
+#ifndef RESOURCE_MANAGER_H
+#define RESOURCE_MANAGER_H
 
 #include <Arc/ManagedObject.h>
 
@@ -15,13 +15,13 @@
 
 using namespace Arc;
 
-class Game;
+class GraphicsManager;
 
 class ResourceManager
 	: public ManagedObject
 {
 
-	friend class Game;
+	friend class GraphicsManager;
 
 public:
 
@@ -137,4 +137,4 @@ private:
 
 };
 
-#endif // GRAPHICS_II_RESOURCE_MANAGER_H
+#endif // RESOURCE_MANAGER_H

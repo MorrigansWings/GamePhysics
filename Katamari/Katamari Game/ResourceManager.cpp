@@ -1,6 +1,6 @@
 #include "ResourceManager.h"
 
-#include "Game.h"
+#include "GraphicsManager.h"
 #include "Log.h"
 #include "ResourceLoaderOBJ.h"
 #include "ResourceLoader3DS.h"

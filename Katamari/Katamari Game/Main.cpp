@@ -1,5 +1,5 @@
 #include "OpenGL.h"
-#include "Game.h"
+#include "GraphicsManager.h"
 #include "Log.h"
 
 #include <Arc/ArcCore.h>
@@ -15,7 +15,7 @@ void glfwError( int error, const char* description )
 
 void glfwResize( GLFWwindow* window, int width, int height )
 {
-	Game::GetInstance()->hookResize(width, height);
+	GraphicsManager::GetInstance()->hookResize(width, height);
 }
 
 void glfwKey( GLFWwindow* window, int key, int scancode, int action, int mods )
@@ -24,17 +24,17 @@ void glfwKey( GLFWwindow* window, int key, int scancode, int action, int mods )
 	{
 	case GLFW_PRESS:
 
-		Game::GetInstance()->hookKeyDown(key);
+		GraphicsManager::GetInstance()->hookKeyDown(key);
 
 		break;
 	case GLFW_RELEASE:
 
-		Game::GetInstance()->hookKeyUp(key);
+		GraphicsManager::GetInstance()->hookKeyUp(key);
 
 		break;
 	case GLFW_REPEAT:
 
-		Game::GetInstance()->hookKeyHeld(key);
+		GraphicsManager::GetInstance()->hookKeyHeld(key);
 
 		break;
 	}
@@ -42,7 +42,7 @@ void glfwKey( GLFWwindow* window, int key, int scancode, int action, int mods )
 
 void glfwMouseMove( GLFWwindow* window, double x, double y )
 {
-	Game::GetInstance()->hookMouseMoved((float)x, (float)y);
+	GraphicsManager::GetInstance()->hookMouseMoved((float)x, (float)y);
 }
 
 void glfwMouse( GLFWwindow* window, int button, int action, int mods )
@@ -51,12 +51,12 @@ void glfwMouse( GLFWwindow* window, int button, int action, int mods )
 	{
 	case GLFW_PRESS:
 		
-		Game::GetInstance()->hookMouseDown(button);
+		GraphicsManager::GetInstance()->hookMouseDown(button);
 
 		break;
 	case GLFW_RELEASE:
 
-		Game::GetInstance()->hookMouseUp(button);
+		GraphicsManager::GetInstance()->hookMouseUp(button);
 
 		break;
 	}
@@ -64,7 +64,7 @@ void glfwMouse( GLFWwindow* window, int button, int action, int mods )
 
 void glfwMouseScroll( GLFWwindow* window, double x, double y )
 {
-	Game::GetInstance()->hookMouseScrolled((float)x, (float)y);
+	GraphicsManager::GetInstance()->hookMouseScrolled((float)x, (float)y);
 }
 
 int main( int argc, char* argv[] )
@@ -90,8 +90,8 @@ int main( int argc, char* argv[] )
 
 	glfwSetErrorCallback(glfwError);
 
-	New Game(argc, argv);
-	GLFWwindow* pWindow = Game::GetInstance()->getGLFWWindow();
+	New GraphicsManager(argc, argv);
+	GLFWwindow* pWindow = GraphicsManager::GetInstance()->getGLFWWindow();
 
 	if (pWindow != nullptr)
 	{
@@ -101,10 +101,10 @@ int main( int argc, char* argv[] )
 		glfwSetCursorPosCallback(pWindow, glfwMouseMove);
 		glfwSetScrollCallback(pWindow, glfwMouseScroll);
 
-		Game::GetInstance()->start();
+		GraphicsManager::GetInstance()->start();
 	}
 
-	delete Game::GetInstance();
+	delete GraphicsManager::GetInstance();
 
 	if (Arc_GetMemoryAllocationCount() > 0)
 	{

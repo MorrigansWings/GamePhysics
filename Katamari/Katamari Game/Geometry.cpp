@@ -1,6 +1,6 @@
 #include "Geometry.h"
 
-#include "Game.h"
+#include "GraphicsManager.h"
 #include "Mesh.h"
 #include "ResourceManager.h"
 
@@ -240,7 +240,7 @@ Mesh* Geometry::CreateMesh( const string& name, const GLenum& primitiveType, con
 	if (verts.isEmpty())
 		return nullptr;
 
-	Mesh* pMesh = Game::GetInstance()->getResourceManager()->addMesh(name);
+	Mesh* pMesh = GraphicsManager::GetInstance()->getResourceManager()->addMesh(name);
 
 	pMesh->begin(primitiveType, verts.getSize());
 	pMesh->copyVertexData(verts);

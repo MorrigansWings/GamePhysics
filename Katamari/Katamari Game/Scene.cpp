@@ -1,6 +1,6 @@
 #include "Scene.h"
 
-#include "Game.h"
+#include "GraphicsManager.h"
 #include "Debug.h"
 #include "RenderData.h"
 #include "Entity.h"

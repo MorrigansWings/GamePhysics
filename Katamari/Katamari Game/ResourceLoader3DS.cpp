@@ -1,6 +1,6 @@
 #include "ResourceLoader3DS.h"
 
-#include "Game.h"
+#include "GraphicsManager.h"
 #include "ResourceManager.h"
 #include "Log.h"
 
@@ -87,8 +87,8 @@ void Chunk3DS::load( const unsigned long& chunkStart, Buffer& buff, const string
 				}
 			}
 
-			Model* pModel = Game::GetInstance()->getResourceManager()->addModel(name);
-			Mesh* pTris   = Game::GetInstance()->getResourceManager()->addMesh(name + "_tris");
+			Model* pModel = GraphicsManager::GetInstance()->getResourceManager()->addModel(name);
+			Mesh* pTris   = GraphicsManager::GetInstance()->getResourceManager()->addMesh(name + "_tris");
 
 			Log::InfoFmt(getClassName(), "Loaded 3DS Object with %d Tris", numFaces);
 
@@ -101,7 +101,7 @@ void Chunk3DS::load( const unsigned long& chunkStart, Buffer& buff, const string
 
 			if (useMatName.size() > 0)
 			{
-				pModel->setMaterial(Game::GetInstance()->getResourceManager()->getMaterial(useMatName));
+				pModel->setMaterial(GraphicsManager::GetInstance()->getResourceManager()->getMaterial(useMatName));
 			}
 		}
 		break;
@@ -208,7 +208,7 @@ void Chunk3DS::load( const unsigned long& chunkStart, Buffer& buff, const string
 
 			//Log::InfoFmt(getClassName(), "Read Material Name, Name: %s", matName.c_str());
 
-			pMat = Game::GetInstance()->getResourceManager()->addMaterial(matName);
+			pMat = GraphicsManager::GetInstance()->getResourceManager()->addMaterial(matName);
 		}
 		break;
 	case 0xA010: // Ambient Color
@@ -250,7 +250,7 @@ void Chunk3DS::load( const unsigned long& chunkStart, Buffer& buff, const string
 			loadChildren(dataOffset, buff, filename);
 
 			if (matFilename.size() > 0)
-				pMat->setDiffuseMap(Game::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + matFilename, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT));
+				pMat->setDiffuseMap(GraphicsManager::GetInstance()->getResourceManager()->loadTexture(Arc_Dirname(filename) + "/" + matFilename, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT));
 		}
 		break;
 	case 0xA33A: // Texture Map 2

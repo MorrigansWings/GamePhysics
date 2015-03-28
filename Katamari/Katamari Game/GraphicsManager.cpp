@@ -1,4 +1,4 @@
-#include "Game.h" 
+#include "GraphicsManager.h" 
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
@@ -16,9 +16,9 @@
 #include "HeightMap.h"
 #include "Config.h"
 
-Game* Game::s_Instance = nullptr;
+GraphicsManager* GraphicsManager::s_Instance = nullptr;
 
-Game::Game( int argc, char* argv[] ) 
+GraphicsManager::GraphicsManager( int argc, char* argv[] ) 
 	: mp_Window			(nullptr),
 	  mp_ResourceManager(nullptr),
 	  mp_ShaderManager	(nullptr),
@@ -92,22 +92,22 @@ Game::Game( int argc, char* argv[] )
 	Debug::SetBool("fly-through-mode", false);
 }
 
-SceneManager* Game::getSceneManager( void )
+SceneManager* GraphicsManager::getSceneManager( void )
 {
 	return mp_SceneManager;
 }
 
-ResourceManager* Game::getResourceManager( void )
+ResourceManager* GraphicsManager::getResourceManager( void )
 {
 	return mp_ResourceManager;
 }
 
-ShaderManager* Game::getShaderManager( void )
+ShaderManager* GraphicsManager::getShaderManager( void )
 {
 	return mp_ShaderManager;
 }
 
-void Game::term( void )
+void GraphicsManager::term( void )
 {
 	delete mp_SceneManager;
 	delete mp_ShaderManager;
@@ -119,7 +119,7 @@ void Game::term( void )
 	glfwTerminate();
 }
 
-void Game::start( void )
+void GraphicsManager::start( void )
 {
 	while( ! glfwWindowShouldClose(mp_Window) )
 	{
@@ -146,12 +146,12 @@ void Game::start( void )
 	}
 }
 
-void Game::update( float deltaTime )
+void GraphicsManager::update( float deltaTime )
 {
 	mp_SceneManager->update(deltaTime);
 }
 
-void Game::render( void )
+void GraphicsManager::render( void )
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glClearDepth(1.0f);
@@ -159,7 +159,7 @@ void Game::render( void )
 	mp_SceneManager->render();
 }
 
-void Game::hookResize( int width, int height )
+void GraphicsManager::hookResize( int width, int height )
 {
 	m_Width = width;
 	m_Height = height;
@@ -169,7 +169,7 @@ void Game::hookResize( int width, int height )
 	mp_SceneManager->hookResize(width, height);
 }
 
-void Game::hookKeyDown( int key )
+void GraphicsManager::hookKeyDown( int key )
 {
 	switch (key)
 	{
@@ -214,7 +214,7 @@ void Game::hookKeyDown( int key )
 	mp_SceneManager->hookKeyDown(key);
 }
 
-void Game::hookKeyUp( int key )
+void GraphicsManager::hookKeyUp( int key )
 {
 	//switch (key)
 	//{
@@ -223,7 +223,7 @@ void Game::hookKeyUp( int key )
 	mp_SceneManager->hookKeyUp(key);
 }
 
-void Game::hookKeyHeld( int key )
+void GraphicsManager::hookKeyHeld( int key )
 {
 	//switch (key)
 	//{
@@ -232,7 +232,7 @@ void Game::hookKeyHeld( int key )
 	mp_SceneManager->hookKeyHeld(key);
 }
 
-void Game::hookMouseDown( int button )
+void GraphicsManager::hookMouseDown( int button )
 {
 	switch (button)
 	{
@@ -247,7 +247,7 @@ void Game::hookMouseDown( int button )
 	mp_SceneManager->hookMouseDown(button);
 }
 
-void Game::hookMouseUp( int button )
+void GraphicsManager::hookMouseUp( int button )
 {
 	switch (button)
 	{
@@ -262,17 +262,17 @@ void Game::hookMouseUp( int button )
 	mp_SceneManager->hookMouseUp(button);
 }
 
-void Game::hookMouseMoved( float x, float y )
+void GraphicsManager::hookMouseMoved( float x, float y )
 {
 	mp_SceneManager->hookMouseMoved(x, y);
 }
 
-void Game::hookMouseScrolled( float scrollX, float scrollY )
+void GraphicsManager::hookMouseScrolled( float scrollX, float scrollY )
 {
 	mp_SceneManager->hookMouseScrolled(scrollX, scrollY);
 }
 
-void Game::initGL( void )
+void GraphicsManager::initGL( void )
 {
 	glClearColor(m_ClearColor.r, m_ClearColor.g, m_ClearColor.b, m_ClearColor.a);
 
@@ -284,7 +284,7 @@ void Game::initGL( void )
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-void Game::initWindow( void )
+void GraphicsManager::initWindow( void )
 {
 	glfwWindowHint(GLFW_DEPTH_BITS, 16);
 
@@ -316,7 +316,7 @@ void Game::initWindow( void )
 	glfwSwapInterval(0);
 }
 
-void Game::screenshot( const string& filename /*= "" */ )
+void GraphicsManager::screenshot( const string& filename /*= "" */ )
 {
 	string tmpFilename = filename;
 	if (tmpFilename == "")
