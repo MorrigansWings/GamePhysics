@@ -17,6 +17,7 @@
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="HeightMap.cpp" />
+    <ClCompile Include="KatamariGame\KatamariGame.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
@@ -42,6 +43,7 @@
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="HeightMap.h" />
+    <ClInclude Include="KatamariGame\KatamariGame.h" />
     <ClInclude Include="PhysicsEngine\ForceGenerators\DragForceGenerator.h" />
     <ClInclude Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.h" />
     <ClInclude Include="PhysicsEngine\ForceGenerators\ParticleForceGenerator.h" />

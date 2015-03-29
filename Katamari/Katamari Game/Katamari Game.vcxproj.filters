@@ -40,6 +40,9 @@
     <Filter Include="Project\GraphicsEngine\Util">
       <UniqueIdentifier>{e6aac566-302a-4ce0-b5db-2384483114f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\KatamariGame">
+      <UniqueIdentifier>{1aff04b2-cb7c-4fb7-96a7-43c38bba9df1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -128,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="GraphicsManager.cpp">
       <Filter>Project\GraphicsEngine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="KatamariGame\KatamariGame.cpp">
+      <Filter>Project\KatamariGame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="GraphicsManager.h">
       <Filter>Project\GraphicsEngine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="KatamariGame\KatamariGame.h">
+      <Filter>Project\KatamariGame</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
