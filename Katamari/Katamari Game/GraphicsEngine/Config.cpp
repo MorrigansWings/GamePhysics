@@ -425,6 +425,7 @@ Entity* Config::ReadEntity( const string& name, Buffer& file, const string& dirn
 {
 	vec3 pos, rot, scale;
 	ArrayList<string> modelNames;
+	vec4 color;
 
 	int offset = 0;
 
@@ -514,10 +515,14 @@ Entity* Config::ReadEntity( const string& name, Buffer& file, const string& dirn
 			{
 				modelNames.add(ReadString(line, lineStartInd, offset));
 			}
+			else if (name == "Color")
+			{
+				color = ReadVec4(line, lineStartInd, offset);
+			}
 		}
 	}
 
-	Entity* pEntity = New Entity(pos, rot, scale);
+	Entity* pEntity = New Entity(pos, rot, scale, color);
 
 	for (unsigned int i = 0; i < modelNames.getSize(); ++i)
 	{

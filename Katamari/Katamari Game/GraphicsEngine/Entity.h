@@ -23,14 +23,16 @@ public:
 		  m_Pos		(0.0f, 0.0f, 0.0f),
 		  m_Rot		(0.0f, 0.0f, 0.0f),
 		  m_Scale	(1.0f, 1.0f, 1.0f),
+		  m_Color(0.5f, 0.5f, 0.5f, 1.0f),
 		  m_LightingAffected(true)
 	{ }
 
-	inline Entity( const vec3& pos, const vec3& rot = vec3(0.0f, 0.0f, 0.0f), const vec3& scale = vec3(1.0f, 1.0f, 1.0f) )
+	inline Entity( const vec3& pos, const vec3& rot = vec3(0.0f, 0.0f, 0.0f), const vec3& scale = vec3(1.0f, 1.0f, 1.0f), const vec4& color = vec4(0.5f, 0.5f, 0.5f, 1.0f) )
 		: m_Models	(),
 		  m_Pos		(pos),
 		  m_Rot		(rot),
 		  m_Scale	(scale),
+		  m_Color(color),
 		  m_LightingAffected(true)
 	{ }
 
@@ -39,6 +41,7 @@ public:
 		  m_Pos		(rhs.m_Pos),
 		  m_Rot		(rhs.m_Rot),
 		  m_Scale	(rhs.m_Scale),
+		  m_Color(rhs.m_Color),
 		  m_LightingAffected(rhs.m_LightingAffected)
 	{ }
 
@@ -80,6 +83,8 @@ protected:
 							m_Scale;
 
 	bool					m_LightingAffected;
+
+	vec4					m_Color;
 
 };
 

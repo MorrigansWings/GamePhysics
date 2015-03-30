@@ -21,7 +21,7 @@ void Entity::preRender( const RenderData* pData )
 {
 	ShaderManager* pShaderManager = GraphicsManager::GetInstance()->getShaderManager();
 
-	pShaderManager->useProgram("entity");
+	pShaderManager->useProgram("flat");
 
 	glm::mat4x4 mModel = mat4(1.0f);
 	glm::mat4x4 mViewProj, mModelView, mModelViewProj;
@@ -36,22 +36,24 @@ void Entity::preRender( const RenderData* pData )
 	mModelView = pData->View * mModel;
 	mModelViewProj = pData->ViewProj * mModel;
 
-	static GLint m4ModelViewLoc      = pShaderManager->getUniformLocation("uModelView");
-	static GLint m4ModelViewProjLoc  = pShaderManager->getUniformLocation("uModelViewProj");
-	static GLint v3GlobalAmbientLoc  = pShaderManager->getUniformLocation("uGlobalAmbient");
-	static GLint v3LightColorLoc     = pShaderManager->getUniformLocation("uLightColor");
-	static GLint v3LightDirectionLoc = pShaderManager->getUniformLocation("uLightDirection");
-	static GLint v3HalfVectorLoc     = pShaderManager->getUniformLocation("uHalfVector");
-	static GLint bGlobalLightLoc     = pShaderManager->getUniformLocation("uHasGlobalLight");
+	//static GLint m4ModelViewLoc      = pShaderManager->getUniformLocation("uModelView");
+	static GLint m4ModelViewProjLoc = pShaderManager->getUniformLocation("uModelViewProj");
+	static GLint v4FlatColor = pShaderManager->getUniformLocation("uFlatColor");
+	//static GLint v3GlobalAmbientLoc  = pShaderManager->getUniformLocation("uGlobalAmbient");
+	//static GLint v3LightColorLoc     = pShaderManager->getUniformLocation("uLightColor");
+	//static GLint v3LightDirectionLoc = pShaderManager->getUniformLocation("uLightDirection");
+	//static GLint v3HalfVectorLoc     = pShaderManager->getUniformLocation("uHalfVector");
+	//static GLint bGlobalLightLoc     = pShaderManager->getUniformLocation("uHasGlobalLight");
 
 	pShaderManager->setUniformMatrix4fv(m4ModelViewProjLoc, 1, &mModelViewProj);
-	pShaderManager->setUniformMatrix4fv(m4ModelViewLoc,     1, &mModelView);
+	pShaderManager->setUniform4f(v4FlatColor, m_Color);
+	//pShaderManager->setUniformMatrix4fv(m4ModelViewLoc,     1, &mModelView);
 
-	pShaderManager->setUniform3f(v3GlobalAmbientLoc,  pData->AmbientLightAmount);
-	pShaderManager->setUniform3f(v3LightColorLoc,     pData->GlobalLightColor);
-	pShaderManager->setUniform3f(v3LightDirectionLoc, pData->GlobalLightDirection);
+	//pShaderManager->setUniform3f(v3GlobalAmbientLoc,  pData->AmbientLightAmount);
+	//pShaderManager->setUniform3f(v3LightColorLoc,     pData->GlobalLightColor);
+	//pShaderManager->setUniform3f(v3LightDirectionLoc, pData->GlobalLightDirection);
 
-	pShaderManager->setUniform1i(bGlobalLightLoc, isLightingAffected());
+	//pShaderManager->setUniform1i(bGlobalLightLoc, isLightingAffected());
 }
 
 void Entity::doRender( const RenderData* pData )
