@@ -48,71 +48,8 @@
     <ClCompile Include="Main.cpp">
       <Filter>Project</Filter>
     </ClCompile>
-    <ClCompile Include="Log.cpp">
-      <Filter>Project\GraphicsEngine\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderManager.cpp">
-      <Filter>Project\GraphicsEngine\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Project\GraphicsEngine\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Project\GraphicsEngine\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Project\GraphicsEngine\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Functions.cpp">
-      <Filter>Project\GraphicsEngine\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>Project\GraphicsEngine\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Material.cpp">
-      <Filter>Project\GraphicsEngine\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Project\GraphicsEngine\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Project\GraphicsEngine\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceLoader.cpp">
-      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceLoader3DS.cpp">
-      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceLoaderOBJ.cpp">
-      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug.cpp">
-      <Filter>Project\GraphicsEngine\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry.cpp">
-      <Filter>Project\GraphicsEngine\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="HeightMap.cpp">
-      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Skybox.cpp">
-      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Grid.cpp">
-      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Project\GraphicsEngine\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Config.cpp">
       <Filter>Project\GraphicsEngine\Config</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderData.cpp">
-      <Filter>Project\GraphicsEngine\Scene</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsEngine\PhysicsManager.cpp">
       <Filter>Project\PhysicsEngine</Filter>
@@ -129,83 +66,74 @@
     <ClCompile Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.cpp">
       <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicsManager.cpp">
-      <Filter>Project\GraphicsEngine\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="KatamariGame\KatamariGame.cpp">
       <Filter>Project\KatamariGame</Filter>
     </ClCompile>
+    <ClCompile Include="GraphicsEngine\ResourceLoader3DS.cpp">
+      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\ResourceLoaderOBJ.cpp">
+      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\ResourceLoader.cpp">
+      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\GraphicsManager.cpp">
+      <Filter>Project\GraphicsEngine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\SceneManager.cpp">
+      <Filter>Project\GraphicsEngine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\ShaderManager.cpp">
+      <Filter>Project\GraphicsEngine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Texture.cpp">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Material.cpp">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Mesh.cpp">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Model.cpp">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Entity.cpp">
+      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Grid.cpp">
+      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\HeightMap.cpp">
+      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Skybox.cpp">
+      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Camera.cpp">
+      <Filter>Project\GraphicsEngine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\RenderData.cpp">
+      <Filter>Project\GraphicsEngine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Scene.cpp">
+      <Filter>Project\GraphicsEngine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Geometry.cpp">
+      <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Debug.cpp">
+      <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\functions.cpp">
+      <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Log.cpp">
+      <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Log.h">
-      <Filter>Project\GraphicsEngine\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderManager.h">
-      <Filter>Project\GraphicsEngine\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Project\GraphicsEngine\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Project\GraphicsEngine\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Project\GraphicsEngine\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Project\GraphicsEngine\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Functions.h">
-      <Filter>Project\GraphicsEngine\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>Project\GraphicsEngine\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Project\GraphicsEngine\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Project\GraphicsEngine\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceLoader.h">
-      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceLoader3DS.h">
-      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceLoaderOBJ.h">
-      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Debug.h">
-      <Filter>Project\GraphicsEngine\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGL.h">
-      <Filter>Project\GraphicsEngine\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry.h">
-      <Filter>Project\GraphicsEngine\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderData.h">
-      <Filter>Project\GraphicsEngine\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="HeightMap.h">
-      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Skybox.h">
-      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Grid.h">
-      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Project\GraphicsEngine\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Project\GraphicsEngine\Resources</Filter>
-    </ClInclude>
     <ClInclude Include="Config.h">
       <Filter>Project\GraphicsEngine\Config</Filter>
     </ClInclude>
@@ -227,11 +155,77 @@
     <ClInclude Include="PhysicsEngine\ForceGenerators\ParticleForceGenerator.h">
       <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicsManager.h">
-      <Filter>Project\GraphicsEngine\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="KatamariGame\KatamariGame.h">
       <Filter>Project\KatamariGame</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\ResourceLoader3DS.h">
+      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\ResourceLoaderOBJ.h">
+      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\ResourceLoader.h">
+      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\GraphicsManager.h">
+      <Filter>Project\GraphicsEngine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\SceneManager.h">
+      <Filter>Project\GraphicsEngine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\ShaderManager.h">
+      <Filter>Project\GraphicsEngine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Shader.h">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Texture.h">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Material.h">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Mesh.h">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Model.h">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Skybox.h">
+      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Entity.h">
+      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Grid.h">
+      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\HeightMap.h">
+      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Scene.h">
+      <Filter>Project\GraphicsEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Camera.h">
+      <Filter>Project\GraphicsEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\RenderData.h">
+      <Filter>Project\GraphicsEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Geometry.h">
+      <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Debug.h">
+      <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\functions.h">
+      <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\OpenGL.h">
+      <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Log.h">
+      <Filter>Project\GraphicsEngine\Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

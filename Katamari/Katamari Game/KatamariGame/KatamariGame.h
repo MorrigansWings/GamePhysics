@@ -1,11 +1,13 @@
 #include <Arc/ManagedObject.h>
+#include <GraphicsManager.h>
+#include <PhysicsManager.h>
 
 class KatamariGame
 {
 public:
 	KatamariGame(){};
 	~KatamariGame(){};
-	void initialize(int x, int y);
+	inline void setGroundPlane(string name) { groundPlane = name; }
 
 private:
 	int	mWorldX, // size of the world ground plane

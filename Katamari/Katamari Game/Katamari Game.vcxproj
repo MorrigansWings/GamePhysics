@@ -12,37 +12,57 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Config.cpp" />
-    <ClCompile Include="Debug.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="Geometry.cpp" />
-    <ClCompile Include="Grid.cpp" />
-    <ClCompile Include="HeightMap.cpp" />
+    <ClCompile Include="GraphicsEngine\Camera.cpp" />
+    <ClCompile Include="GraphicsEngine\Debug.cpp" />
+    <ClCompile Include="GraphicsEngine\Entity.cpp" />
+    <ClCompile Include="GraphicsEngine\functions.cpp" />
+    <ClCompile Include="GraphicsEngine\Geometry.cpp" />
+    <ClCompile Include="GraphicsEngine\GraphicsManager.cpp" />
+    <ClCompile Include="GraphicsEngine\Grid.cpp" />
+    <ClCompile Include="GraphicsEngine\HeightMap.cpp" />
+    <ClCompile Include="GraphicsEngine\Log.cpp" />
+    <ClCompile Include="GraphicsEngine\Material.cpp" />
+    <ClCompile Include="GraphicsEngine\Mesh.cpp" />
+    <ClCompile Include="GraphicsEngine\Model.cpp" />
+    <ClCompile Include="GraphicsEngine\RenderData.cpp" />
+    <ClCompile Include="GraphicsEngine\ResourceLoader.cpp" />
+    <ClCompile Include="GraphicsEngine\ResourceLoader3DS.cpp" />
+    <ClCompile Include="GraphicsEngine\ResourceLoaderOBJ.cpp" />
+    <ClCompile Include="GraphicsEngine\Scene.cpp" />
+    <ClCompile Include="GraphicsEngine\SceneManager.cpp" />
+    <ClCompile Include="GraphicsEngine\ShaderManager.cpp" />
+    <ClCompile Include="GraphicsEngine\Skybox.cpp" />
+    <ClCompile Include="GraphicsEngine\Texture.cpp" />
     <ClCompile Include="KatamariGame\KatamariGame.cpp" />
-    <ClCompile Include="Material.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="GraphicsManager.cpp" />
-    <ClCompile Include="Log.cpp" />
     <ClCompile Include="PhysicsEngine\ForceGenerators\DragForceGenerator.cpp" />
     <ClCompile Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.cpp" />
     <ClCompile Include="PhysicsEngine\Particle.cpp" />
     <ClCompile Include="PhysicsEngine\PhysicsManager.cpp" />
     <ClCompile Include="PhysicsEngine\Vectors.cpp" />
-    <ClCompile Include="RenderData.cpp" />
-    <ClCompile Include="ResourceLoaderOBJ.cpp" />
-    <ClCompile Include="ResourceLoader.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="ShaderManager.cpp" />
-    <ClCompile Include="Skybox.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="ResourceLoader3DS.cpp" />
     <ClInclude Include="Config.h" />
-    <ClInclude Include="Debug.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="Geometry.h" />
-    <ClInclude Include="Grid.h" />
-    <ClInclude Include="HeightMap.h" />
+    <ClInclude Include="GraphicsEngine\Camera.h" />
+    <ClInclude Include="GraphicsEngine\Debug.h" />
+    <ClInclude Include="GraphicsEngine\Entity.h" />
+    <ClInclude Include="GraphicsEngine\functions.h" />
+    <ClInclude Include="GraphicsEngine\Geometry.h" />
+    <ClInclude Include="GraphicsEngine\GraphicsManager.h" />
+    <ClInclude Include="GraphicsEngine\Grid.h" />
+    <ClInclude Include="GraphicsEngine\HeightMap.h" />
+    <ClInclude Include="GraphicsEngine\Log.h" />
+    <ClInclude Include="GraphicsEngine\Material.h" />
+    <ClInclude Include="GraphicsEngine\Mesh.h" />
+    <ClInclude Include="GraphicsEngine\Model.h" />
+    <ClInclude Include="GraphicsEngine\OpenGL.h" />
+    <ClInclude Include="GraphicsEngine\RenderData.h" />
+    <ClInclude Include="GraphicsEngine\ResourceLoader.h" />
+    <ClInclude Include="GraphicsEngine\ResourceLoader3DS.h" />
+    <ClInclude Include="GraphicsEngine\ResourceLoaderOBJ.h" />
+    <ClInclude Include="GraphicsEngine\Scene.h" />
+    <ClInclude Include="GraphicsEngine\SceneManager.h" />
+    <ClInclude Include="GraphicsEngine\Shader.h" />
+    <ClInclude Include="GraphicsEngine\ShaderManager.h" />
+    <ClInclude Include="GraphicsEngine\Skybox.h" />
+    <ClInclude Include="GraphicsEngine\Texture.h" />
     <ClInclude Include="KatamariGame\KatamariGame.h" />
     <ClInclude Include="PhysicsEngine\ForceGenerators\DragForceGenerator.h" />
     <ClInclude Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.h" />
@@ -50,33 +70,7 @@
     <ClInclude Include="PhysicsEngine\Particle.h" />
     <ClInclude Include="PhysicsEngine\PhysicsManager.h" />
     <ClInclude Include="PhysicsEngine\Vectors.h" />
-    <ClInclude Include="RenderData.h" />
-    <ClInclude Include="ResourceLoaderOBJ.h" />
-    <ClInclude Include="ResourceLoader.h" />
-    <ClInclude Include="Material.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Functions.h">
-      <FileType>CppCode</FileType>
-    </ClInclude>
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClInclude Include="GraphicsManager.h" />
-    <ClInclude Include="Log.h" />
-    <ClInclude Include="OpenGL.h" />
-    <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="ShaderManager.h" />
-    <ClInclude Include="Skybox.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="ResourceLoader3DS.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Model.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Config\resources.cfg" />
@@ -139,7 +133,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>NOGDI;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../Libraries/GL/include;../Libraries/Arc/include;../Libraries/SDL/include;../Libraries/GLM/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Libraries/GL/include;../Libraries/Arc/include;../Libraries/SDL/include;../Libraries/GLM/include;../GraphicsEngine;../PhysicsEngine</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
     </ClCompile>
