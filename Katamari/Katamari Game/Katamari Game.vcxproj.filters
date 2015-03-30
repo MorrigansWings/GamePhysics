@@ -48,9 +48,6 @@
     <ClCompile Include="Main.cpp">
       <Filter>Project</Filter>
     </ClCompile>
-    <ClCompile Include="Config.cpp">
-      <Filter>Project\GraphicsEngine\Config</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsEngine\PhysicsManager.cpp">
       <Filter>Project\PhysicsEngine</Filter>
     </ClCompile>
@@ -132,11 +129,14 @@
     <ClCompile Include="GraphicsEngine\Log.cpp">
       <Filter>Project\GraphicsEngine\Util</Filter>
     </ClCompile>
+    <ClCompile Include="GraphicsEngine\Config.cpp">
+      <Filter>Project\GraphicsEngine\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\ResourceManager.cpp">
+      <Filter>Project\GraphicsEngine\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Config.h">
-      <Filter>Project\GraphicsEngine\Config</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicsEngine\PhysicsManager.h">
       <Filter>Project\PhysicsEngine</Filter>
     </ClInclude>
@@ -226,6 +226,12 @@
     </ClInclude>
     <ClInclude Include="GraphicsEngine\Log.h">
       <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Config.h">
+      <Filter>Project\GraphicsEngine\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\ResourceManager.h">
+      <Filter>Project\GraphicsEngine\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

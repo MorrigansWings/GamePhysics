@@ -154,8 +154,8 @@ bool HeightMap::load( const string& heightMapFilename, const string& textureFile
 
 float HeightMap::getHeightAt( vec2 pos )
 {
-	int x = (pos.x / m_Width) * m_Heights.getSize();
-	int y = (pos.y / m_Height) * m_Heights.getSize();
+	int x = (int)((pos.x / m_Width) * m_Heights.getSize());
+	int y = (int)((pos.y / m_Height) * m_Heights.getSize());
 
 	return m_Heights[y][x];
 }
