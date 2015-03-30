@@ -209,6 +209,22 @@ Vector3 Vector3::operator-(const Vector3 &rhs) const
 	return result;
 }
 
+Vector3 Vector3::operator-=(const float modifier)
+{
+	this->x -= modifier;
+	this->y -= modifier;
+	this->z -= modifier;
+	return *this;
+}
+
+Vector3 Vector3::operator-=(const Vector3 &rhs)
+{
+	this->x -= rhs.x;
+	this->y -= rhs.y;
+	this->z -= rhs.z;
+	return *this;
+}
+
 const Vector3 Vector3::operator=(const Vector3 &rhs)
 {
 	this->x = rhs.x;
@@ -217,7 +233,7 @@ const Vector3 Vector3::operator=(const Vector3 &rhs)
 	return *this;
 }
 
-const Vector3 Vector3::operator*(const float rhs)
+Vector3 Vector3::operator*(const float rhs)
 {
 	Vector3 result = Vector3(*this);
 	result.x *= rhs;
@@ -226,7 +242,7 @@ const Vector3 Vector3::operator*(const float rhs)
 	return result;
 }
 
-const Vector3 Vector3::operator*=(const float rhs)
+Vector3 Vector3::operator*=(const float rhs)
 {
 	this->x *= rhs;
 	this->y *= rhs;
@@ -234,6 +250,22 @@ const Vector3 Vector3::operator*=(const float rhs)
 	return *this;
 }
 
+Vector3 Vector3::operator/(const float rhs)
+{
+	Vector3 result = Vector3(*this);
+	result.x /= rhs;
+	result.y /= rhs;
+	result.z /= rhs;
+	return result;
+}
+
+Vector3 Vector3::operator/=(const float rhs)
+{
+	this->x /= rhs;
+	this->y /= rhs;
+	this->z /= rhs;
+	return *this;
+}
 
 const std::string Vector3::ToString()
 {

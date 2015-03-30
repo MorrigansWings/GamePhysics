@@ -10,12 +10,12 @@ class GravityForceGenerator : ParticleForceGenerator
 public:
 	static float GRAVITATIONAL_CONSTANT; // Gravitational Constant
 	static float GAUSSIAN_CONSTANT; // Gravitational Constant for AU
+	static float EARTH_GRAVITY;
 
-	GravityForceGenerator();
-	~GravityForceGenerator();
+	GravityForceGenerator(); // Default constructor sets as earth gravity
+	~GravityForceGenerator(){};
 
 	virtual void updateForce(Particle* particle, float duration);
-
 
 private:
 	Vector3 gravity;

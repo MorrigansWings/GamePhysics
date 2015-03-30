@@ -28,7 +28,8 @@ public:
 
 	~Particle(){};
 
-
+	void integrate(float duration);
+	void clearAccumulation();
 	void addForce(Vector3 force);
 	
 	// GETTERS
@@ -68,7 +69,8 @@ private:
 
 	Vector3 position,
 			velocity,
-			acceleration;
+			acceleration,
+			forceAccumulation;
 
 	float	damping,
 			mass,

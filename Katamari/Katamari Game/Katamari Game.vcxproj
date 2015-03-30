@@ -35,8 +35,11 @@
     <ClCompile Include="GraphicsEngine\Skybox.cpp" />
     <ClCompile Include="GraphicsEngine\Texture.cpp" />
     <ClCompile Include="KatamariGame\KatamariGame.cpp" />
+    <ClCompile Include="PhysicsEngine\Collision\ParticleContact.cpp" />
+    <ClCompile Include="PhysicsEngine\ForceGenerators\BungeeForceGenerator.cpp" />
     <ClCompile Include="PhysicsEngine\ForceGenerators\DragForceGenerator.cpp" />
     <ClCompile Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.cpp" />
+    <ClCompile Include="PhysicsEngine\ForceGenerators\SpringForceGenerator.cpp" />
     <ClCompile Include="PhysicsEngine\Particle.cpp" />
     <ClCompile Include="PhysicsEngine\PhysicsManager.cpp" />
     <ClCompile Include="PhysicsEngine\Vectors.cpp" />
@@ -66,9 +69,13 @@
     <ClInclude Include="GraphicsEngine\Skybox.h" />
     <ClInclude Include="GraphicsEngine\Texture.h" />
     <ClInclude Include="KatamariGame\KatamariGame.h" />
+    <ClInclude Include="PhysicsEngine\Collision\ParticleContact.h" />
+    <ClInclude Include="PhysicsEngine\Collision\ParticleContactGenerator.h" />
+    <ClInclude Include="PhysicsEngine\ForceGenerators\BungeeForceGenerator.h" />
     <ClInclude Include="PhysicsEngine\ForceGenerators\DragForceGenerator.h" />
     <ClInclude Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.h" />
     <ClInclude Include="PhysicsEngine\ForceGenerators\ParticleForceGenerator.h" />
+    <ClInclude Include="PhysicsEngine\ForceGenerators\SpringForceGenerator.h" />
     <ClInclude Include="PhysicsEngine\Particle.h" />
     <ClInclude Include="PhysicsEngine\PhysicsManager.h" />
     <ClInclude Include="PhysicsEngine\Vectors.h" />

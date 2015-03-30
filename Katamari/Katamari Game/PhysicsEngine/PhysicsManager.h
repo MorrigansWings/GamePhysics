@@ -6,6 +6,7 @@
 
 #include "Particle.h"
 #include "ForceGenerators/ParticleForceGenerator.h"
+#include "Collision/ParticleContact.h"
 
 struct ForceRegistration
 {
@@ -19,6 +20,8 @@ public:
 	PhysicsManager();
 	~PhysicsManager();
 
+	void update(float duration);
+
 	void updateForces(float duration);
 
 private:
@@ -27,6 +30,7 @@ private:
 	std::vector<ParticleForceGenerator*> particleForceRegistry;
 
 	// Contact Set
+	std::vector<ParticleContact> contacts;
 
 	// Force Generators
 	typedef std::vector<ForceRegistration> Registry;
