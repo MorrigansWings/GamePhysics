@@ -96,20 +96,32 @@ GraphicsManager::GraphicsManager( int argc, char* argv[] )
 
 	Mesh* pMesh = mp_ResourceManager->addMesh("test-mesh");
 	Model* pModel = mp_ResourceManager->addModel("test-model");
-	pModel->addMesh(pMesh);
 
 	ArrayList<vec3> verts;
 	verts.add(vec3(0.0f, 0.0f, 0.0f));
 	verts.add(vec3(0.0f, 5.0f, 0.0f));
+
+	verts.add(vec3(0.0f, 5.0f, 0.0f));
 	verts.add(vec3(0.0f, 5.0f, 5.0f));
+
+	verts.add(vec3(0.0f, 5.0f, 5.0f));
+	verts.add(vec3(0.0f, 0.0f, 5.0f));
+
 	verts.add(vec3(0.0f, 0.0f, 5.0f));
 	verts.add(vec3(5.0f, 0.0f, 5.0f));
 
-	pMesh->begin(GL_LINES, 5);
+	ArrayList<vec3> norms;
+	for (int i = 0; i < 10; ++i)
+		norms.add(vec3(0.0f, 1.0f, 0.0f));
+
+	pMesh->begin(GL_LINES, 10);
 	pMesh->copyVertexData(verts);
+	pMesh->copyNormalData(norms);
 	pMesh->end();
 
-	mp_TestEntity = New Entity(vec3(0.0f), vec3(0.0f), vec3(1.0f), vec4(1.0f, 0.0f, 0.0f, 1.0f));
+	pModel->addMesh(pMesh);
+
+	mp_TestEntity = New Entity(vec3(0.0f), vec3(0.0f), vec3(1.0f), vec4(0.0f, 0.0f, 1.0f, 1.0f));
 	mp_TestEntity->addModel(pModel);
 	mp_SceneManager->getCurrentScene()->addEntity("test-entity", mp_TestEntity);
 }
@@ -131,8 +143,6 @@ ShaderManager* GraphicsManager::getShaderManager( void )
 
 void GraphicsManager::term( void )
 {
-	delete mp_TestEntity;
-
 	delete mp_SceneManager;
 	delete mp_ShaderManager;
 	delete mp_ResourceManager;
