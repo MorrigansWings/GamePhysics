@@ -4,7 +4,7 @@
 #include "ParticleForceGenerator.h"
 #include "../Vectors.h"
 
-class SpringForceGenerator : ParticleForceGenerator
+class SpringForceGenerator : public ParticleForceGenerator
 {
 public:
 	SpringForceGenerator();

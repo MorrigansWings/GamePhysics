@@ -4,14 +4,12 @@
 #include <Arc/ManagedObject.h>
 
 #include "OpenGL.h"
+#include "SceneManager.h"
 
-class SceneManager;
 class ShaderManager;
 class ResourceManager;
 class Scene;
 class Entity;
-
-using namespace Arc;
 
 class GraphicsManager :
 	public ManagedObject
@@ -105,9 +103,11 @@ public:
 	void updateEntityPosition(string name, vec3 pos);
 	void updateEntityRotation(string name, vec3 rot);
 	void updateEntityScale(string name, vec3 scale);
-	void updateEntityColor(string name, vec4 col);
+	//void updateEntityColor(string name, vec4 col);
 
 	void updateLineEnds(string name, vec3 endOne, vec3 endTwo);
+
+	inline bool hasEntity(string &name){ return mp_SceneManager->getCurrentScene()->hasEntity(name); }
 
 private:
 	

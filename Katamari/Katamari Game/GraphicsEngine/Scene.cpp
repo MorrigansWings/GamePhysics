@@ -238,9 +238,21 @@ void Scene::loadSkybox( const string& filename )
 	}
 }
 
-void Scene::addEntity( const string& name, Entity* pEntity )
+bool Scene::addEntity( const string& name, Entity* pEntity )
 {
-	m_Entities.add(name, pEntity);
+	if (!m_Entities.containsKey(name))
+	{
+		m_Entities.add(name, pEntity);
+		return true;
+	}
+	else return false;
+}
+
+Entity* Scene::getEntity( const string& name )
+{
+	if (m_Entities.containsKey(name))
+		return m_Entities[name];
+	else return nullptr;
 }
 
 void Scene::addWater( const string& name, Water* pWater )

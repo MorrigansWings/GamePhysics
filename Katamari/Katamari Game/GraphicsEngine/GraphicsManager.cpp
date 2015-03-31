@@ -472,8 +472,35 @@ string GraphicsManager::createCube(string name, vec3 position, vec3 dimensions, 
 void GraphicsManager::updateEntityPosition(string name, vec3 pos)
 {
 	// get entity from list
+	Entity* mp_thing = mp_SceneManager->getCurrentScene()->getEntity(name);
 
-	// set new position
-
+	if (mp_thing != nullptr)
+	{
+		// set new position
+		mp_thing->setPos(pos);
+	}
 }
 
+void GraphicsManager::updateEntityRotation(string name, vec3 rot)
+{
+	// get entity from list
+	Entity* mp_thing = mp_SceneManager->getCurrentScene()->getEntity(name);
+
+	if (mp_thing != nullptr)
+	{
+		// set new position
+		mp_thing->setRot(rot);
+	}
+}
+
+void GraphicsManager::updateEntityScale(string name, vec3 scale)
+{
+	// get entity from list
+	Entity* mp_thing = mp_SceneManager->getCurrentScene()->getEntity(name);
+
+	if (mp_thing != nullptr)
+	{
+		// set new position
+		mp_thing->setScale(scale);
+	}
+}

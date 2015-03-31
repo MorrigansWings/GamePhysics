@@ -39,7 +39,14 @@ public:
 
 	void loadSkybox( const string& filename );
 
-	void addEntity( const string& name, Entity* pEntity );
+	bool addEntity( const string& name, Entity* pEntity );
+	Entity* getEntity( const string& name );
+	inline bool hasEntity(string &name) 
+	{
+		std::cout << "SCENE::hasEntity(): Checking for " << name << " in m_entities keys..." << std::endl;
+		return m_Entities.containsKey(name); 
+	}
+
 	void addHeightMap( const string& name, HeightMap* pEntity );
 
 	inline Camera* addCamera( const string& name, Camera* pCamera ) { if (m_Cameras.containsKey(name)) { printf("HELP\n"); } m_Cameras.add(name, pCamera); return pCamera; }

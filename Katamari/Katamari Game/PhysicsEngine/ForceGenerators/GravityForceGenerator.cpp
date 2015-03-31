@@ -10,6 +10,12 @@ GravityForceGenerator::GravityForceGenerator()
 	gravity.y = -EARTH_GRAVITY;
 }
 
+GravityForceGenerator::GravityForceGenerator(float scalar)
+{
+	gravity = Vector3(0.0f);
+	gravity.y = -EARTH_GRAVITY * scalar;
+}
+
 void GravityForceGenerator::updateForce(Particle* particle, float duration)
 {
 	particle->addForce(gravity * particle->getMass());

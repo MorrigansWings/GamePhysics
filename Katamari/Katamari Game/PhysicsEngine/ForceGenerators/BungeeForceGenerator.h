@@ -4,7 +4,7 @@
 #include "ParticleForceGenerator.h"
 #include "../Vectors.h"
 
-class BungeeForceGenerator : ParticleForceGenerator
+class BungeeForceGenerator : public ParticleForceGenerator
 {
 public:
 	BungeeForceGenerator();

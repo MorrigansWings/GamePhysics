@@ -5,7 +5,7 @@
 #include "ParticleForceGenerator.h"
 #include "../Vectors.h"
 
-class GravityForceGenerator : ParticleForceGenerator
+class GravityForceGenerator : public ParticleForceGenerator
 {
 public:
 	static float GRAVITATIONAL_CONSTANT; // Gravitational Constant
@@ -13,6 +13,7 @@ public:
 	static float EARTH_GRAVITY;
 
 	GravityForceGenerator(); // Default constructor sets as earth gravity
+	GravityForceGenerator(float scalar); // Scales earth gravity by scalar
 	~GravityForceGenerator(){};
 
 	virtual void updateForce(Particle* particle, float duration);

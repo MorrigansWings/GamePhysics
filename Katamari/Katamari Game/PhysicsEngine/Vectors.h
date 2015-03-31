@@ -1,186 +1,213 @@
 #ifndef _VECTORS_H_
 #define _VECTORS_H_
 
-#pragma once
-//#include "..\Dependencies\glew\glew.h"
 #include <string>
+#include <glm/glm.hpp>
 
-class Vector2;
-class Vector3;
-class Vector4;
-
-class Vector2
+namespace Physics
 {
-public:
-	const static Vector2 ZERO;
 
-	float x, y;
+	class Vector2
+	{
+	public:
+		const static Vector2 ZERO;
 
-	Vector2()
-		: x(0.0f)
-		, y(0.0f)
-	{}
+		float x, y;
 
-	Vector2(float inX, float inY)
-		:x(inX)
-		, y(inY)
-	{}
+		Vector2()
+			: x(0.0f)
+			, y(0.0f)
+		{}
 
-	Vector2(int inX, int inY)
-		:x((float)inX)
-		, y((float)inY)
-	{}
+		Vector2(float inX, float inY)
+			:x(inX)
+			, y(inY)
+		{}
 
-	Vector2(float values[2])
-		: x(values[0])
-		, y(values[1])
-	{}
+		Vector2(int inX, int inY)
+			:x((float)inX)
+			, y((float)inY)
+		{}
 
-	const Vector2 operator+(const Vector2 &rhs);
-	const Vector2 operator+(const int modifier);
-	const Vector2 operator+(const float modifier);
-	const Vector2 operator=(const Vector2 &rhs);
+		Vector2(float values[2])
+			: x(values[0])
+			, y(values[1])
+		{}
 
-	const std::string ToString();
-};
+		const Vector2 operator+(const Vector2 &rhs);
+		const Vector2 operator+(const int modifier);
+		const Vector2 operator+(const float modifier);
+		const Vector2 operator=(const Vector2 &rhs);
 
-class Vector3
-{
-public:
-	const static Vector3 ZERO;
+		const std::string ToString();
 
-	float x, y, z;
+		inline glm::vec2 convertToGLM() { return glm::vec2(this->x, this->y); }
+	};
 
-	Vector3()
-		: x(0.0f)
-		, y(0.0f)
-		, z(0.0f)
-	{}
 
-	Vector3(int value)
-		: x((float)value)
-		, y((float)value)
-		, z((float)value)
-	{}
+	class Vector4;
 
-	Vector3(float value)
-		: x(value)
-		, y(value)
-		, z(value)
-	{}
+	class Vector3
+	{
+	public:
+		const static Vector3 ZERO;
 
-	// Float constructor for Vector3
-	Vector3(float inX, float inY, float inZ)
-		: x(inX)
-		, y(inY)
-		, z(inZ)
-	{}
+		float x, y, z;
 
-	// Int constructor for Vector3
-	Vector3(int inX, int inY, int inZ)
-		: x((float)inX)
-		, y((float)inY)
-		, z((float)inZ)
-	{}
+		Vector3()
+			: x(0.0f)
+			, y(0.0f)
+			, z(0.0f)
+		{}
 
-	Vector3(float values[3])
-		: x(values[0])
-		, y(values[1])
-		, z(values[2])
-	{}
+		Vector3(int value)
+			: x((float)value)
+			, y((float)value)
+			, z((float)value)
+		{}
 
-	Vector3(const Vector3 &orig)
-		: x(orig.x)
-		, y(orig.y)
-		, z(orig.z)
-	{}
+		Vector3(float value)
+			: x(value)
+			, y(value)
+			, z(value)
+		{}
 
-	void invert();
-	Vector3 getInverted();
-	float magnitude();
-	float squareMagnitude();
-	Vector3 normalize();
-	Vector3 getNormalized();
-	Vector3 addScaledVector(const Vector3 &velocity, float t);
+		// Float constructor for Vector3
+		Vector3(float inX, float inY, float inZ)
+			: x(inX)
+			, y(inY)
+			, z(inZ)
+		{}
 
-	float dot(const Vector3 &second);
-	Vector3 cross(const Vector3 &second);
+		// Int constructor for Vector3
+		Vector3(int inX, int inY, int inZ)
+			: x((float)inX)
+			, y((float)inY)
+			, z((float)inZ)
+		{}
 
-	const Vector4 ConvertToHomogeneous();
+		Vector3(float values[3])
+			: x(values[0])
+			, y(values[1])
+			, z(values[2])
+		{}
 
-	const Vector3 operator+(const int modifier);
-	const Vector3 operator+(const float modifier);
-	const Vector3 operator+(const Vector3 &rhs);
+		Vector3(Vector2 base, float inZ)
+			: x(base.x)
+			, y(base.y)
+			, z(inZ)
+		{}
 
-	const Vector3 operator+=(const float modifier);
-	const Vector3 operator+=(const Vector3 &rhs);
+		Vector3(const Vector3 &orig)
+			: x(orig.x)
+			, y(orig.y)
+			, z(orig.z)
+		{}
 
-	Vector3 operator-(const float modifier);
-	Vector3 operator-(const Vector3 &rhs);
-	Vector3 operator-(const Vector3 &rhs) const;
+		void invert();
+		Vector3 getInverted();
+		float magnitude();
+		float squareMagnitude();
+		Vector3 normalize();
+		Vector3 getNormalized();
+		Vector3 addScaledVector(const Vector3 &velocity, float t);
 
-	Vector3 operator-=(const float modifier);
-	Vector3 operator-=(const Vector3 &rhs);
+		float dot(const Vector3 &second);
+		Vector3 cross(const Vector3 &second);
 
-	const Vector3 operator=(const Vector3 &rhs);
+		const Vector4 ConvertToHomogeneous();
 
-	Vector3 operator*(const float rhs);
-	Vector3 operator*=(const float rhs);
+		const Vector3 operator+(const int modifier);
+		const Vector3 operator+(const float modifier);
+		const Vector3 operator+(const Vector3 &rhs);
 
-	Vector3 operator/(const float rhs);
-	Vector3 operator/=(const float rhs);
+		const Vector3 operator+=(const float modifier);
+		const Vector3 operator+=(const Vector3 &rhs);
 
-	const std::string ToString();
+		Vector3 operator-(const float modifier);
+		Vector3 operator-(const Vector3 &rhs);
+		Vector3 operator-(const Vector3 &rhs) const;
 
-	static Vector3 cross(const Vector3 &first, const Vector3 &second);
-	static float dot(const Vector3 &first, const Vector3 &second);
-};
+		Vector3 operator-=(const float modifier);
+		Vector3 operator-=(const Vector3 &rhs);
 
-class Vector4
-{
-public:
-	const static Vector4 ZERO;
+		const Vector3 operator=(const Vector3 &rhs);
 
-	float x, y, z, w;
+		Vector3 operator*(const float rhs);
+		Vector3 operator*=(const float rhs);
 
-	Vector4()
-		: x(0.0f)
-		, y(0.0f)
-		, z(0.0f)
-		, w(0.0f)
-	{}
+		Vector3 operator/(const float rhs);
+		Vector3 operator/=(const float rhs);
 
-	Vector4(float value)
-		: x(value)
-		, y(value)
-		, z(value)
-		, w(value)
-	{}
+		const std::string ToString();
 
-	Vector4(float inR, float inG, float inB, float inA)
-		: x(inR)
-		, y(inG)
-		, z(inB)
-		, w(inA)
-	{}
+		static Vector3 cross(const Vector3 &first, const Vector3 &second);
+		static float dot(const Vector3 &first, const Vector3 &second);
 
-	Vector4(int inR, int inG, int inB, int inA)
-		: x((float)inR)
-		, y((float)inG)
-		, z((float)inB)
-		, w((float)inA)
-	{}
+		inline glm::vec3 convertToGLM() { return glm::vec3(this->x, this->y, this->z); }
+	};
 
-	Vector4(float values[4])
-		: x(values[0])
-		, y(values[1])
-		, z(values[2])
-		, w(values[3])
-	{}
+	class Vector4
+	{
+	public:
+		const static Vector4 ZERO;
 
-	const Vector4 operator+(const Vector4 &rhs);
-	const Vector4 operator=(const Vector4 &rhs);
+		float x, y, z, w;
 
-};
+		Vector4()
+			: x(0.0f)
+			, y(0.0f)
+			, z(0.0f)
+			, w(0.0f)
+		{}
+
+		Vector4(float value)
+			: x(value)
+			, y(value)
+			, z(value)
+			, w(value)
+		{}
+
+		Vector4(float inR, float inG, float inB, float inA)
+			: x(inR)
+			, y(inG)
+			, z(inB)
+			, w(inA)
+		{}
+
+		Vector4(int inR, int inG, int inB, int inA)
+			: x((float)inR)
+			, y((float)inG)
+			, z((float)inB)
+			, w((float)inA)
+		{}
+
+		Vector4(float values[4])
+			: x(values[0])
+			, y(values[1])
+			, z(values[2])
+			, w(values[3])
+		{}
+
+		Vector4(const Vector3 &base, float inW)
+			: x(base.x)
+			, y(base.y)
+			, z(base.z)
+			, w(inW)
+		{}
+
+		Vector4(const Vector4 &orig)
+			: x(orig.x)
+			, y(orig.y)
+			, z(orig.z)
+			, w(orig.w)
+		{}
+
+		const Vector4 operator+(const Vector4 &rhs);
+		const Vector4 operator=(const Vector4 &rhs);
+
+		inline glm::vec4 convertToGLM() { return glm::vec4(this->x, this->y, this->z, this->w); }
+	};
+}
 
 #endif // _VECTORS_H_

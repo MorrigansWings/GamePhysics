@@ -2,6 +2,8 @@
 #include <string>
 #include <sstream>
 
+using namespace Physics;
+
 /********************** Vector2 ****************************/
 const Vector2 Vector2::ZERO = Vector2(0.0f, 0.0f);
 

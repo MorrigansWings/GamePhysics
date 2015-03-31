@@ -6,7 +6,7 @@
 #include "ParticleForceGenerator.h"
 #include "../Vectors.h"
 
-class DragForceGenerator : ParticleForceGenerator
+class DragForceGenerator : public ParticleForceGenerator
 {
 public:
 	DragForceGenerator(){}

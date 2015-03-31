@@ -57,7 +57,7 @@ public:
 	virtual void postRender( const RenderData* pData );
 
 	void addModel( Model* pModel ) { m_Models.add(pModel); }
-
+	ArrayList<Model*>* getModels() { return &m_Models; }
 	void removeModels( void );
 
 	inline vec3 getPos( void ) const { return m_Pos; }
