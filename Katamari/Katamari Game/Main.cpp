@@ -1,5 +1,6 @@
 #include "OpenGL.h"
 #include "GraphicsManager.h"
+#include "KatamariGame/KatamariGame.h"
 #include "Log.h"
 
 #include <Arc/ArcCore.h>
@@ -90,8 +91,13 @@ int main( int argc, char* argv[] )
 
 	glfwSetErrorCallback(glfwError);
 
-	New GraphicsManager(argc, argv);
-	GLFWwindow* pWindow = GraphicsManager::GetInstance()->getGLFWWindow();
+	//New GraphicsManager(argc, argv);
+	//GLFWwindow* pWindow = GraphicsManager::GetInstance()->getGLFWWindow();
+
+	KatamariGame* pGame = new KatamariGame(argc, argv);
+	pGame->setup(60, 10.0f, 10.0f);
+
+	GLFWwindow* pWindow = pGame->getGLFWwindow();
 
 	if (pWindow != nullptr)
 	{
@@ -101,10 +107,11 @@ int main( int argc, char* argv[] )
 		glfwSetCursorPosCallback(pWindow, glfwMouseMove);
 		glfwSetScrollCallback(pWindow, glfwMouseScroll);
 
-		GraphicsManager::GetInstance()->start();
+		//GraphicsManager::GetInstance()->start();
+		pGame->start();
 	}
 
-	delete GraphicsManager::GetInstance();
+	delete pGame;
 
 	if (Arc_GetMemoryAllocationCount() > 0)
 	{

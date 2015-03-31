@@ -36,16 +36,18 @@ public:
 
 
 	inline bool  hasMesh( const string& name ) { return m_Meshes.containsKey(name); }
+	//inline bool	 hasMesh( const Mesh& mesh ) { return m_Meshes.containsValue(mesh); }
 	inline Mesh* addMesh( const string& name ) { return addMesh(name, New Mesh()); }
 	inline Mesh* addMesh( const string& name, Mesh* pMesh ) { m_Meshes.add(getSafeMeshName(name), pMesh); return pMesh; }
 	inline Mesh* getMesh( const string& name ) { return (hasMesh(name) ? m_Meshes[name] : nullptr); }
+	string getMeshName(const Mesh* mesh);
 
 
 	inline bool   hasModel( const string& name ) { return m_Models.containsKey(name); }
 	inline Model* addModel( const string& name ) { return addModel(name, New Model()); }
 	inline Model* addModel( const string& name, Model* pModel ) { m_Models.add(getSafeModelName(name), pModel); return pModel; }
 	inline Model* getModel( const string& name ) { return (hasModel(name) ? m_Models[name] : nullptr); }
-
+	string getModelName(const Model* model);
 
 	inline bool      hasMaterial( const string& name ) { return m_Materials.containsKey(name); }
 	inline Material* addMaterial( const string& name ) { return addMaterial(name, New Material()); }

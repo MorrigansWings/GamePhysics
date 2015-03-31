@@ -1,8 +1,10 @@
 #include "PhysicsManager.h"
 
+PhysicsManager* PhysicsManager::s_Instance = nullptr;
+
 PhysicsManager::PhysicsManager()
 {
-
+	s_Instance = this;
 }
 
 PhysicsManager::~PhysicsManager()

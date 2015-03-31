@@ -36,6 +36,7 @@ public:
 
 	void update( float deltaTime );
 	void render( void );
+	void draw( void );
 
 	void hookResize( int width, int height );
 
@@ -78,12 +79,38 @@ public:
 
 	inline bool isFullscreen( void ) const { return m_Fullscreen; }
 
+	inline int shouldWindowClose() { return glfwWindowShouldClose(mp_Window); }
+
 	void screenshot( const string& filename = "" );
 
 	inline GLFWwindow* getGLFWWindow( void ) { return mp_Window; }
+	inline void pollEvents() { glfwPollEvents(); }
+
+	// object creation functions
+	string createLine(string name, vec3 start, vec3 end);
+	string createLine(string name, vec3 start, vec3 end, vec4 color);
+	void setLineThickness(float width);
+
+	string createPlane(string name);
+	string createPlane(string name, vec2 dimensions);
+	string createPlane(string name, vec2 dimensions, vec3 position);
+	string createPlane(string name, vec2 dimensions, vec3 position, vec4 color);
+
+	string createCube(string name);
+	string createCube(string name, vec3 position);
+	string createCube(string name, vec3 position, vec3 dimensions);
+	string createCube(string name, vec3 position, vec3 dimensions, vec4 color);
+
+	// object manipulation functions
+	void updateEntityPosition(string name, vec3 pos);
+	void updateEntityRotation(string name, vec3 rot);
+	void updateEntityScale(string name, vec3 scale);
+	void updateEntityColor(string name, vec4 col);
+
+	void updateLineEnds(string name, vec3 endOne, vec3 endTwo);
 
 private:
-
+	
 	void initGL( void );
 	void initWindow( void );
 
@@ -110,7 +137,7 @@ private:
 
 	//////////////////////////////////////////////////////////////////////////
 
-	Entity* mp_TestEntity;
+	
 
 };
 

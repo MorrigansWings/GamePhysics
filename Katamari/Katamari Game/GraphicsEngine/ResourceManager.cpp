@@ -98,6 +98,26 @@ Texture* ResourceManager::loadTexture( const string& filename, GLenum minFilter,
 	return pTex;
 }
 
+string ResourceManager::getMeshName(const Mesh* mesh)
+{
+	for (auto iter = m_Meshes.itBegin(); iter != m_Meshes.itEnd(); ++iter)
+	{
+		if (iter->second == mesh)
+			return iter->first;
+	}
+	return "";
+}
+
+string ResourceManager::getModelName(const Model* model)
+{
+	for (auto iter = m_Models.itBegin(); iter != m_Models.itEnd(); ++iter)
+	{
+		if (iter->second == model)
+			return iter->first;
+	}
+	return "";
+}
+
 bool ResourceManager::loadModelFile( const string& filename )
 {
 	if (filename == "")

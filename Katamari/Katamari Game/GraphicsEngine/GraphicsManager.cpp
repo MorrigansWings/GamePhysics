@@ -90,40 +90,6 @@ GraphicsManager::GraphicsManager( int argc, char* argv[] )
 
 	Debug::SetBool("wireframe-mode",   false);
 	Debug::SetBool("fly-through-mode", false);
-
-
-
-
-	Mesh* pMesh = mp_ResourceManager->addMesh("test-mesh");
-	Model* pModel = mp_ResourceManager->addModel("test-model");
-
-	ArrayList<vec3> verts;
-	verts.add(vec3(0.0f, 0.0f, 0.0f));
-	verts.add(vec3(0.0f, 5.0f, 0.0f));
-
-	verts.add(vec3(0.0f, 5.0f, 0.0f));
-	verts.add(vec3(0.0f, 5.0f, 5.0f));
-
-	verts.add(vec3(0.0f, 5.0f, 5.0f));
-	verts.add(vec3(0.0f, 0.0f, 5.0f));
-
-	verts.add(vec3(0.0f, 0.0f, 5.0f));
-	verts.add(vec3(5.0f, 0.0f, 5.0f));
-
-	ArrayList<vec3> norms;
-	for (int i = 0; i < 10; ++i)
-		norms.add(vec3(0.0f, 1.0f, 0.0f));
-
-	pMesh->begin(GL_LINES, 10);
-	pMesh->copyVertexData(verts);
-	pMesh->copyNormalData(norms);
-	pMesh->end();
-
-	pModel->addMesh(pMesh);
-
-	mp_TestEntity = New Entity(vec3(0.0f), vec3(0.0f), vec3(1.0f), vec4(0.0f, 0.0f, 1.0f, 1.0f));
-	mp_TestEntity->addModel(pModel);
-	mp_SceneManager->getCurrentScene()->addEntity("test-entity", mp_TestEntity);
 }
 
 SceneManager* GraphicsManager::getSceneManager( void )
@@ -155,7 +121,7 @@ void GraphicsManager::term( void )
 
 void GraphicsManager::start( void )
 {
-	while( ! glfwWindowShouldClose(mp_Window) )
+/*	while( ! glfwWindowShouldClose(mp_Window) )
 	{
 		const float updateInt = 1.0f / 60.0f;
 		static float updateTimer = 0.0f;
@@ -178,6 +144,7 @@ void GraphicsManager::start( void )
 
 		glfwPollEvents();
 	}
+	*/
 }
 
 void GraphicsManager::update( float deltaTime )
@@ -191,6 +158,12 @@ void GraphicsManager::render( void )
 	glClearDepth(1.0f);
 	
 	mp_SceneManager->render();
+}
+
+void GraphicsManager::draw( void )
+{
+	render();
+	glfwSwapBuffers(mp_Window);
 }
 
 void GraphicsManager::hookResize( int width, int height )
@@ -378,3 +351,129 @@ void GraphicsManager::screenshot( const string& filename /*= "" */ )
 
 	Log::InfoFmt(getClassName(), "Screenshot saved to %s", tmpFilename.c_str());
 }
+
+// object creation functions ======================================================
+string GraphicsManager::createLine(string name, vec3 start, vec3 end)
+{
+	return createLine(name, start, end, vec4(0.4f, 0.4f, 0.4f, 1.0f));
+}
+
+string GraphicsManager::createLine(string name, vec3 start, vec3 end, vec4 color)
+{
+	Entity* mp_Entity;
+	Mesh* pMesh = mp_ResourceManager->addMesh(name + "-mesh");
+	Model* pModel = mp_ResourceManager->addModel(name + "-model");
+
+	ArrayList<vec3> verts;
+	verts.add(start);
+	verts.add(end);
+
+	ArrayList<vec3> norms;
+	for (int i = 0; i < 2; ++i)
+		norms.add(vec3(0.0f, 1.0f, 0.0f));
+
+	pMesh->begin(GL_LINES, 2);
+	pMesh->copyVertexData(verts);
+	pMesh->copyNormalData(norms);
+	pMesh->end();
+
+	pModel->addMesh(pMesh);
+
+	mp_Entity = New Entity(vec3(0.0f), vec3(0.0f), vec3(1.0f), color);
+	mp_Entity->addModel(pModel);
+	mp_SceneManager->getCurrentScene()->addEntity(name + "-entity", mp_Entity);
+
+	return name + "-entity";
+}
+
+void GraphicsManager::setLineThickness(float width)
+{
+	glLineWidth(width);
+}
+
+
+string GraphicsManager::createPlane(string name)
+{
+	return createPlane(name, vec2(1.0f));
+}
+
+string GraphicsManager::createPlane(string name, vec2 dimensions)
+{
+	return createPlane(name, dimensions, vec3(0.0f));
+}
+
+string GraphicsManager::createPlane(string name, vec2 dimensions, vec3 position)
+{
+	return createPlane(name, dimensions, position, vec4(0.4f));
+}
+
+string GraphicsManager::createPlane(string name, vec2 dimensions, vec3 position, vec4 color)
+{
+	Entity* mp_Entity;
+	Mesh* pMesh = mp_ResourceManager->addMesh(name + "-mesh");
+	Model* pModel = mp_ResourceManager->addModel(name + "-model");
+	
+	float x = dimensions.x / 2.0f;
+	float z = dimensions.y / 2.0f;
+
+	ArrayList<vec3> verts;
+	verts.add(vec3(-x, 0.0f, -z));
+	verts.add(vec3(-x, 0.0f, z));
+	verts.add(vec3(x, 0.0f, z));
+	verts.add(vec3(x, 0.0f, -z));
+
+	ArrayList<vec3> norms;
+	for (int i = 0; i < 4; ++i)
+		norms.add(vec3(0.0f, 1.0f, 0.0f));
+
+	pMesh->begin(GL_QUADS, 4);
+	pMesh->copyVertexData(verts);
+	pMesh->copyNormalData(norms);
+	pMesh->end();
+
+	pModel->addMesh(pMesh);
+
+	mp_Entity = New Entity(position, vec3(0.0f), vec3(1.0f), color);
+	mp_Entity->addModel(pModel);
+	mp_SceneManager->getCurrentScene()->addEntity(name + "-entity", mp_Entity);
+
+	return name + "-entity";
+}
+
+
+string GraphicsManager::createCube(string name)
+{
+	return createCube(name, vec3(0.0f, 0.5f, 0.0f));
+}
+
+string GraphicsManager::createCube(string name, vec3 position)
+{
+	return createCube(name, position, vec3(1.0f));
+}
+
+string GraphicsManager::createCube(string name, vec3 position, vec3 dimensions)
+{
+	return createCube(name, position, dimensions, vec4(vec3(0.4f), 1.f));
+}
+
+string GraphicsManager::createCube(string name, vec3 position, vec3 dimensions, vec4 color)
+{
+	Entity* mp_Entity;
+	Model* pModel = mp_ResourceManager->getModel("mdl_cube");
+
+	mp_Entity = New Entity(position, vec3(0.0f), dimensions, color);
+	mp_Entity->addModel(pModel);
+	mp_SceneManager->getCurrentScene()->addEntity(name + "-entity", mp_Entity);
+
+	return name + "-entity";
+}
+
+// object manipulation functions ===========================================================
+void GraphicsManager::updateEntityPosition(string name, vec3 pos)
+{
+	// get entity from list
+
+	// set new position
+
+}
+

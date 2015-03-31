@@ -7,6 +7,7 @@
 #include "Particle.h"
 #include "ForceGenerators/ParticleForceGenerator.h"
 #include "Collision/ParticleContact.h"
+#include "Arc/ManagedObject.h"
 
 struct ForceRegistration
 {
@@ -17,6 +18,8 @@ struct ForceRegistration
 class PhysicsManager
 {
 public:
+	static PhysicsManager* GetInstance(void) { return s_Instance; }
+
 	PhysicsManager();
 	~PhysicsManager();
 
@@ -25,6 +28,8 @@ public:
 	void updateForces(float duration);
 
 private:
+	static PhysicsManager* s_Instance;
+
 	// Particle Set and Registry
 	std::vector<Particle> particleSet;
 	std::vector<ParticleForceGenerator*> particleForceRegistry;

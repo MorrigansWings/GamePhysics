@@ -5,14 +5,29 @@
 class KatamariGame
 {
 public:
-	KatamariGame(){};
-	~KatamariGame(){};
-	inline void setGroundPlane(string name) { groundPlane = name; }
+	KatamariGame(int argc, char* argv[]);
+	~KatamariGame();
+
+	void setup(int framerate, float groundx, float groundZ);
+
+	void start();
+	void update(float deltaTime);
+	void fixedUpdate(float deltaTime);
+
+	inline GLFWwindow* getGLFWwindow() { return GraphicsManager::GetInstance()->getGLFWWindow(); }
 
 private:
-	int	mWorldX, // size of the world ground plane
-		mWorldY;
+	PhysicsManager* mp_PhysicsManager;
 
-	string groundPlane;
+	string	m_groundPlane,
+			m_testCube;
+
+	double	m_LastFrameTime;
+
+	float	m_WorldX, // size of the world ground plane
+			m_WorldZ;
+	
+	int		m_framerate;
+
 
 };
