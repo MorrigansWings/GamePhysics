@@ -13,7 +13,7 @@ public:
 	KatamariGame(int argc, char* argv[]);
 	~KatamariGame();
 
-	void setup(int framerate, float groundx, float groundZ);
+	void setup(int framerate, float groundHeight, float groundx, float groundZ);
 
 	void start();
 	void update(float deltaTime);

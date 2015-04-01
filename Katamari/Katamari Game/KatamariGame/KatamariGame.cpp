@@ -20,16 +20,17 @@ KatamariGame::~KatamariGame()
 	delete mp_PhysicsManager;
 }
 
-void KatamariGame::setup(int framerate, float groundX, float groundZ)
+void KatamariGame::setup(int framerate, float groundHeight, float groundX, float groundZ)
 {
 	m_framerate = framerate;
 	m_WorldX = groundX;
 	m_WorldZ = groundZ;
 
 	// Set up ground plane
+	mp_PhysicsManager->setupGround(0.0f, m_WorldX / 2.0f, m_WorldZ / 2.0f);
 	m_groundPlane = mp_GraphicsManager->createPlane("ground_plane",
 									Physics::Vector2(m_WorldX, m_WorldZ).convertToGLM(),
-									Physics::Vector3(0).convertToGLM(),
+									Physics::Vector3(0.0f, groundHeight, 0.0f).convertToGLM(),
 									Physics::Vector4(0.1f, 0.5f, 0.1f, 1.0f).convertToGLM());
 
 	// Set line width and display test lines
@@ -42,12 +43,14 @@ void KatamariGame::setup(int framerate, float groundX, float groundZ)
 	*/
 
 	// Cube test
-	m_testPosition = Physics::Vector3(0.0f, 10.0f, 0.0f);
-	m_testCube = GraphicsManager::GetInstance()->createCube("testOne", m_testPosition.convertToGLM());
+	m_testPosition = Physics::Vector3(0.0f, 3.0f, 0.0f);
+	m_testCube = GraphicsManager::GetInstance()->createCube("testOne", 
+															m_testPosition.convertToGLM(), 
+															Physics::Vector3(0.2f, 0.2f, 0.2f).convertToGLM());
 
 	// Particle test
 	m_testParticle = mp_PhysicsManager->createParticle("testParticle", m_testPosition);
-	std::cout << "KATAMARIGAME::setup(): Got back " << m_testParticle << " from createParticle function in PhysicsManager!" << std::endl;
+	//std::cout << "KATAMARIGAME::setup(): Got back " << m_testParticle << " from createParticle function in PhysicsManager!" << std::endl;
 
 	// GameObject test
 	m_testObject = new GameObject();

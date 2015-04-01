@@ -1,65 +1,89 @@
 #include "ParticleContact.h"
 
-ParticleContact::ParticleContact(Particle* f, float rest, Vector3 cn, float penetration)
-{
-
-}
-
-ParticleContact::ParticleContact(Particle* f, Particle* s, float rest, Vector3 cn, float penetration)
-{
-
-}
-
-ParticleContact::~ParticleContact()
-{}
-
 void ParticleContact::resolve(float duration)
 {
 	// update velocity on both particles
 	resolveVelocity(duration);
 
 	// update positions to resolve interpenetration
+	resolveInterpenetration(duration);
 }
 
 float ParticleContact::separatingVelocity() const
 {
-	Vector3 relativeVelocity = first->getVelocity();
-	if (second != NULL)
+	Vector3 relativeVelocity = m_first->getVelocity();
+	if (m_second != nullptr)
 	{
-		relativeVelocity -= second->getVelocity();
+		relativeVelocity -= m_second->getVelocity();
 	}
 
-	return relativeVelocity.dot(contactNormal);
+	return relativeVelocity.dot(m_contactNormal);
 }
 
-// NOTE :: ADJUST FOR NULL PARTICLE B!!!
 void ParticleContact::resolveVelocity(float duration)
 {
+	// separating velocity calculations
 	float separating = separatingVelocity();
-	if (separating > 0)
-		return;
-	float newVel = -restitution * separating;
-	float totalMass = first->getMass() + second->getMass();
-	//if (second != NULL)
-	//	totalMass += second->getMass();
-	float deltaVel = newVel - separating;
-	float impulseMag = deltaVel / totalMass;
-	Vector3 impulse = contactNormal * impulseMag;
-	first->setVelocity(first->getVelocity() + (impulse * second->getMass()));
-	second->setVelocity(second->getVelocity() - (impulse * first->getMass()));
+	if (separating > 0) return;
+	float newSeparatingVel = -m_restitution * separating;
+
+	// Check for velocity buildup due to acceleration
+	Vector3 accelVelocity = m_first->getAcceleration();
+	if (m_second != nullptr)
+		accelVelocity -= m_second->getAcceleration();
+	float accelSepVelocity = Vector3::dot(accelVelocity, m_contactNormal) * duration;
+
+	if (accelSepVelocity < 0)
+	{
+		newSeparatingVel += m_restitution * accelSepVelocity;
+		if (newSeparatingVel < 0)
+			newSeparatingVel = 0.0f;
+	}
+
+	// Calcualte change in separating velocity
+	float deltaVel = newSeparatingVel - separating;
+
+	// mass calculations
+	float totalInverseMass = m_first->getInverseMass();
+	if (m_second != nullptr)
+		totalInverseMass += m_second->getInverseMass();
+	if (totalInverseMass <= 0) return;
+	
+	// impulse calculation	
+	float impulseMag = deltaVel / totalInverseMass;
+	
+	// impulse per unit of inverse mass
+	Vector3 impulse = m_contactNormal * impulseMag;
+
+	m_first->setVelocity(m_first->getVelocity() + (impulse * m_first->getInverseMass()));
+	if (m_second != nullptr) // if second particle exists, apply!
+		m_second->setVelocity(m_second->getVelocity() + (impulse * m_second->getInverseMass()));
 }
 
 void ParticleContact::resolveInterpenetration(float duration)
 {
-	if (penetrationDepth <= 0) return;
-	float totalMass = first->getMass();
-	if (second != NULL)
-		totalMass += second->getMass();
-	Vector3 displacement = contactNormal * penetrationDepth / totalMass;
+	// if none, skip function
+	if (m_penetrationDepth <= 0) return;
 
-	Vector3 firstMove = displacement * second->getMass();
-	Vector3 secondMove = displacement * first->getMass();
-	first->setPosition(first->getPosition() + firstMove);
-	second->setPosition(second->getPosition() - secondMove);
+
+	float totalInverseMass = m_first->getInverseMass();
+	if (m_second != nullptr)
+		totalInverseMass += m_second->getInverseMass();
+	if (totalInverseMass <= 0) return;
+//	float totalMass = m_first->getMass();
+//	if (m_second != nullptr)
+//		totalMass += m_second->getMass();
+//	Vector3 displacement = m_contactNormal * m_penetrationDepth / totalMass;
+
+	// amount of penetration resolution per unit of inverse mass
+	Vector3 movePerInverseMass = m_contactNormal * (m_penetrationDepth / totalInverseMass);
+
+	// Calculate amounts per particle
+	Vector3 firstMove = movePerInverseMass * m_first->getInverseMass();
+	Vector3 secondMove = (m_second != nullptr) ? movePerInverseMass * m_second->getInverseMass() : Vector3(0);
+
+	m_first->setPosition(m_first->getPosition() + firstMove);
+	if (m_second != nullptr)
+		m_second->setPosition(m_second->getPosition() - secondMove);
 
 }

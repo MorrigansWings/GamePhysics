@@ -36,6 +36,8 @@
     <ClCompile Include="GraphicsEngine\Texture.cpp" />
     <ClCompile Include="KatamariGame\GameObject.cpp" />
     <ClCompile Include="KatamariGame\KatamariGame.cpp" />
+    <ClCompile Include="PhysicsEngine\Collision\CableParticleConnection.cpp" />
+    <ClCompile Include="PhysicsEngine\Collision\GroundContactGenerator.cpp" />
     <ClCompile Include="PhysicsEngine\Collision\ParticleContact.cpp" />
     <ClCompile Include="PhysicsEngine\ForceGenerators\BungeeForceGenerator.cpp" />
     <ClCompile Include="PhysicsEngine\ForceGenerators\DragForceGenerator.cpp" />
@@ -72,6 +74,9 @@
     <ClInclude Include="KatamariGame\Object.h" />
     <ClInclude Include="KatamariGame\KatamariGame.h" />
     <ClInclude Include="KatamariGame\GameObject.h" />
+    <ClInclude Include="PhysicsEngine\Collision\CableParticleConnection.h" />
+    <ClInclude Include="PhysicsEngine\Collision\GroundContactGenerator.h" />
+    <ClInclude Include="PhysicsEngine\Collision\ParticleConnection.h" />
     <ClInclude Include="PhysicsEngine\Collision\ParticleContact.h" />
     <ClInclude Include="PhysicsEngine\Collision\ParticleContactGenerator.h" />
     <ClInclude Include="PhysicsEngine\ForceGenerators\BungeeForceGenerator.h" />

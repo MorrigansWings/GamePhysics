@@ -95,7 +95,7 @@ int main( int argc, char* argv[] )
 	//GLFWwindow* pWindow = GraphicsManager::GetInstance()->getGLFWWindow();
 
 	KatamariGame* pGame = new KatamariGame(argc, argv);
-	pGame->setup(60, 10.0f, 10.0f);
+	pGame->setup(60, 0.0f, 10.0f, 10.0f);
 
 	GLFWwindow* pWindow = pGame->getGLFWwindow();
 

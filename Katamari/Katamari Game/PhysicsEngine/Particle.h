@@ -14,7 +14,7 @@ public:
 		, acceleration(Physics::Vector3(0.0f))
 		, damping(DEFAULT_DAMPING)
 		, mass(DEFAULT_MASS)
-		, inverseMass(1.0f/mass)
+		, inverseMass((mass > 0) ? (1.0f / mass) : 0.0f) // If mass is 0, set inversemass to 0
 	{}
 	Particle(Physics::Vector3 pos, Physics::Vector3 vel, Physics::Vector3 acc, float damp, float ma)
 		: position(pos)
@@ -22,7 +22,7 @@ public:
 		, acceleration(acc)
 		, damping(damp)
 		, mass(ma)
-		, inverseMass(1.0f/mass)
+		, inverseMass((mass > 0) ? (1.0f / mass) : 0.0f)
 	{}
 
 	~Particle(){};
@@ -56,7 +56,7 @@ public:
 	inline void setMass(float newVal)
 	{ 
 		mass = newVal; 
-		inverseMass = 1.0f / mass; 
+		inverseMass = (mass > 0) ? (1.0f / mass) : 0.0f;
 	}
 
 private:

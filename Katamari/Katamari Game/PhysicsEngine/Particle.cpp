@@ -1,5 +1,7 @@
 #include "Particle.h"
 
+#include <iostream>
+
 const float Particle::DEFAULT_DAMPING = 0.999f;
 const float Particle::DEFAULT_MASS = 1.0f;
 
@@ -14,6 +16,7 @@ void Particle::integrate(float duration)
 	// get acceleration from force
 	Vector3 calculatedAcc = acceleration;
 	calculatedAcc.addScaledVector(forceAccumulation, duration);
+	//std::cout << "PARTICLE:integrate(): Calculated Acceleration: " << calculatedAcc.ToString() << std::endl;
 
 	// get linear velocity from acceleration
 	velocity.addScaledVector(calculatedAcc, duration);

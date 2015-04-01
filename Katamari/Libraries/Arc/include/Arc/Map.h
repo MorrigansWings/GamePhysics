@@ -240,7 +240,7 @@ Arc::ArrayList<T> Arc::Map<K, T, Sort>::getValues( void ) const
 	ArrayList<T> values;
 
 	for (auto it = itConstBegin(); it != itConstEnd(); ++it)
-		keys.add(it->second);
+		values.add(it->second);
 
 	return values;
 }

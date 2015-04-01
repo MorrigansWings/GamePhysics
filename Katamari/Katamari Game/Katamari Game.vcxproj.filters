@@ -153,6 +153,12 @@
     <ClCompile Include="KatamariGame\GameObject.cpp">
       <Filter>Project\KatamariGame\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsEngine\Collision\GroundContactGenerator.cpp">
+      <Filter>Project\PhysicsEngine\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Collision\CableParticleConnection.cpp">
+      <Filter>Project\PhysicsEngine\Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PhysicsEngine\PhysicsManager.h">
@@ -268,6 +274,15 @@
     </ClInclude>
     <ClInclude Include="KatamariGame\GameObject.h">
       <Filter>Project\KatamariGame\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\GroundContactGenerator.h">
+      <Filter>Project\PhysicsEngine\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\ParticleConnection.h">
+      <Filter>Project\PhysicsEngine\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\CableParticleConnection.h">
+      <Filter>Project\PhysicsEngine\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
