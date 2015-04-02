@@ -17,6 +17,20 @@ struct ForceRegistration
 	ParticleForceGenerator *generator;
 };
 
+enum ConnectionType
+{
+	ROD = 0,
+	CABLE,
+	SPRING
+};
+
+struct GameObjectConnection
+{
+	string m_first;
+	string m_second;
+	ConnectionType m_type;
+};
+
 class PhysicsManager
 {
 public:
@@ -44,6 +58,10 @@ public:
 	bool applyGravity(string &name);
 
 	void addContact(ParticleContact* cont) { m_contacts.add(cont); }
+	string addConnection(string &name, GameObjectConnection &connection);
+	string addRod(string &name, string first, string second);
+	string addCable(string &name, string first, string second);
+	string addSpring(string &name, string particle, string anchor);
 
 private:
 	static PhysicsManager* s_Instance;
@@ -53,8 +71,8 @@ private:
 	Arc::Map<string, ParticleForceGenerator*> m_particleForceRegistry;
 
 	// Force Generators
-	typedef std::vector<ForceRegistration> Registry;
-	Registry m_forceRegistrations;
+	//typedef std::vector<ForceRegistration> Registry;
+	Arc::ArrayList<ForceRegistration> m_forceRegistrations;
 
 	// Contact Set
 	Arc::Map<string, ParticleContactGenerator*> m_particleContactRegistry;

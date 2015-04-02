@@ -27,13 +27,13 @@ private:
 
 	Map<string, Object*> m_gameObjects;
 
-	GameObject* m_testObject;
+	//GameObject* m_testObject;
 
-	Physics::Vector3 m_testPosition;
+	//Physics::Vector3 m_testPosition;
 
-	string	m_groundPlane,
-			m_testCube,
-			m_testParticle;
+	string	m_groundPlane;
+//			m_testCube,
+//			m_testParticle;
 
 	double	m_LastFrameTime;
 

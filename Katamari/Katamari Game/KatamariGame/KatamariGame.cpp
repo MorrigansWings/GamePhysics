@@ -42,24 +42,40 @@ void KatamariGame::setup(int framerate, float groundHeight, float groundX, float
 	GraphicsManager::GetInstance()->createLine("testFive", vec3(0.0f), vec3(-1.0f, 1.0f, -1.0f));
 	*/
 
-	// Cube test
-	m_testPosition = Physics::Vector3(0.0f, 3.0f, 0.0f);
-	m_testCube = GraphicsManager::GetInstance()->createCube("testOne", 
-															m_testPosition.convertToGLM(), 
-															Physics::Vector3(0.2f, 0.2f, 0.2f).convertToGLM());
+	// Graphics test - cube
+	string m_testCube = GraphicsManager::GetInstance()->createCube("cubeTest", 
+											Physics::Vector3(10.0f, 0.5f, 10.0f).convertToGLM(),
+											Physics::Vector3(0.2f, 0.2f, 0.2f).convertToGLM());
+	
+	// Physics test - gravity
+	GameObject* m_testGravity = new GameObject();
+	string m_gravityParticle = mp_PhysicsManager->createParticle("gravityParticle", 
+											Physics::Vector3(-4.0f, 3.0f, 0.0f));
+	string m_gravityEntity = mp_GraphicsManager->createCube("gravityCube", 
+											Physics::Vector3(-4.0f, 3.0f, 0.0f).convertToGLM(),
+											Physics::Vector3(0.2f, 0.2f, 0.2f).convertToGLM(),
+											Physics::Vector4(0.0f, 0.7f, 0.0f, 1.0f).convertToGLM());
+	m_testGravity->setGraphicsManager(mp_GraphicsManager);
+	m_testGravity->setPhysicsManager(mp_PhysicsManager);
+	m_testGravity->init(m_gravityParticle, m_gravityEntity);
+	m_testGravity->applyGravity();
+	m_gameObjects.add("TestObject", m_testGravity);
 
-	// Particle test
-	m_testParticle = mp_PhysicsManager->createParticle("testParticle", m_testPosition);
-	//std::cout << "KATAMARIGAME::setup(): Got back " << m_testParticle << " from createParticle function in PhysicsManager!" << std::endl;
+	// Physics Test - Cable
+	GameObject* m_testCableOne = new GameObject();
+	string m_cableParticleOne = mp_PhysicsManager->createParticle("cableParticleOne",
+											Physics::Vector3(0.0f, 3.0f, 0.0f));
+	string m_cableEntityOne = mp_GraphicsManager->createCube("cableCubeOne",
+											Physics::Vector3(0.0f, 3.0f, 0.0f).convertToGLM(),
+											Physics::Vector3(0.2f, 0.2f, 0.2f).convertToGLM(),
+											Physics::Vector4(0.0f, 0.7f, 0.0f, 1.0f).convertToGLM());
+	m_testCableOne->setGraphicsManager(mp_GraphicsManager);
+	m_testCableOne->setPhysicsManager(mp_PhysicsManager);
+	m_testCableOne->init(m_cableParticleOne, m_cableEntityOne);
+	m_testCableOne->applyGravity();
+	m_gameObjects.add("TestObject", m_testCableOne);
 
-	// GameObject test
-	m_testObject = new GameObject();
-	m_testObject->setGraphicsManager(mp_GraphicsManager);
-	m_testObject->setPhysicsManager(mp_PhysicsManager);
-	m_testObject->init(m_testParticle, m_testCube);
-	mp_PhysicsManager->applyGravity(m_testParticle);
-	m_gameObjects.add("TestObject", m_testObject);
-	//m_testObject->applyGravity();
+
 }
 
 void KatamariGame::start()

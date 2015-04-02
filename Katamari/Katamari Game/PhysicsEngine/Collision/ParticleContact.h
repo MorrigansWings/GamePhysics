@@ -6,7 +6,14 @@
 class ParticleContact
 {
 public:
-	ParticleContact(){};
+	ParticleContact()
+		: m_first(nullptr)
+		, m_second(nullptr)
+		, m_restitution(0.0f)
+		, m_contactNormal(Vector3(0))
+		, m_penetrationDepth(0.0f)
+	{}
+
 	ParticleContact(Particle* f, float rest, Vector3 cn, float penetration)
 		: m_first(f)
 		, m_second(nullptr)

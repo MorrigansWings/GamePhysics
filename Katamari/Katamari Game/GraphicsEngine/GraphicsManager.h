@@ -109,6 +109,8 @@ public:
 
 	inline bool hasEntity(string &name){ return mp_SceneManager->getCurrentScene()->hasEntity(name); }
 
+	inline void removeEntity(string &name) { mp_SceneManager->getCurrentScene()->removeEntity(name); }
+
 private:
 	
 	void initGL( void );

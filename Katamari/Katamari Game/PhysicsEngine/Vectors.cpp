@@ -295,6 +295,12 @@ float Vector3::dot(const Vector3 &first, const Vector3 &second)
 	return result;
 }
 
+// Calculate the distance between two vectors
+float Vector3::getDistance(const Vector3 &first, const Vector3 &second)
+{
+	return (second - first).magnitude();
+}
+
 /********************** Vector4 ****************************/
 
 const Vector4 Vector4::ZERO = Vector4(0.0f, 0.0f, 0.0f, 0.0f);

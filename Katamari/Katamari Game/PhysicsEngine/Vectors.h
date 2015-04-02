@@ -143,6 +143,7 @@ namespace Physics
 
 		static Vector3 cross(const Vector3 &first, const Vector3 &second);
 		static float dot(const Vector3 &first, const Vector3 &second);
+		static float getDistance(const Vector3 &first, const Vector3 &second);
 
 		inline glm::vec3 convertToGLM() { return glm::vec3(this->x, this->y, this->z); }
 	};

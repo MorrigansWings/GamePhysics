@@ -16,13 +16,15 @@ public:
 
 	virtual void updateForce(Particle* particle, float duration);
 
+	inline void setRestLength(float length) { mRestLength = length; }
+
 private:
 
 	Particle*		mEndParticle;
 
 	Vector3			mAnchor;
 
-	const float		mK = 1.0f,
+	float			mK = 1.0f,
 					mRestLength = 1.0f;
 
 };

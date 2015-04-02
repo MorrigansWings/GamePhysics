@@ -4,10 +4,12 @@
 
 #include "ForceGenerators/ParticleForceGenerator.h"
 #include "ForceGenerators/GravityForceGenerator.h"
+#include "ForceGenerators/SpringForceGenerator.h"
 #include "Collision/ParticleContact.h"
 #include "Collision/ParticleContactGenerator.h"
 #include "Collision/GroundContactGenerator.h"
-
+#include "Collision/CableParticleConnection.h"
+#include "Collision/RodParticleConnection.h"
 
 PhysicsManager* PhysicsManager::s_Instance = nullptr;
 
@@ -54,21 +56,9 @@ void PhysicsManager::update(float duration)
 
 	// Generate forces via generators
 	updateForces(duration);
-	//for (unsigned int i = 0; i < m_forceRegistrations.size(); ++i)
-	//{
-	//	ForceRegistration reg = m_forceRegistrations[i];
-	//	reg.generator->updateForce(reg.particle, duration);
-	//}
 
 	// Integrate particle positions
 	integrateParticles(duration);
-	//for (auto iter = m_particleSet.itBegin(); iter != m_particleSet.itEnd(); ++iter)
-	//	iter->second->integrate(duration);
-
-	//TESTING
-	//std::cout << "PARTICLES! =================================" << std::endl;
-	//for (auto iter = m_particleSet.itBegin(); iter != m_particleSet.itEnd(); ++iter)
-	//	std::cout << "Particle Position: " << iter->second->getPosition().ToString() << std::endl;
 
 	// Compute set of all particles in contact
 	generateCollisions();
@@ -77,11 +67,9 @@ void PhysicsManager::update(float duration)
 	resolveCollisions(duration);
 }
 
-
 void PhysicsManager::updateForces(float duration)
 {
-	Registry::iterator it = m_forceRegistrations.begin();
-	for (; it != m_forceRegistrations.end(); ++it)
+	for (auto it = m_forceRegistrations.itBegin(); it != m_forceRegistrations.itEnd(); ++it)
 	{
 		it->generator->updateForce(it->particle, duration);
 	}
@@ -139,27 +127,6 @@ string PhysicsManager::createParticle(string name, Vector3 pos)
 	}
 	else return "";
 }
-/*
-Particle* PhysicsManager::getParticle(string name)
-{
-	std::cout << "PHYSICSMANAGER::getParticle(): call to hasParticle(" << name << ") returns " << hasParticle(name) << std::endl;
-	if (hasParticle(name))
-		return m_particleSet[name];
-	else return nullptr;
-}
-
-Physics::Vector3 PhysicsManager::getParticlePosition(string &name)
-{
-	std::cout << "PHYSICSMANAGER::getParticlePosition(): Looking for particle named " << name << "..." << std::endl;
-
-	if (hasParticle(name))
-	{
-		Physics::Vector3 position = getParticle(name)->getPosition();
-		std::cout << "PHYSICSMANAGER::getParticlePosition(): Found particle named " << name << "! Position: " << position.ToString() << std::endl;
-		return position;
-	}
-	else return Vector3(0.0f);
-}*/
 
 bool PhysicsManager::applyGravity(string &name)
 {
@@ -168,8 +135,94 @@ bool PhysicsManager::applyGravity(string &name)
 		ForceRegistration newForce;
 		newForce.generator = m_particleForceRegistry["gravity"];
 		newForce.particle = m_particleSet[name];
-		m_forceRegistrations.push_back(newForce);
+		m_forceRegistrations.add(newForce);
 		return true;
 	}
 	return false;
+}
+
+string PhysicsManager::addConnection(string &name, GameObjectConnection &connection)
+{
+	string result = "";
+	if ((m_particleSet.containsKey(connection.m_first) && m_particleSet.containsKey(connection.m_second)))
+	{
+		switch (connection.m_type)
+		{
+		case ROD:
+			// Add only if name doesn't already exist in registry
+			if (!m_particleContactRegistry.containsKey(name + "_rod"))
+				result = addRod(name + "_rod", connection.m_first, connection.m_second);
+
+			break;
+		case CABLE:
+			// return without adding if contact name already exists
+			if (!m_particleContactRegistry.containsKey(name + "_cable"))
+					result = addCable(name + "_cable", connection.m_first, connection.m_second);
+
+			break;
+		case SPRING:
+			// return without adding if contact name already exists
+			if (!m_particleForceRegistry.containsKey(name + "_spring_first")
+				&& m_particleForceRegistry.containsKey(name + "_spring_second"))
+			{
+				// One generator for each side...
+				result = addSpring(name + "_spring_first", connection.m_first, connection.m_second);
+				result += addSpring(name + "_spring_second", connection.m_second, connection.m_first);
+
+				if (result != "")
+					result = name + "_spring";
+			}
+			break;
+		}
+	}
+	return result;
+}
+
+string PhysicsManager::addRod(string &name, string first, string second)
+{
+	RodParticleConnection* rod = new RodParticleConnection();
+
+	rod->mp_first = m_particleSet[first];
+	rod->mp_second = m_particleSet[second];
+	rod->m_maxLength = Vector3::getDistance(rod->mp_first->getPosition(),
+		rod->mp_second->getPosition());
+
+	// Add contact generator to registry
+	m_particleContactRegistry[name] = rod;
+
+	return name;
+}
+
+string PhysicsManager::addCable(string &name, string first, string second)
+{
+	CableParticleConnection* cable = new CableParticleConnection();
+
+	cable->mp_first = m_particleSet[first];
+	cable->mp_second = m_particleSet[second];
+	cable->m_maxLength = Vector3::getDistance(cable->mp_first->getPosition(),
+											cable->mp_second->getPosition());
+	cable->m_restitution = 0.5f;
+
+	// Add contact generator to registry
+	m_particleContactRegistry[name] = cable;
+	return name;
+}
+
+string PhysicsManager::addSpring(string &name, string particle, string anchor)
+{
+	// One generator for each side...
+	Particle* partPart = m_particleSet[particle];
+	Particle* anchorPart = m_particleSet[anchor];
+
+	float restLength = Physics::Vector3::getDistance(partPart->getPosition(), anchorPart->getPosition());
+	SpringForceGenerator* spring = new SpringForceGenerator(anchorPart); //first is anchored by second
+	spring->setRestLength(restLength);
+
+	m_particleForceRegistry[name] = spring;
+
+	ForceRegistration registration;
+	registration.generator = spring;
+	registration.particle = partPart;
+	m_forceRegistrations.add(registration);
+	return name;
 }

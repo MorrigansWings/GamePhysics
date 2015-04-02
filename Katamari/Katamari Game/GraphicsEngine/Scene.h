@@ -43,9 +43,10 @@ public:
 	Entity* getEntity( const string& name );
 	inline bool hasEntity(string &name) 
 	{
-		std::cout << "SCENE::hasEntity(): Checking for " << name << " in m_entities keys..." << std::endl;
+		//std::cout << "SCENE::hasEntity(): Checking for " << name << " in m_entities keys..." << std::endl;
 		return m_Entities.containsKey(name); 
 	}
+	inline void removeEntity(string &name) { if (m_Entities.containsKey(name)) m_Entities.removeKey(name); }
 
 	void addHeightMap( const string& name, HeightMap* pEntity );
 

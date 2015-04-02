@@ -10,7 +10,9 @@ public:
 
 	virtual int AddContact(PhysicsManager* manager) = 0;
 
-	Particle*	mp_first,
-				mp_second;
+	inline float getCurrentLength(){ return Vector3::getDistance(mp_first->getPosition(), mp_second->getPosition()); }
+	
+	Particle*	mp_first;
+	Particle*	mp_second;
 };
 #endif //_PARTICLE_CONNECTION_
