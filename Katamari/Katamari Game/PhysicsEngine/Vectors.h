@@ -41,7 +41,7 @@ namespace Physics
 
 		const std::string ToString();
 
-		inline glm::vec2 convertToGLM() { return glm::vec2(this->x, this->y); }
+		inline glm::vec2 GLM() { return glm::vec2(this->x, this->y); }
 	};
 
 
@@ -145,7 +145,7 @@ namespace Physics
 		static float dot(const Vector3 &first, const Vector3 &second);
 		static float getDistance(const Vector3 &first, const Vector3 &second);
 
-		inline glm::vec3 convertToGLM() { return glm::vec3(this->x, this->y, this->z); }
+		inline glm::vec3 GLM() { return glm::vec3(this->x, this->y, this->z); }
 	};
 
 	class Vector4
@@ -207,7 +207,7 @@ namespace Physics
 		const Vector4 operator+(const Vector4 &rhs);
 		const Vector4 operator=(const Vector4 &rhs);
 
-		inline glm::vec4 convertToGLM() { return glm::vec4(this->x, this->y, this->z, this->w); }
+		inline glm::vec4 GLM() { return glm::vec4(this->x, this->y, this->z, this->w); }
 	};
 }
 

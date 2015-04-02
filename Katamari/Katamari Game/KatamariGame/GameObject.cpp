@@ -4,8 +4,10 @@
 
 using namespace Physics;
 
-void GameObject::init(string particle, string entity)
+void GameObject::init(string name, string particle, string entity)
 {
+	m_name = name;
+
 	if (mp_PhysicsManager->hasParticle(particle))
 		m_particleName = particle;
 
@@ -22,7 +24,7 @@ void GameObject::update()
 	//std::cout << "GAMEOBJECT:: update(): Attempting to update particle " << m_particleName << " with physics postion: " << newPos.ToString() << std::endl;
 
 	// give data to graphics engine
-	mp_GraphicsManager->updateEntityPosition(m_entityName, m_position.convertToGLM());
+	mp_GraphicsManager->updateEntityPosition(m_entityName, m_position.GLM());
 
 	//std::cout << "GAMEOBJECT:: update(): " << m_particleName << "'s position after update: " << newPos.ToString() << std::endl;
 }

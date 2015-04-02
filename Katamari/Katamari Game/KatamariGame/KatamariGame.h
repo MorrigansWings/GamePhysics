@@ -4,8 +4,9 @@
 #include "../GraphicsEngine/GraphicsManager.h"
 #include "../PhysicsEngine/PhysicsManager.h"
 #include "../PhysicsEngine/Vectors.h"
-#include "GameObject.h"
 #include "Object.h"
+#include "GameObject.h"
+#include "AggregateGameObject.h"
 
 class KatamariGame
 {
@@ -18,6 +19,11 @@ public:
 	void start();
 	void update(float deltaTime);
 	void fixedUpdate(float deltaTime);
+
+	void createAggCube(string &name);
+	void createAggCube(string &name, Physics::Vector3 dimensions);
+	void createAggCube(string &name, Physics::Vector3 dimensions, Physics::Vector3 position);
+	void createAggCube(string &name, Physics::Vector3 dimensions, Physics::Vector3 position, Physics::Vector4 color);
 
 	inline GLFWwindow* getGLFWwindow() { return GraphicsManager::GetInstance()->getGLFWWindow(); }
 

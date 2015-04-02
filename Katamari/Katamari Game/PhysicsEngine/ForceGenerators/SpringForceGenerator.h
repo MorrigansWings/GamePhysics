@@ -24,7 +24,7 @@ private:
 
 	Vector3			mAnchor;
 
-	float			mK = 1.0f,
+	float			mK = 5.0f,
 					mRestLength = 1.0f;
 
 };

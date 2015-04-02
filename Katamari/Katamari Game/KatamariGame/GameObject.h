@@ -11,7 +11,7 @@ public:
 	GameObject(){};
 	~GameObject(){};
 
-	void init(string particle, string entity);
+	void init(string name, string particle, string entity);
 
 	virtual void update();
 	virtual void applyGravity(){ mp_PhysicsManager->applyGravity(m_particleName); }
@@ -22,10 +22,14 @@ public:
 	inline string getEntityName() { return m_entityName; }
 	inline void setEntityName(string name) { m_entityName = name; }
 
+	inline string getName() { return m_name; }
+	inline void setName(string name) { m_name = name; }
+
 	inline Physics::Vector3 getPosition() { return m_position; }
 	inline void setPosition(Physics::Vector3 newPos) { m_position = newPos; }
 
 private:
+	string m_name;
 	string m_particleName;
 	string m_entityName;
 

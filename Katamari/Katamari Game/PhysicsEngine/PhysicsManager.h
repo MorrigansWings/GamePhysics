@@ -24,13 +24,6 @@ enum ConnectionType
 	SPRING
 };
 
-struct GameObjectConnection
-{
-	string m_first;
-	string m_second;
-	ConnectionType m_type;
-};
-
 class PhysicsManager
 {
 public:
@@ -58,7 +51,8 @@ public:
 	bool applyGravity(string &name);
 
 	void addContact(ParticleContact* cont) { m_contacts.add(cont); }
-	string addConnection(string &name, GameObjectConnection &connection);
+
+	string addConnection(string &name, string first, string second, ConnectionType type);
 	string addRod(string &name, string first, string second);
 	string addCable(string &name, string first, string second);
 	string addSpring(string &name, string particle, string anchor);

@@ -40,7 +40,7 @@ void ParticleContact::resolveVelocity(float duration)
 			newSeparatingVel = 0.0f;
 	}
 
-	// Calcualte change in separating velocity
+	// Calculate change in separating velocity
 	float deltaVel = newSeparatingVel - separating;
 
 	// mass calculations
@@ -57,7 +57,7 @@ void ParticleContact::resolveVelocity(float duration)
 
 	m_first->setVelocity(m_first->getVelocity() + (impulse * m_first->getInverseMass()));
 	if (m_second != nullptr) // if second particle exists, apply!
-		m_second->setVelocity(m_second->getVelocity() + (impulse * m_second->getInverseMass()));
+		m_second->setVelocity(m_second->getVelocity() - (impulse * m_second->getInverseMass()));
 }
 
 void ParticleContact::resolveInterpenetration(float duration)

@@ -1,4 +1,5 @@
 #include "SpringForceGenerator.h"
+#include <iostream>
 
 SpringForceGenerator::SpringForceGenerator()
 {
@@ -19,6 +20,7 @@ SpringForceGenerator::~SpringForceGenerator()
 
 void SpringForceGenerator::updateForce(Particle* particle, float duration)
 {
+	std::cout << "SPRINGFORCEGENERATOR:updateForce: Attempting to update force!";
 	Vector3 force = particle->getPosition();
 
 	if (mEndParticle != NULL)
