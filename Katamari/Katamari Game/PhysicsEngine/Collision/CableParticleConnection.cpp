@@ -5,8 +5,12 @@ int CableParticleConnection::AddContact(PhysicsManager* manager)
 {
 	float length = getCurrentLength();
 
+	// Disregard anything past 2nd decimal place
+	float checkLength = length;
+	//checkLength = floorf(length * 100.0f) / 100.0f;	
+
 	// Do nothing if length is less than max
-	if (length < m_maxLength) return 0;
+	if (checkLength < m_maxLength) return 0;
 
 	ParticleContact* contact = new ParticleContact();
 	contact->setFirstParticle(mp_first);

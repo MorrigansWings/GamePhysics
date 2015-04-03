@@ -5,7 +5,11 @@ int RodParticleConnection::AddContact(PhysicsManager* manager)
 {
 	float length = getCurrentLength();
 
-	if (length == m_maxLength) return 0;
+	// Disregard anything past 2nd decimal place
+	float checkLength = length;
+	checkLength = floorf(length * 100.0f) / 100.0f;
+
+	if (checkLength == m_maxLength) return 0;
 
 	// particle links
 	ParticleContact* contact = new ParticleContact();

@@ -20,6 +20,8 @@ PhysicsManager::PhysicsManager()
 	// Set up force generators
 	GravityForceGenerator* gravity = new GravityForceGenerator(2.0f); // scale gravity by 2
 	m_particleForceRegistry.add("gravity", gravity);
+
+	m_maxPasses = 50;
 }
 
 PhysicsManager::~PhysicsManager()
@@ -31,7 +33,6 @@ PhysicsManager::~PhysicsManager()
 	for (auto iter = m_particleForceRegistry.itBegin(); iter != m_particleForceRegistry.itEnd(); ++iter)
 		delete iter->second;
 	m_particleForceRegistry.clear();
-
 
 	m_forceRegistrations.clear();
 }
@@ -63,8 +64,15 @@ void PhysicsManager::update(float duration)
 	// Compute set of all particles in contact
 	generateCollisions();
 
-	// Resolve velocities for all particles in contact
-	resolveCollisions(duration);
+	singlePassCollisions(duration);
+	//multiPassCollisions(duration);
+
+	// clear contacts after resolution
+	for (unsigned int i = 0; i < m_contacts.getSize(); ++i)
+		m_contacts.removeAt(i);
+
+	m_contacts.clear();
+
 }
 
 void PhysicsManager::updateForces(float duration)
@@ -72,7 +80,7 @@ void PhysicsManager::updateForces(float duration)
 	//for (auto it = m_forceRegistrations.itBegin(); it != m_forceRegistrations.itEnd(); ++it)
 	for (unsigned int i = 0; i < m_forceRegistrations.getSize(); ++i)
 	{
-		std::cout << "PHYSICSMANAGER:updateForces: Attempting to update generator " << i << std::endl; 
+		//std::cout << "PHYSICSMANAGER:updateForces: Attempting to update generator " << i << std::endl; 
 		ParticleForceGenerator* generator = m_forceRegistrations[i].generator;
 		Particle* particle = m_forceRegistrations[i].particle;
 
@@ -105,9 +113,70 @@ void PhysicsManager::resolveCollisions(float duration)
 	// clear contacts after resolution...?
 	for (unsigned int i = 0; i < m_contacts.getSize(); ++i)
 	{
-		delete m_contacts[i];
+		m_contacts.removeAt(i);
 	}
 	m_contacts.clear();
+}
+
+void PhysicsManager::singlePassCollisions(float duration)
+{
+	// Resolve velocities for all particles in contact
+	resolveCollisions(duration);
+}
+
+void PhysicsManager::multiPassCollisions(float duration)
+{
+	int processed = 0;
+	while (processed < m_maxPasses)
+	{
+		float minSeparatingVelocity = std::numeric_limits<float>::max();
+		int candidate = 0;
+		for (unsigned int i = 0; i < m_contacts.getSize(); ++i)
+		{
+			// get collision with greatest velocity
+			float separating = m_contacts[i]->separatingVelocity();
+			if (separating <= minSeparatingVelocity && (separating < 0.0f || m_contacts[i]->getPenetrationDepth() > 0))
+			{
+				minSeparatingVelocity = separating;
+				candidate = i;
+			}
+		}
+		// no collision found
+		if (minSeparatingVelocity > 0.0f)
+			return;
+
+		// Get particles involved
+		Particle* first = m_contacts[candidate]->getFirstParticle();
+		Particle* second = m_contacts[candidate]->getSecondParticle();
+
+		// process best candidate
+		std::cout << "PHYSICSMANAGER:multiPassCollisions: Processing candidate #" << std::to_string(candidate) << std::endl;
+		m_contacts[candidate]->resolve(duration);
+
+		// Get new positions of particles involved
+		Vector3 firstPos = m_contacts[candidate]->getFirstParticle()->getPosition();
+		Vector3 secondPos = Vector3(0.0f);
+		if (m_contacts[candidate]->getSecondParticle() != nullptr)
+			secondPos = m_contacts[candidate]->getSecondParticle()->getPosition();
+
+		// update particle positions in each other contact
+		for (unsigned int i = 0; i < m_contacts.getSize(); ++i)
+		{
+			ParticleContact* contact = m_contacts[i];
+			if (contact->getFirstParticle() == first) contact->getFirstParticle()->setPosition(firstPos);
+			if (second != nullptr)
+				if (contact->getFirstParticle() == second) contact->getFirstParticle()->setPosition(secondPos);
+
+			if (contact->getSecondParticle() != nullptr)
+			{
+				if (contact->getSecondParticle() == first) contact->getSecondParticle()->setPosition(firstPos);
+				if (second != nullptr)
+					if (contact->getSecondParticle() == second) contact->getSecondParticle()->setPosition(secondPos);
+			}
+		}
+
+		++processed;
+	}
 }
 
 string PhysicsManager::createParticle(string name)
@@ -198,8 +267,11 @@ string PhysicsManager::addRod(string &name, string first, string second)
 
 	rod->mp_first = m_particleSet[first];
 	rod->mp_second = m_particleSet[second];
-	rod->m_maxLength = Vector3::getDistance(rod->mp_first->getPosition(),
-										rod->mp_second->getPosition());
+	
+	// calculate max length
+	float mLength = Vector3::getDistance(	rod->mp_first->getPosition(),
+											rod->mp_second->getPosition());
+	rod->setMaxLength(mLength);
 
 	// Add contact generator to registry
 	//std::cout << "PHYSICSMANAGER::addRod(): Adding RodParticleConnection to particleContactRegistry[" << name << "]" << std::endl;
@@ -214,9 +286,10 @@ string PhysicsManager::addCable(string &name, string first, string second)
 
 	cable->mp_first = m_particleSet[first];
 	cable->mp_second = m_particleSet[second];
-	cable->m_maxLength = Vector3::getDistance(cable->mp_second->getPosition(),
+	float mLength = Vector3::getDistance(cable->mp_second->getPosition(),
 											cable->mp_first->getPosition());
-	cable->m_restitution = 0.5f;
+	cable->setMaxLength(mLength);
+	cable->setRestitution(0.5f);
 
 	// Add contact generator to registry
 	//m_particleContactRegistry[name] = cable;
@@ -230,10 +303,10 @@ string PhysicsManager::addSpring(string &name, string particle, string anchor)
 	Particle* partPart = m_particleSet[particle];
 	Particle* anchorPart = m_particleSet[anchor];
 
-	float restLength = Physics::Vector3::getDistance(partPart->getPosition(), anchorPart->getPosition());
 	SpringForceGenerator* spring = new SpringForceGenerator(anchorPart); //first is anchored by second
+
+	float restLength = Physics::Vector3::getDistance(partPart->getPosition(), anchorPart->getPosition());
 	spring->setRestLength(restLength);
-	//spring->set
 
 	//m_particleForceRegistry[name] = spring;
 	m_particleForceRegistry.add(name, spring);

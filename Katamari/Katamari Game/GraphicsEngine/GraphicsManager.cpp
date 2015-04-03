@@ -379,7 +379,7 @@ string GraphicsManager::createLine(string name, vec3 start, vec3 end, vec4 color
 
 	pModel->addMesh(pMesh);
 
-	mp_Entity = New Entity(vec3(0.0f), vec3(0.0f), vec3(1.0f), color);
+	mp_Entity = new Entity(vec3(0.0f), vec3(0.0f), vec3(1.0f), color);
 	mp_Entity->addModel(pModel);
 	mp_SceneManager->getCurrentScene()->addEntity(name + "-entity", mp_Entity);
 
@@ -503,4 +503,39 @@ void GraphicsManager::updateEntityScale(string name, vec3 scale)
 		// set new position
 		mp_thing->setScale(scale);
 	}
+}
+
+void GraphicsManager::updateLineEnds(string name, vec3 endOne, vec3 endTwo)
+{
+/*	//std::cout << "GRAPHICSMANAGER::updateLineEnds: cbecking for entity in scenemanager: " << name << std::endl;
+	if (! mp_SceneManager->getCurrentScene()->hasEntity(name)) return;
+
+	// adjust name to take -entity out
+	string newname = name.substr(0, name.size() - 7);
+
+	// remove mesh and model from resource manager
+	Mesh* oldMesh = mp_ResourceManager->getMesh(newname + "-mesh");
+	//mp_ResourceManager->getModel(name + "-model");
+	//std::cout << "GRAPHICSMANAGER:updateLineEnds: found " << newname << "-mesh in resourcemanager!" << std::endl;
+
+	ArrayList<vec3> verts;
+	verts.add(endOne);
+	verts.add(endTwo);
+
+	ArrayList<vec3> norms;
+	for (int i = 0; i < 2; ++i)
+		norms.add(vec3(0.0f, 1.0f, 0.0f));
+
+	Mesh* pMesh = mp_ResourceManager->addMesh(newname + "-mesh");
+	Model* pModel = mp_ResourceManager->getModel(newname + "-model");
+
+	pMesh->begin(GL_LINES, 2);
+	pMesh->copyVertexData(verts);
+	pMesh->copyNormalData(norms);
+	pMesh->end();
+
+	pModel->removeMesh(oldMesh);
+	mp_ResourceManager->removeMesh(oldMesh);
+	pModel->addMesh(pMesh);
+*/
 }

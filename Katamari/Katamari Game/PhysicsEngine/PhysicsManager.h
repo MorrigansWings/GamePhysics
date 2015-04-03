@@ -40,6 +40,9 @@ public:
 	void generateCollisions();
 	void resolveCollisions(float duration);
 
+	void singlePassCollisions(float duration);
+	void multiPassCollisions(float duration);
+
 	string createParticle(string name);
 	string createParticle(string name, Physics::Vector3 pos);
 
@@ -75,6 +78,8 @@ private:
 	float	m_groundHeight,
 			m_groundXBounds,
 			m_groundYBounds;
+
+	int m_maxPasses;
 
 };
 

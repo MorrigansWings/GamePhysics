@@ -17,10 +17,10 @@ public:
 	virtual void applyGravity(){ mp_PhysicsManager->applyGravity(m_particleName); }
 
 	inline string getParticleName() { return m_particleName; }
-	inline void setParticleName(string name) { m_particleName = name; }
+	inline void setParticleName(string name) { m_particleName = mp_PhysicsManager->hasParticle(name) ? name : m_particleName; }
 
 	inline string getEntityName() { return m_entityName; }
-	inline void setEntityName(string name) { m_entityName = name; }
+	inline void setEntityName(string name) { m_entityName = mp_GraphicsManager->hasEntity(name) ? name : m_entityName; }
 
 	inline string getName() { return m_name; }
 	inline void setName(string name) { m_name = name; }

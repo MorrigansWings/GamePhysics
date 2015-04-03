@@ -25,8 +25,12 @@ public:
 
 	inline void addGameObject(string name, GameObject* object) { if(!m_objects.containsKey(name)) m_objects[name] = object; }
 	inline GameObject* getGameObject(string name) { return m_objects.containsKey(name) ? m_objects[name] : nullptr; }
+	inline Arc::Map<string, GameObject*>* getObjects() { return &m_objects; }
 
 	string createConnection(GameObject* first, GameObject* second, ConnectionType type);
+	inline Arc::Map<string, GameObjectConnection>* getConnections() { return &m_connections; }
+
+	void updateLines();
 
 	void translate(Physics::Vector3 addPos);
 
@@ -35,6 +39,7 @@ private:
 	Arc::Map<string, GameObject*> m_objects;
 
 	Arc::Map<string, GameObjectConnection> m_connections;
+	Arc::Map<string, string> m_lines;
 
 };
 

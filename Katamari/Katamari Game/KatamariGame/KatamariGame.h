@@ -20,10 +20,24 @@ public:
 	void update(float deltaTime);
 	void fixedUpdate(float deltaTime);
 
-	void createAggCube(string &name);
-	void createAggCube(string &name, Physics::Vector3 dimensions);
-	void createAggCube(string &name, Physics::Vector3 dimensions, Physics::Vector3 position);
-	void createAggCube(string &name, Physics::Vector3 dimensions, Physics::Vector3 position, Physics::Vector4 color);
+	void drawConnections();
+	void clearConnections();
+
+	string createAggTetrahedron(string name);
+	string createAggTetrahedron(string name, Physics::Vector3 position);
+	string createAggTetrahedron(string name, Physics::Vector3 position, Physics::Vector3 dimensions);
+	string createAggTetrahedron(string name, Physics::Vector3 position, Physics::Vector3 dimensions, Physics::Vector4 color);
+
+	string createAggCube(string name);
+	string createAggCube(string name, Physics::Vector3 position);
+	string createAggCube(string name, Physics::Vector3 position, Physics::Vector3 dimensions);
+	string createAggCube(string name, Physics::Vector3 position, Physics::Vector3 dimensions, Physics::Vector4 color);
+
+	string createAggDiamond(string name);
+	string createAggDiamond(string name, Physics::Vector3 position);
+	string createAggDiamond(string name, Physics::Vector3 position, Physics::Vector3 dimensions);
+	string createAggDiamond(string name, Physics::Vector3 position, Physics::Vector3 dimensions, Physics::Vector4 color);
+
 
 	inline GLFWwindow* getGLFWwindow() { return GraphicsManager::GetInstance()->getGLFWWindow(); }
 
@@ -32,6 +46,8 @@ private:
 	PhysicsManager* mp_PhysicsManager;
 
 	Map<string, Object*> m_gameObjects;
+
+	Map<string, AggregateGameObject*> m_aggregateObjects;
 
 	//GameObject* m_testObject;
 

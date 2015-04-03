@@ -9,6 +9,9 @@ class RodParticleConnection
 public:
 	virtual int AddContact(PhysicsManager* manager);
 
+	inline void setMaxLength(float length) { m_maxLength = floorf(length * 100.0f) / 100.0f; }
+
+private:
 	float m_maxLength;
 
 };

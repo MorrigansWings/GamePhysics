@@ -28,10 +28,10 @@ void ParticleContact::resolveVelocity(float duration)
 	float newSeparatingVel = -m_restitution * separating;
 
 	// Check for velocity buildup due to acceleration
-	Vector3 accelVelocity = m_first->getAcceleration();
+	Vector3 acceleration = m_first->getAcceleration();
 	if (m_second != nullptr)
-		accelVelocity -= m_second->getAcceleration();
-	float accelSepVelocity = Vector3::dot(accelVelocity, m_contactNormal) * duration;
+		acceleration -= m_second->getAcceleration();
+	float accelSepVelocity = Vector3::dot(acceleration, m_contactNormal) * duration;
 
 	if (accelSepVelocity < 0)
 	{

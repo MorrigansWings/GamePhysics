@@ -43,3 +43,9 @@ void Model::addMesh( Mesh* pMesh )
 	m_Meshes.add(pMesh);
 	GraphicsManager::GetInstance()->getResourceManager()->tetherMesh(pMesh);
 }
+
+void Model::removeMesh(Mesh* pMesh)
+{
+	m_Meshes.remove(pMesh);
+	GraphicsManager::GetInstance()->getResourceManager()->releaseMesh(pMesh);
+}

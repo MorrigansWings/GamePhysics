@@ -36,6 +36,7 @@ public:
 	void render( void );
 
 	void addMesh( Mesh* pMesh );
+	void removeMesh(Mesh* pMesh);
 
 	inline Material* getMaterial( void ) { return mp_Material; }
 	void setMaterial( Material* pMat );

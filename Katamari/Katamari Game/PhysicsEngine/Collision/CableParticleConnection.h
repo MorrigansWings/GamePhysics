@@ -10,6 +10,10 @@ public:
 
 	virtual int AddContact(PhysicsManager* manager);
 
+	inline void setMaxLength(float mLength){ m_maxLength = floorf(mLength * 100.0f) / 100.0f; }
+	inline void setRestitution(float rest) { m_restitution = rest; }
+
+private:
 	float	m_maxLength,
 			m_restitution;
 };
