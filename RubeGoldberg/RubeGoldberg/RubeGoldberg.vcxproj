@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GraphicsEngine\Camera.cpp" />
+    <ClCompile Include="GraphicsEngine\Config.cpp" />
+    <ClCompile Include="GraphicsEngine\Debug.cpp" />
+    <ClCompile Include="GraphicsEngine\Entity.cpp" />
+    <ClCompile Include="GraphicsEngine\functions.cpp" />
+    <ClCompile Include="GraphicsEngine\Geometry.cpp" />
+    <ClCompile Include="GraphicsEngine\GraphicsManager.cpp" />
+    <ClCompile Include="GraphicsEngine\Grid.cpp" />
+    <ClCompile Include="GraphicsEngine\HeightMap.cpp" />
+    <ClCompile Include="GraphicsEngine\Log.cpp" />
+    <ClCompile Include="GraphicsEngine\Material.cpp" />
+    <ClCompile Include="GraphicsEngine\Mesh.cpp" />
+    <ClCompile Include="GraphicsEngine\Model.cpp" />
+    <ClCompile Include="GraphicsEngine\RenderData.cpp" />
+    <ClCompile Include="GraphicsEngine\ResourceLoader.cpp" />
+    <ClCompile Include="GraphicsEngine\ResourceLoader3DS.cpp" />
+    <ClCompile Include="GraphicsEngine\ResourceLoaderOBJ.cpp" />
+    <ClCompile Include="GraphicsEngine\ResourceManager.cpp" />
+    <ClCompile Include="GraphicsEngine\Scene.cpp" />
+    <ClCompile Include="GraphicsEngine\SceneManager.cpp" />
+    <ClCompile Include="GraphicsEngine\ShaderManager.cpp" />
+    <ClCompile Include="GraphicsEngine\Skybox.cpp" />
+    <ClCompile Include="GraphicsEngine\Texture.cpp" />
+    <ClCompile Include="RubeGoldberg\AggregateGameObject.cpp" />
+    <ClCompile Include="RubeGoldberg\GameObject.cpp" />
+    <ClCompile Include="RubeGoldberg\GameObjectConnection.cpp" />
+    <ClCompile Include="RubeGoldberg\RubeGoldberg.cpp" />
+    <ClCompile Include="PhysicsEngine\Collision\CableParticleConnection.cpp" />
+    <ClCompile Include="PhysicsEngine\Collision\GroundContactGenerator.cpp" />
+    <ClCompile Include="PhysicsEngine\Collision\ParticleContact.cpp" />
+    <ClCompile Include="PhysicsEngine\Collision\RodParticleConnection.cpp" />
+    <ClCompile Include="PhysicsEngine\ForceGenerators\BungeeForceGenerator.cpp" />
+    <ClCompile Include="PhysicsEngine\ForceGenerators\DragForceGenerator.cpp" />
+    <ClCompile Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.cpp" />
+    <ClCompile Include="PhysicsEngine\ForceGenerators\SpringForceGenerator.cpp" />
+    <ClCompile Include="PhysicsEngine\Particle.cpp" />
+    <ClCompile Include="PhysicsEngine\PhysicsManager.cpp" />
+    <ClCompile Include="PhysicsEngine\Vectors.cpp" />
+    <ClInclude Include="GraphicsEngine\Camera.h" />
+    <ClInclude Include="GraphicsEngine\Config.h" />
+    <ClInclude Include="GraphicsEngine\Debug.h" />
+    <ClInclude Include="GraphicsEngine\Entity.h" />
+    <ClInclude Include="GraphicsEngine\functions.h" />
+    <ClInclude Include="GraphicsEngine\Geometry.h" />
+    <ClInclude Include="GraphicsEngine\GraphicsManager.h" />
+    <ClInclude Include="GraphicsEngine\Grid.h" />
+    <ClInclude Include="GraphicsEngine\HeightMap.h" />
+    <ClInclude Include="GraphicsEngine\Log.h" />
+    <ClInclude Include="GraphicsEngine\Material.h" />
+    <ClInclude Include="GraphicsEngine\Mesh.h" />
+    <ClInclude Include="GraphicsEngine\Model.h" />
+    <ClInclude Include="GraphicsEngine\OpenGL.h" />
+    <ClInclude Include="GraphicsEngine\RenderData.h" />
+    <ClInclude Include="GraphicsEngine\ResourceLoader.h" />
+    <ClInclude Include="GraphicsEngine\ResourceLoader3DS.h" />
+    <ClInclude Include="GraphicsEngine\ResourceLoaderOBJ.h" />
+    <ClInclude Include="GraphicsEngine\ResourceManager.h" />
+    <ClInclude Include="GraphicsEngine\Scene.h" />
+    <ClInclude Include="GraphicsEngine\SceneManager.h" />
+    <ClInclude Include="GraphicsEngine\Shader.h" />
+    <ClInclude Include="GraphicsEngine\ShaderManager.h" />
+    <ClInclude Include="GraphicsEngine\Skybox.h" />
+    <ClInclude Include="GraphicsEngine\Texture.h" />
+    <ClInclude Include="PhysicsEngine\Matrices.h" />
+    <ClInclude Include="PhysicsEngine\Quaternion.h" />
+    <ClInclude Include="RubeGoldberg\AggregateGameObject.h" />
+    <ClInclude Include="RubeGoldberg\GameObjectConnection.h" />
+    <ClInclude Include="RubeGoldberg\Object.h" />
+    <ClInclude Include="RubeGoldberg\RubeGoldberg.h" />
+    <ClInclude Include="RubeGoldberg\GameObject.h" />
+    <ClInclude Include="PhysicsEngine\Collision\CableParticleConnection.h" />
+    <ClInclude Include="PhysicsEngine\Collision\GroundContactGenerator.h" />
+    <ClInclude Include="PhysicsEngine\Collision\ParticleConnection.h" />
+    <ClInclude Include="PhysicsEngine\Collision\ParticleContact.h" />
+    <ClInclude Include="PhysicsEngine\Collision\ParticleContactGenerator.h" />
+    <ClInclude Include="PhysicsEngine\Collision\RodParticleConnection.h" />
+    <ClInclude Include="PhysicsEngine\ForceGenerators\BungeeForceGenerator.h" />
+    <ClInclude Include="PhysicsEngine\ForceGenerators\DragForceGenerator.h" />
+    <ClInclude Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.h" />
+    <ClInclude Include="PhysicsEngine\ForceGenerators\ParticleForceGenerator.h" />
+    <ClInclude Include="PhysicsEngine\ForceGenerators\SpringForceGenerator.h" />
+    <ClInclude Include="PhysicsEngine\Particle.h" />
+    <ClInclude Include="PhysicsEngine\PhysicsManager.h" />
+    <ClInclude Include="PhysicsEngine\Vectors.h" />
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Config\resources.cfg" />
+    <None Include="Config\scene.cfg" />
+    <None Include="Config\settings.cfg" />
+    <None Include="Config\shaders.cfg" />
+    <None Include="Shaders\entity.fs.glsl" />
+    <None Include="Shaders\entity.vs.glsl" />
+    <None Include="Shaders\flat.fs.glsl" />
+    <None Include="Shaders\flat.vs.glsl" />
+    <None Include="Shaders\skybox.fs.glsl" />
+    <None Include="Shaders\skybox.vs.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="error.log" />
+    <Text Include="info.log" />
+    <Text Include="program.log" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D4F2C127-EFC4-440C-85C8-E3279169551C}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>RubeGoldberg</RootNamespace>
+    <ProjectName>RubeGoldberg</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>NOGDI;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../Libraries/GL/include;../Libraries/Arc/include;../Libraries/SDL/include;../Libraries/GLM/include;GraphicsEngine;PhysicsEngine;RubeGoldberg</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ArcCore.lib;ArcData.lib;SDL.lib;SDL_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../Libraries/GL/lib;../Libraries/Arc/lib;../Libraries/SDL/lib/x86;</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libcmt;msvcrt</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Project">
+      <UniqueIdentifier>{126fb6d4-ae2a-43fa-ae53-b3c9167258ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\PhysicsEngine">
+      <UniqueIdentifier>{85eac253-51aa-4dec-bfb9-0c8cf19e6402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\PhysicsEngine\ForceGenerators">
+      <UniqueIdentifier>{16a3b901-5283-4e51-ade6-2f0b679e57c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GraphicsEngine">
+      <UniqueIdentifier>{ea486322-b351-4ee4-9ad5-48573b120d7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GraphicsEngine\Config">
+      <UniqueIdentifier>{73f792ae-587c-435b-8a91-a8362461d38b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GraphicsEngine\Logs">
+      <UniqueIdentifier>{a804a601-cdf5-4d3a-a825-67733bf82b7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GraphicsEngine\Managers">
+      <UniqueIdentifier>{01f88dbe-971a-4e29-9263-e94193ef433f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GraphicsEngine\Managers\Loaders">
+      <UniqueIdentifier>{6dc1fc1e-9e69-4bf0-85de-83b712c78c94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GraphicsEngine\Resources">
+      <UniqueIdentifier>{66e0bb3a-1b18-4cc5-8133-183dc7d5f8a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GraphicsEngine\Scene">
+      <UniqueIdentifier>{bfaa07a1-0e10-4c42-82ee-792a258e9fec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GraphicsEngine\Scene\Entities">
+      <UniqueIdentifier>{7ed57d13-e7b0-457a-9c47-eda877c1f8c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GraphicsEngine\Shaders">
+      <UniqueIdentifier>{d3ccabe6-106c-4fbc-add2-c7d2a787923c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GraphicsEngine\Util">
+      <UniqueIdentifier>{e6aac566-302a-4ce0-b5db-2384483114f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\RubeGoldberg">
+      <UniqueIdentifier>{1aff04b2-cb7c-4fb7-96a7-43c38bba9df1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\PhysicsEngine\Collision">
+      <UniqueIdentifier>{966c8840-8920-4ae4-b563-e6cfcf2559cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\RubeGoldberg\GameObjects">
+      <UniqueIdentifier>{17359d0f-a59a-43e7-a0cd-b19566f16a87}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Project</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\PhysicsManager.cpp">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Vectors.cpp">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Particle.cpp">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\ForceGenerators\DragForceGenerator.cpp">
+      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.cpp">
+      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="RubeGoldberg\RubeGoldberg.cpp">
+      <Filter>Project\RubeGoldberg</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\ResourceLoader3DS.cpp">
+      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\ResourceLoaderOBJ.cpp">
+      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\ResourceLoader.cpp">
+      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\GraphicsManager.cpp">
+      <Filter>Project\GraphicsEngine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\SceneManager.cpp">
+      <Filter>Project\GraphicsEngine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\ShaderManager.cpp">
+      <Filter>Project\GraphicsEngine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Texture.cpp">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Material.cpp">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Mesh.cpp">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Model.cpp">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Entity.cpp">
+      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Grid.cpp">
+      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\HeightMap.cpp">
+      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Skybox.cpp">
+      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Camera.cpp">
+      <Filter>Project\GraphicsEngine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\RenderData.cpp">
+      <Filter>Project\GraphicsEngine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Scene.cpp">
+      <Filter>Project\GraphicsEngine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Geometry.cpp">
+      <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Debug.cpp">
+      <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\functions.cpp">
+      <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Log.cpp">
+      <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Config.cpp">
+      <Filter>Project\GraphicsEngine\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\ResourceManager.cpp">
+      <Filter>Project\GraphicsEngine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\ForceGenerators\SpringForceGenerator.cpp">
+      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\ForceGenerators\BungeeForceGenerator.cpp">
+      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Collision\ParticleContact.cpp">
+      <Filter>Project\PhysicsEngine\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="RubeGoldberg\GameObject.cpp">
+      <Filter>Project\RubeGoldberg\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Collision\GroundContactGenerator.cpp">
+      <Filter>Project\PhysicsEngine\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Collision\CableParticleConnection.cpp">
+      <Filter>Project\PhysicsEngine\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Collision\RodParticleConnection.cpp">
+      <Filter>Project\PhysicsEngine\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="RubeGoldberg\AggregateGameObject.cpp">
+      <Filter>Project\RubeGoldberg\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="RubeGoldberg\GameObjectConnection.cpp">
+      <Filter>Project\RubeGoldberg\GameObjects</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PhysicsEngine\PhysicsManager.h">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Vectors.h">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Particle.h">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\ForceGenerators\DragForceGenerator.h">
+      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.h">
+      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\ForceGenerators\ParticleForceGenerator.h">
+      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="RubeGoldberg\RubeGoldberg.h">
+      <Filter>Project\RubeGoldberg</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\ResourceLoader3DS.h">
+      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\ResourceLoaderOBJ.h">
+      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\ResourceLoader.h">
+      <Filter>Project\GraphicsEngine\Managers\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\GraphicsManager.h">
+      <Filter>Project\GraphicsEngine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\SceneManager.h">
+      <Filter>Project\GraphicsEngine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\ShaderManager.h">
+      <Filter>Project\GraphicsEngine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Shader.h">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Texture.h">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Material.h">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Mesh.h">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Model.h">
+      <Filter>Project\GraphicsEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Skybox.h">
+      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Entity.h">
+      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Grid.h">
+      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\HeightMap.h">
+      <Filter>Project\GraphicsEngine\Scene\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Scene.h">
+      <Filter>Project\GraphicsEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Camera.h">
+      <Filter>Project\GraphicsEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\RenderData.h">
+      <Filter>Project\GraphicsEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Geometry.h">
+      <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Debug.h">
+      <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\functions.h">
+      <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\OpenGL.h">
+      <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Log.h">
+      <Filter>Project\GraphicsEngine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\Config.h">
+      <Filter>Project\GraphicsEngine\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine\ResourceManager.h">
+      <Filter>Project\GraphicsEngine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\ForceGenerators\SpringForceGenerator.h">
+      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\ForceGenerators\BungeeForceGenerator.h">
+      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\ParticleContact.h">
+      <Filter>Project\PhysicsEngine\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\ParticleContactGenerator.h">
+      <Filter>Project\PhysicsEngine\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="RubeGoldberg\Object.h">
+      <Filter>Project\RubeGoldberg\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="RubeGoldberg\GameObject.h">
+      <Filter>Project\RubeGoldberg\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\GroundContactGenerator.h">
+      <Filter>Project\PhysicsEngine\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\ParticleConnection.h">
+      <Filter>Project\PhysicsEngine\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\CableParticleConnection.h">
+      <Filter>Project\PhysicsEngine\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\RodParticleConnection.h">
+      <Filter>Project\PhysicsEngine\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="RubeGoldberg\AggregateGameObject.h">
+      <Filter>Project\RubeGoldberg\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="RubeGoldberg\GameObjectConnection.h">
+      <Filter>Project\RubeGoldberg\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Matrices.h">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Quaternion.h">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\flat.fs.glsl">
+      <Filter>Project\GraphicsEngine\Shaders</Filter>
+    </None>
+    <None Include="Shaders\flat.vs.glsl">
+      <Filter>Project\GraphicsEngine\Shaders</Filter>
+    </None>
+    <None Include="Shaders\entity.fs.glsl">
+      <Filter>Project\GraphicsEngine\Shaders</Filter>
+    </None>
+    <None Include="Shaders\entity.vs.glsl">
+      <Filter>Project\GraphicsEngine\Shaders</Filter>
+    </None>
+    <None Include="Config\scene.cfg">
+      <Filter>Project\GraphicsEngine\Config</Filter>
+    </None>
+    <None Include="Config\settings.cfg">
+      <Filter>Project\GraphicsEngine\Config</Filter>
+    </None>
+    <None Include="Config\shaders.cfg">
+      <Filter>Project\GraphicsEngine\Config</Filter>
+    </None>
+    <None Include="Config\resources.cfg">
+      <Filter>Project\GraphicsEngine\Config</Filter>
+    </None>
+    <None Include="Shaders\skybox.fs.glsl">
+      <Filter>Project\GraphicsEngine\Shaders</Filter>
+    </None>
+    <None Include="Shaders\skybox.vs.glsl">
+      <Filter>Project\GraphicsEngine\Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="info.log">
+      <Filter>Project\GraphicsEngine\Logs</Filter>
+    </Text>
+    <Text Include="program.log">
+      <Filter>Project\GraphicsEngine\Logs</Filter>
+    </Text>
+    <Text Include="error.log">
+      <Filter>Project\GraphicsEngine\Logs</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
