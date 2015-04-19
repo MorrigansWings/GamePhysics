@@ -34,6 +34,8 @@
     <ClCompile Include="GraphicsEngine\ShaderManager.cpp" />
     <ClCompile Include="GraphicsEngine\Skybox.cpp" />
     <ClCompile Include="GraphicsEngine\Texture.cpp" />
+    <ClCompile Include="PhysicsEngine\Matrices.cpp" />
+    <ClCompile Include="PhysicsEngine\Quaternion.cpp" />
     <ClCompile Include="RubeGoldberg\AggregateGameObject.cpp" />
     <ClCompile Include="RubeGoldberg\GameObject.cpp" />
     <ClCompile Include="RubeGoldberg\GameObjectConnection.cpp" />
@@ -76,6 +78,7 @@
     <ClInclude Include="GraphicsEngine\Texture.h" />
     <ClInclude Include="PhysicsEngine\Matrices.h" />
     <ClInclude Include="PhysicsEngine\Quaternion.h" />
+    <ClInclude Include="PhysicsEngine\RigidBody.h" />
     <ClInclude Include="RubeGoldberg\AggregateGameObject.h" />
     <ClInclude Include="RubeGoldberg\GameObjectConnection.h" />
     <ClInclude Include="RubeGoldberg\Object.h" />

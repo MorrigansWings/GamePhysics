@@ -168,6 +168,12 @@
     <ClCompile Include="RubeGoldberg\GameObjectConnection.cpp">
       <Filter>Project\RubeGoldberg\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsEngine\Matrices.cpp">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Quaternion.cpp">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PhysicsEngine\PhysicsManager.h">
@@ -306,6 +312,9 @@
       <Filter>Project\PhysicsEngine</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsEngine\Quaternion.h">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\RigidBody.h">
       <Filter>Project\PhysicsEngine</Filter>
     </ClInclude>
   </ItemGroup>
