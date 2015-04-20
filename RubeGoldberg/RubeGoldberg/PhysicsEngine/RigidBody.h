@@ -41,17 +41,28 @@ public:
 private:
 	Quaternion orientation;
 
-	Matrix4 transform;
-
 	Matrix3 inverseInertiaTensor;
 
 	Vector3 position,
 			velocity,
+			rotation,
 			angularVelocity;
 
 	float	mass,
-			inverseMass;
+			inverseMass,
+			linearDamping,
+			angularDamping;
 
+	// Derived variables
+	Matrix4 transform;
+
+	Matrix3 inverseInertiaTensorWorld; //IIT in world space
+
+	// Force and Torque Accumulators
+	Vector3 forceAccum,
+			torqueAccum,
+			acceleration,
+			lastFrameAcceleration;
 
 };
 

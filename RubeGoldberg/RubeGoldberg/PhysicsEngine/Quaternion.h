@@ -11,27 +11,27 @@ namespace Physics
 	class Quaternion
 	{
 	public:
-		float w, x, y, z;
+		float x, y, z, w;
 
 
 		Quaternion()
-			: w(0.0f)
-			, x(0.0f)
+			: x(0.0f)
 			, y(0.0f)
+			, w(0.0f)
 			, z(0.0f)
 		{}
 
 		Quaternion(float value)
-			: w(value)
-			, x(value)
+			: x(value)
 			, y(value)
+			, w(value)
 			, z(value)
 		{}
 
-		Quaternion(float inW, float inX, float inY, float inZ)
-			: w(inW)
-			, x(inX)
+		Quaternion(float inX, float inY, float inZ, float inW)
+			: x(inX)
 			, y(inY)
+			, w(inW)
 			, z(inZ)
 		{}
 
