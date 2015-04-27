@@ -49,6 +49,9 @@
     <Filter Include="Project\RubeGoldberg\GameObjects">
       <UniqueIdentifier>{17359d0f-a59a-43e7-a0cd-b19566f16a87}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\PhysicsEngine\Collision\RigidBody Collision">
+      <UniqueIdentifier>{5ecda8c0-d217-4546-bad8-c39d58bc3df4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -173,6 +176,12 @@
     </ClCompile>
     <ClCompile Include="PhysicsEngine\Quaternion.cpp">
       <Filter>Project\PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\RigidBody.cpp">
+      <Filter>Project\PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Collision\CollisionPrimitive.cpp">
+      <Filter>Project\PhysicsEngine\Collision\RigidBody Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +325,9 @@
     </ClInclude>
     <ClInclude Include="PhysicsEngine\RigidBody.h">
       <Filter>Project\PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\CollisionPrimitive.h">
+      <Filter>Project\PhysicsEngine\Collision\RigidBody Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

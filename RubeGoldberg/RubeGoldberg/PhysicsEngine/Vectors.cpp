@@ -49,6 +49,13 @@ const Vector2 Vector2::operator=(const Vector2 &rhs)
 /********************** Vector3 ****************************/
 const Vector3 Vector3::ZERO = Vector3(0.0f, 0.0f, 0.0f);
 
+void Vector3::clear()
+{
+	this->x = 0.0f;
+	this->y = 0.0f;
+	this->z = 0.0f;
+}
+
 void Vector3::invert()
 {
 	this->x = -this->x;
@@ -135,11 +142,15 @@ Vector3 Vector3::cross(const Vector3 &second)
 		this->x * second.y - this->y * second.x);
 }
 
+Vector3 Vector3::componentProduct(const Vector3 &second)
+{
+	return Vector3(this->x * second.x, this->y * second.y, this->z * second.z);
+}
+
 const Vector4 Vector3::ConvertToHomogeneous()
 {
 	return Vector4(this->x, this->y, this->z, 1.0f);
 }
-
 
 const Vector3 Vector3::operator+(const Vector3 &rhs)
 {
@@ -284,6 +295,11 @@ Vector3 Vector3::cross(const Vector3 &first, const Vector3 &second)
 		first.y * second.z - second.y * first.z,
 		first.z * second.x - second.z * first.x,
 		first.x * second.y - second.x * first.y);
+}
+
+Vector3 Vector3::componentProduct(const Vector3 &first, const Vector3 &second)
+{
+	return Vector3(first.x * second.x, first.y * second.y, first.z * second.z);
 }
 
 float Vector3::dot(const Vector3 &first, const Vector3 &second)

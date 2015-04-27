@@ -10,41 +10,63 @@ namespace Physics
 	class Matrix3
 	{
 	public:
-		float	x0, y0, z0,
-				x1, y1, z1,
-				x2, y2, z2;
+		float	data[9];
 
 		Matrix3()
-			: x0(0.0f), y0(0.0f), z0(0.0f)
-			, x1(0.0f), y1(0.0f), z1(0.0f)
-			, x2(0.0f), y2(0.0f), z2(0.0f)
-		{}
+		{
+			for (int i = 0; i < 9; ++i)
+				data[i] = 0.0f;
+		}
 
 		Matrix3(float value)
-			: x0(value), y0(value), z0(value)
-			, x1(value), y1(value), z1(value)
-			, x2(value), y2(value), z2(value)
-		{}
+		{
+			for (int i = 0; i < 9; ++i)
+				data[i] = value;
+		}
+
+		Matrix3(float vals[9])
+		{
+			for (int i = 0; i < 9; ++i)
+				data[i] = vals[i];
+		}
+
+		Matrix3(const Vector3 &one, const Vector3 &two, const Vector3 &three)
+		{
+			setComponents(one, two, three);
+		}
 
 		Matrix3(float xzero, float yzero, float zzero, 
 				float xone, float yone, float zone,
 				float xtwo, float ytwo, float ztwo)
-			: x0(xzero), y0(yzero), z0(zzero)
-			, x1(xone), y1(yone), z1(zone)
-			, x2(xtwo), y2(ytwo), z2(ztwo)
-		{}
+		{
+			data[0] = xzero;	data[1] = yzero;	data[2] = zzero;
+			data[3] = xone;		data[4] = yone;		data[5] = zone;
+			data[6] = xtwo;		data[7] = ytwo;		data[8] = ztwo;
+		}
 
 		~Matrix3(){}
 
-		inline glm::mat3 GLM() { return glm::mat3(	x0, y0, z0, 
-													x1, y1, z1, 
-													x2, y2, z2); }
+		inline glm::mat3 GLM() { return glm::mat3(	data[0],	data[1],	data[2],
+													data[3],	data[4],	data[5],
+													data[6],	data[7],	data[8] ); }
 		Matrix3 operator*(float value);
-		Vector3 operator*(Vector3 &rhs);
-		
+		Vector3 operator*(const Vector3 &rhs);
+
+		void setDiagonals(float a, float b, float c) { setInertiaTensorCoefficients(a, b, c); }
+		void setComponents(const Vector3 &one, const Vector3 &two, const Vector3 &three);
+		void setInertiaTensorCoefficients(float ix, float iy, float iz, float ixy = 0.0f, float ixz = 0.0f, float iyz = 0.0f);
+		void setBlockInertiaTensor(const Vector3 &halfSizes, float mass);
+
+		Vector3 transform(const Vector3 &vec) { return (*this) * vec; }
+		Vector3 transformTranspose(Vector3 &vec);
+
+		inline Vector3 getRowVector(int i) { Vector3(data[i * 3], data[i * 3 + 1], data[i * 3 + 2]); }
+		inline Vector3 getColumnVector(int i) { return Vector3(data[i], data[i + 3], data[i + 6]); }
 		Matrix3 getTranspose();
 		float getDeterminant();
 		Matrix3 getInverse();
+
+		void setInverse(const Matrix3 &mat);
 
 
 	};
@@ -52,41 +74,41 @@ namespace Physics
 	class Matrix4
 	{
 	public:
-		float	x0, y0, z0, w0, 
-				x1, y1, z1, w1,
-				x2, y2, z2, w2,
-				x3, y3, z3, w3;
+		float	data[12];
 
 		Matrix4()
-			: x0(0.0f), y0(0.0f), z0(0.0f), w0(0.0f)
-			, x1(0.0f), y1(0.0f), z1(0.0f), w1(0.0f)
-			, x2(0.0f), y2(0.0f), z2(0.0f), w2(0.0f)
-			, x3(0.0f), y3(0.0f), z3(0.0f), w3(0.0f)
-		{}
+		{
+			data[1] = data[2] = data[3] = 
+			data[4] = data[6] = data[7] =
+			data[8] = data[9] = data[11] = 0.0f;
+			
+			data[0] = data[5] = data[10] = 1.0f;
+		}
 
-		Matrix4(float value)
-			: x0(value), y0(value), z0(value), w0(value)
-			, x1(value), y1(value), z1(value), w1(value)
-			, x2(value), y2(value), z2(value), w2(value)
-			, x3(value), y3(value), z3(value), w3(value)
-		{}
 
-		Matrix4(float xzero, float yzero, float zzero, float wzero,
-				float xone, float yone, float zone, float wone,
-				float xtwo, float ytwo, float ztwo, float wtwo,
-				float xthree, float ythree, float zthree, float wthree)
-				: x0(xzero), y0(yzero), z0(zzero), w0(wzero)
-				, x1(xone), y1(yone), z1(zone), w1(wone)
-				, x2(xtwo), y2(ytwo), z2(ztwo), w2(wtwo)
-				, x3(xthree), y3(ythree), z3(zthree), w3(wthree)
-		{}
+		inline void setDiagonal(float a, float b, float c)
+		{
+			data[0] = a;
+			data[5] = b;
+			data[10] = c;
+		}
+
+		Vector3 operator*(const Vector3 &rhs) const;
+		Matrix4 operator*(const Matrix4 &rhs) const;
+
+		Vector3 transform(const Vector3 &vector) const;
+		Vector3 transformInverse(const Vector3 &vector) const;
+		Vector3 transformDirection(const Vector3 &direction) const;
+		Vector3 transformInverseDirection(const Vector3 &direction) const;
+
+		float getDeterminant() const;
 
 		Matrix4 getTranslationWithRotation(Matrix3 &base, Vector3 &trans);
 
-		inline glm::mat4 GLM() { return glm::mat4(	x0, y0, z0, w0,
-													x1, y1, z1, w1,
-													x2, y2, z2, w2,
-													x3, y3, z3, w3); }
+		Vector3 getRowVector(int i) const;
+		Vector3 getColumnVector(int i) const;
+		
+		glm::mat4 GLM();
 
 	};
 }

@@ -6,6 +6,7 @@
 
 namespace Physics
 {
+	class Vector4;
 
 	class Vector2
 	{
@@ -43,9 +44,6 @@ namespace Physics
 
 		inline glm::vec2 GLM() { return glm::vec2(this->x, this->y); }
 	};
-
-
-	class Vector4;
 
 	class Vector3
 	{
@@ -104,6 +102,7 @@ namespace Physics
 			, z(orig.z)
 		{}
 
+		void clear();
 		void invert();
 		Vector3 getInverted();
 		float magnitude();
@@ -114,6 +113,7 @@ namespace Physics
 
 		float dot(const Vector3 &second);
 		Vector3 cross(const Vector3 &second);
+		Vector3 componentProduct(const Vector3 &second);
 
 		const Vector4 ConvertToHomogeneous();
 
@@ -142,6 +142,7 @@ namespace Physics
 		const std::string ToString();
 
 		static Vector3 cross(const Vector3 &first, const Vector3 &second);
+		static Vector3 componentProduct(const Vector3 &first, const Vector3 &second);
 		static float dot(const Vector3 &first, const Vector3 &second);
 		static float getDistance(const Vector3 &first, const Vector3 &second);
 
