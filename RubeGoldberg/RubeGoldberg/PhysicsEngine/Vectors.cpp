@@ -80,7 +80,7 @@ float Vector3::magnitude()
 	return sqrt(squareX + squareY + squareZ);
 }
 
-float Vector3::squareMagnitude()
+float Vector3::squareMagnitude() const
 {
 	float squareX = this->x * this->x;
 	float squareY = this->y * this->y;
@@ -147,12 +147,19 @@ Vector3 Vector3::componentProduct(const Vector3 &second)
 	return Vector3(this->x * second.x, this->y * second.y, this->z * second.z);
 }
 
+void Vector3::setComponentProduct(const Vector3 &vector)
+{
+	this->x *= vector.x;
+	this->y *= vector.y;
+	this->z *= vector.z;
+}
+
 const Vector4 Vector3::ConvertToHomogeneous()
 {
 	return Vector4(this->x, this->y, this->z, 1.0f);
 }
 
-const Vector3 Vector3::operator+(const Vector3 &rhs)
+const Vector3 Vector3::operator+(const Vector3 &rhs) const
 {
 	Vector3 result = Vector3(*this);
 	result.x += rhs.x;
@@ -161,7 +168,7 @@ const Vector3 Vector3::operator+(const Vector3 &rhs)
 	return result;
 }
 
-const Vector3 Vector3::operator+(const int modifier)
+const Vector3 Vector3::operator+(const int modifier) const
 {
 	Vector3 result = Vector3(*this);
 	result.x += modifier;
@@ -170,7 +177,7 @@ const Vector3 Vector3::operator+(const int modifier)
 	return result;
 }
 
-const Vector3 Vector3::operator+(const float modifier)
+const Vector3 Vector3::operator+(const float modifier) const
 {
 	Vector3 result = Vector3(*this);
 	result.x += modifier;
@@ -246,7 +253,7 @@ const Vector3 Vector3::operator=(const Vector3 &rhs)
 	return *this;
 }
 
-Vector3 Vector3::operator*(const float rhs)
+Vector3 Vector3::operator*(const float rhs) const
 {
 	Vector3 result = Vector3(*this);
 	result.x *= rhs;
@@ -278,6 +285,20 @@ Vector3 Vector3::operator/=(const float rhs)
 	this->y /= rhs;
 	this->z /= rhs;
 	return *this;
+}
+
+float Vector3::operator[](unsigned i) const
+{
+	if (i == 0) return x;
+	if (i == 1) return y;
+	return z;
+}
+
+float& Vector3::operator[](unsigned i)
+{
+	if (i == 0) return x;
+	if (i == 1) return y;
+	return z;
 }
 
 const std::string Vector3::ToString()

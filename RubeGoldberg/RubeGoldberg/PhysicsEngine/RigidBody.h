@@ -39,6 +39,10 @@ namespace Physics{
 		void integrate(float duration);
 		void clearAccumulators();
 
+		void addVelocity(const Vector3 &deltaVel) { velocity += deltaVel; }
+		void addRotation(const Vector3 &deltaRot) { rotation += deltaRot; }
+		void addForce(const Vector3 &force) { forceAccum += force; }
+
 		Vector3 convertPointToLocalSpace(const Vector3 &point) const;
 		Vector3 convertPointToWorldSpace(const Vector3 &point) const;
 		Vector3 convertDirectionToLocalSpace(const Vector3 &direction) const;

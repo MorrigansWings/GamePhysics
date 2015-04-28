@@ -34,7 +34,8 @@
     <ClCompile Include="GraphicsEngine\ShaderManager.cpp" />
     <ClCompile Include="GraphicsEngine\Skybox.cpp" />
     <ClCompile Include="GraphicsEngine\Texture.cpp" />
-    <ClCompile Include="PhysicsEngine\Collision\CollisionPrimitive.cpp" />
+    <ClCompile Include="PhysicsEngine\Collision\CollisionDetection_Narrow.cpp" />
+    <ClCompile Include="PhysicsEngine\Collision\RigidBodyContact.cpp" />
     <ClCompile Include="PhysicsEngine\Matrices.cpp" />
     <ClCompile Include="PhysicsEngine\Quaternion.cpp" />
     <ClCompile Include="PhysicsEngine\RigidBody.cpp" />
@@ -78,7 +79,9 @@
     <ClInclude Include="GraphicsEngine\ShaderManager.h" />
     <ClInclude Include="GraphicsEngine\Skybox.h" />
     <ClInclude Include="GraphicsEngine\Texture.h" />
+    <ClInclude Include="PhysicsEngine\Collision\CollisionDetection_Narrow.h" />
     <ClInclude Include="PhysicsEngine\Collision\CollisionPrimitive.h" />
+    <ClInclude Include="PhysicsEngine\Collision\RigidBodyContact.h" />
     <ClInclude Include="PhysicsEngine\Matrices.h" />
     <ClInclude Include="PhysicsEngine\Quaternion.h" />
     <ClInclude Include="PhysicsEngine\RigidBody.h" />

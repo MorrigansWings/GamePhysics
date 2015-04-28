@@ -180,7 +180,10 @@
     <ClCompile Include="PhysicsEngine\RigidBody.cpp">
       <Filter>Project\PhysicsEngine</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsEngine\Collision\CollisionPrimitive.cpp">
+    <ClCompile Include="PhysicsEngine\Collision\RigidBodyContact.cpp">
+      <Filter>Project\PhysicsEngine\Collision\RigidBody Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Collision\CollisionDetection_Narrow.cpp">
       <Filter>Project\PhysicsEngine\Collision\RigidBody Collision</Filter>
     </ClCompile>
   </ItemGroup>
@@ -327,6 +330,12 @@
       <Filter>Project\PhysicsEngine</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsEngine\Collision\CollisionPrimitive.h">
+      <Filter>Project\PhysicsEngine\Collision\RigidBody Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\RigidBodyContact.h">
+      <Filter>Project\PhysicsEngine\Collision\RigidBody Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\CollisionDetection_Narrow.h">
       <Filter>Project\PhysicsEngine\Collision\RigidBody Collision</Filter>
     </ClInclude>
   </ItemGroup>

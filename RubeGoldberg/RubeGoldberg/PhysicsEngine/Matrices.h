@@ -51,7 +51,11 @@ namespace Physics
 													data[6],	data[7],	data[8] ); }
 		Matrix3 operator*(float value);
 		Vector3 operator*(const Vector3 &rhs);
+		void operator*=(const Matrix3 &rhs);
 
+		void operator+=(const Matrix3 &rhs);
+
+		void setSkewSymmetric(const Vector3 vec);
 		void setDiagonals(float a, float b, float c) { setInertiaTensorCoefficients(a, b, c); }
 		void setComponents(const Vector3 &one, const Vector3 &two, const Vector3 &three);
 		void setInertiaTensorCoefficients(float ix, float iy, float iz, float ixy = 0.0f, float ixz = 0.0f, float iyz = 0.0f);
@@ -107,7 +111,7 @@ namespace Physics
 
 		Vector3 getRowVector(int i) const;
 		Vector3 getColumnVector(int i) const;
-		
+
 		glm::mat4 GLM();
 
 	};

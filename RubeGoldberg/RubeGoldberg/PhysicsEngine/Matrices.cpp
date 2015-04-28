@@ -15,6 +15,52 @@ Vector3 Matrix3::operator*(const Vector3 &rhs)
 					rhs.x * data[6] + rhs.y * data[7] + rhs.z * data[8] );
 }
 
+void Matrix3::operator*=(const Matrix3 &rhs)
+{
+	float t1;
+	float t2;
+	float t3;
+
+	t1 = this->data[0] * rhs.data[0] + this->data[1] * rhs.data[3] + this->data[2] * rhs.data[6];
+	t2 = this->data[0] * rhs.data[1] + this->data[1] * rhs.data[4] + this->data[2] * rhs.data[7];
+	t3 = this->data[0] * rhs.data[2] + this->data[1] * rhs.data[5] + this->data[2] * rhs.data[8];
+	this->data[0] = t1;
+	this->data[1] = t2;
+	this->data[2] = t3;
+
+	t1 = this->data[3] * rhs.data[0] + this->data[4] * rhs.data[3] + this->data[5] * rhs.data[6];
+	t2 = this->data[3] * rhs.data[1] + this->data[4] * rhs.data[4] + this->data[5] * rhs.data[7];
+	t3 = this->data[3] * rhs.data[2] + this->data[4] * rhs.data[5] + this->data[5] * rhs.data[8];
+	this->data[3] = t1;
+	this->data[4] = t2;
+	this->data[5] = t3;
+
+	t1 = this->data[6] * rhs.data[0] + this->data[7] * rhs.data[3] + this->data[8] * rhs.data[6];
+	t2 = this->data[6] * rhs.data[1] + this->data[7] * rhs.data[4] + this->data[8] * rhs.data[7];
+	t3 = this->data[6] * rhs.data[2] + this->data[7] * rhs.data[5] + this->data[8] * rhs.data[8];
+	this->data[6] = t1;
+	this->data[7] = t2;
+	this->data[8] = t3;
+}
+
+void Matrix3::operator+=(const Matrix3 &rhs)
+{
+	this->data[0] += rhs.data[0]; this->data[1] += rhs.data[1]; this->data[2] += rhs.data[2];
+	this->data[3] += rhs.data[3]; this->data[4] += rhs.data[4]; this->data[5] += rhs.data[5];
+	this->data[6] += rhs.data[6]; this->data[7] += rhs.data[7]; this->data[8] += rhs.data[8];
+}
+
+void Matrix3::setSkewSymmetric(const Vector3 vec)
+{
+	data[0] = data[4] = data[8] = 0;
+	data[1] = -vec.z;
+	data[2] = vec.y;
+	data[3] = vec.z;
+	data[5] = -vec.x;
+	data[6] = -vec.y;
+	data[7] = vec.x;
+}
+
 void Matrix3::setComponents(const Vector3 &one, const Vector3 &two, const Vector3 &three)
 {
 	data[0] = one.x;

@@ -106,7 +106,7 @@ namespace Physics
 		void invert();
 		Vector3 getInverted();
 		float magnitude();
-		float squareMagnitude();
+		float squareMagnitude() const;
 		Vector3 normalize();
 		Vector3 getNormalized();
 		Vector3 addScaledVector(const Vector3 &velocity, float t);
@@ -114,12 +114,13 @@ namespace Physics
 		float dot(const Vector3 &second);
 		Vector3 cross(const Vector3 &second);
 		Vector3 componentProduct(const Vector3 &second);
+		void setComponentProduct(const Vector3 &second);
 
 		const Vector4 ConvertToHomogeneous();
 
-		const Vector3 operator+(const int modifier);
-		const Vector3 operator+(const float modifier);
-		const Vector3 operator+(const Vector3 &rhs);
+		const Vector3 operator+(const int modifier) const;
+		const Vector3 operator+(const float modifier) const;
+		const Vector3 operator+(const Vector3 &rhs) const;
 
 		const Vector3 operator+=(const float modifier);
 		const Vector3 operator+=(const Vector3 &rhs);
@@ -133,11 +134,14 @@ namespace Physics
 
 		const Vector3 operator=(const Vector3 &rhs);
 
-		Vector3 operator*(const float rhs);
+		Vector3 operator*(const float rhs) const;
 		Vector3 operator*=(const float rhs);
 
 		Vector3 operator/(const float rhs);
 		Vector3 operator/=(const float rhs);
+
+		float operator[](unsigned i) const;
+		float& operator[](unsigned i);
 
 		const std::string ToString();
 
