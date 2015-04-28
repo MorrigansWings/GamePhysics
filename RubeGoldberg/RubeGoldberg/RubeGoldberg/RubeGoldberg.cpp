@@ -32,65 +32,6 @@ void RubeGoldberg::setup(int framerate, float groundHeight, float groundX, float
 
 	// Set line width and display test lines
 	mp_GraphicsManager->setLineThickness(5.0f);
-/*	GraphicsManager::GetInstance()->createLine("testOne", vec3(0.0f), vec3(0.0f, 1.0f, 0.0f));
-	GraphicsManager::GetInstance()->createLine("testTwo", vec3(0.0f), vec3(1.0f, 1.0f, 1.0f));
-	GraphicsManager::GetInstance()->createLine("testThree", vec3(0.0f), vec3(-1.0f, 1.0f, 1.0f));
-	GraphicsManager::GetInstance()->createLine("testFour", vec3(0.0f), vec3(1.0f, 1.0f, -1.0f));
-	GraphicsManager::GetInstance()->createLine("testFive", vec3(0.0f), vec3(-1.0f, 1.0f, -1.0f));
-*/	
-
-	// Graphics test - cube
-/*	string m_testCube = GraphicsManager::GetInstance()->createCube("cubeTest", 
-											Physics::Vector3(10.0f, 0.5f, 10.0f).GLM(),
-											Physics::Vector3(0.2f, 0.2f, 0.2f).GLM());
-	
-	// Physics test - gravity
-	GameObject* m_testGravity = new GameObject();
-	string m_gravityParticle = mp_PhysicsManager->createParticle("gravityParticle", 
-											Physics::Vector3(-4.0f, 3.0f, 0.0f));
-	string m_gravityEntity = mp_GraphicsManager->createCube("gravityCube", 
-											Physics::Vector3(-4.0f, 3.0f, 0.0f).GLM(),
-											Physics::Vector3(0.2f, 0.2f, 0.2f).GLM(),
-											Physics::Vector4(0.0f, 0.7f, 0.0f, 1.0f).GLM());
-	m_testGravity->setGraphicsManager(mp_GraphicsManager);
-	m_testGravity->setPhysicsManager(mp_PhysicsManager);
-	m_testGravity->init("gravityObject", m_gravityParticle, m_gravityEntity);
-	m_testGravity->applyGravity();
-	m_gameObjects.add(m_testGravity->getName(), m_testGravity);
-
-	// Physics Test - Cable ==================================================================
-	GameObject* m_testCableOne = new GameObject();
-	string m_cableParticleOne = mp_PhysicsManager->createParticle("cableParticleOne",
-											Physics::Vector3(-1.0f, 3.0f, 0.0f));
-	string m_cableEntityOne = mp_GraphicsManager->createCube("cableCubeOne",
-											Physics::Vector3(-1.0f, 3.0f, 0.0f).GLM(),
-											Physics::Vector3(0.2f, 0.2f, 0.2f).GLM(),
-											Physics::Vector4(0.0f, 0.7f, 0.7f, 1.0f).GLM());
-	m_testCableOne->setGraphicsManager(mp_GraphicsManager);
-	m_testCableOne->setPhysicsManager(mp_PhysicsManager);
-	m_testCableOne->init("cableObjectOne", m_cableParticleOne, m_cableEntityOne);
-	m_testCableOne->applyGravity();
-
-	GameObject* m_testCableTwo = new GameObject();
-	string m_cableParticleTwo = mp_PhysicsManager->createParticle("cableParticleTwo",
-											Physics::Vector3(1.0f, 2.0f, 0.0f));
-	string m_cableEntityTwo = mp_GraphicsManager->createCube("cableCubeTwo",
-											Physics::Vector3(1.0f, 3.0f, 0.0f).GLM(),
-											Physics::Vector3(0.2f, 0.2f, 0.2f).GLM(),
-											Physics::Vector4(0.0f, 0.7f, 0.7f, 1.0f).GLM());
-	m_testCableTwo->setGraphicsManager(mp_GraphicsManager);
-	m_testCableTwo->setPhysicsManager(mp_PhysicsManager);
-	m_testCableTwo->init("cableObjectTwo", m_cableParticleTwo, m_cableEntityTwo);
-	m_testCableTwo->applyGravity();
-	//m_gameObjects.add(m_testCableTwo->getName(), m_testCableTwo);
-
-	AggregateGameObject* aggCable = new AggregateGameObject();
-	aggCable->setGraphicsManager(mp_GraphicsManager);
-	aggCable->setPhysicsManager(mp_PhysicsManager);
-	aggCable->addGameObject("left", m_testCableOne);
-	aggCable->addGameObject("right", m_testCableTwo);
-	aggCable->createConnection(m_testCableOne, m_testCableTwo, ROD);
-	m_gameObjects.add("AggCableTest", aggCable);*/
 
 	// TEST AGG_CUBE
 	createAggCube("TEST_AGG_CUBE", Physics::Vector3(3.0f, 3.0f, 3.0f));
@@ -100,18 +41,6 @@ void RubeGoldberg::setup(int framerate, float groundHeight, float groundX, float
 
 	// TEST AGG_DIAMOND
 	createAggDiamond("TEST_AGG_DIAMOND", Physics::Vector3(0.0f, 3.0f, 3.0f));
-
-	// Draw connections
-	//for (auto iter = m_aggregateObjects.itBegin(); iter != m_aggregateObjects.itEnd(); ++iter)
-	//{
-	//	std::cout << "RubeGoldberg::update: Attempting to call drawLines in " << iter->first << std::endl;
-	//	//iter->second->drawLines();
-	//}
-
-
-	// Clear lines
-	//for (auto iter = m_aggregateObjects.itBegin(); iter != m_aggregateObjects.itEnd(); ++iter)
-	//	iter->second->clearLines();
 
 }
 

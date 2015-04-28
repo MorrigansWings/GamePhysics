@@ -338,6 +338,9 @@
     <ClInclude Include="PhysicsEngine\Collision\CollisionDetection_Narrow.h">
       <Filter>Project\PhysicsEngine\Collision\RigidBody Collision</Filter>
     </ClInclude>
+    <ClInclude Include="RubeGoldberg\RigidBodyObject.h">
+      <Filter>Project\RubeGoldberg\GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\flat.fs.glsl">

@@ -88,6 +88,7 @@
     <ClInclude Include="RubeGoldberg\AggregateGameObject.h" />
     <ClInclude Include="RubeGoldberg\GameObjectConnection.h" />
     <ClInclude Include="RubeGoldberg\Object.h" />
+    <ClInclude Include="RubeGoldberg\RigidBodyObject.h" />
     <ClInclude Include="RubeGoldberg\RubeGoldberg.h" />
     <ClInclude Include="RubeGoldberg\GameObject.h" />
     <ClInclude Include="PhysicsEngine\Collision\CableParticleConnection.h" />
