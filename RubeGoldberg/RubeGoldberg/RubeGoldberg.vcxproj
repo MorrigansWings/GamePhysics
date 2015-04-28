@@ -42,6 +42,7 @@
     <ClCompile Include="RubeGoldberg\AggregateGameObject.cpp" />
     <ClCompile Include="RubeGoldberg\GameObject.cpp" />
     <ClCompile Include="RubeGoldberg\GameObjectConnection.cpp" />
+    <ClCompile Include="RubeGoldberg\RigidBodyObject.cpp" />
     <ClCompile Include="RubeGoldberg\RubeGoldberg.cpp" />
     <ClCompile Include="PhysicsEngine\Collision\CableParticleConnection.cpp" />
     <ClCompile Include="PhysicsEngine\Collision\GroundContactGenerator.cpp" />
@@ -82,6 +83,7 @@
     <ClInclude Include="PhysicsEngine\Collision\CollisionDetection_Narrow.h" />
     <ClInclude Include="PhysicsEngine\Collision\CollisionPrimitive.h" />
     <ClInclude Include="PhysicsEngine\Collision\RigidBodyContact.h" />
+    <ClInclude Include="PhysicsEngine\ForceGenerators\RigidBodyForceGenerator.h" />
     <ClInclude Include="PhysicsEngine\Matrices.h" />
     <ClInclude Include="PhysicsEngine\Quaternion.h" />
     <ClInclude Include="PhysicsEngine\RigidBody.h" />

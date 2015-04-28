@@ -71,8 +71,6 @@ namespace Physics
 		Matrix3 getInverse();
 
 		void setInverse(const Matrix3 &mat);
-
-
 	};
 
 	class Matrix4
@@ -107,10 +105,11 @@ namespace Physics
 
 		float getDeterminant() const;
 
-		Matrix4 getTranslationWithRotation(Matrix3 &base, Vector3 &trans);
-
 		Vector3 getRowVector(int i) const;
 		Vector3 getColumnVector(int i) const;
+
+		static Matrix4 getRotationMatrix(Matrix3 &base);
+		static Matrix4 getTranslationWithRotation(Matrix3 &base, Vector3 &trans);
 
 		glm::mat4 GLM();
 

@@ -43,15 +43,13 @@ Quaternion Quaternion::getNormalized()
 	return result;
 }
 
-Quaternion Quaternion::normalize()
+void Quaternion::normalize()
 {
 	float length = this->getMagnitude();
 	this->w = this->w / length;
 	this->x = this->x / length;
 	this->y = this->y / length;
 	this->z = this->z / length;
-
-	return *this;
 }
 
 Quaternion Quaternion::getInverse()
@@ -65,24 +63,18 @@ Quaternion Quaternion::getInverse()
 	return result;
 }
 
-Quaternion Quaternion::invert()
+void Quaternion::invert()
 {
 	float length = this->getMagnitude();
 	this->x = -this->x / (length * length);
 	this->y = -this->y / (length * length);
 	this->z = -this->z / (length * length);
-
-	return *this;
 }
 
-Quaternion Quaternion::rotate(Vector3 rotation)
+void Quaternion::rotate(Vector3 rotation)
 {
-	Quaternion rot = Quaternion(0.0f, rotation.x, rotation.y, rotation.z);
-}
-
-Quaternion Quaternion::rotate(Quaternion rotation)
-{
-
+	Quaternion q(0, rotation.x, rotation.y, rotation.z);
+	(*this) *= q;
 }
 
 void Quaternion::addScaledVector(const Vector3 &vect, float scale)

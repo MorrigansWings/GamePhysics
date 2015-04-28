@@ -14,7 +14,7 @@ namespace Physics
 		float w, x, y, z;
 
 		Quaternion()
-			: w(0.0f)
+			: w(1.0f)
 			, x(0.0f)
 			, y(0.0f)
 			, z(0.0f)
@@ -27,7 +27,7 @@ namespace Physics
 			, z(value)
 		{}
 
-		Quaternion(float inX, float inY, float inZ, float inW)
+		Quaternion(float inW, float inX, float inY, float inZ)
 			: w(inW)
 			, x(inX)
 			, y(inY)
@@ -56,14 +56,13 @@ namespace Physics
 		float getMagnitude();
 
 		Quaternion getNormalized();
-		Quaternion normalize();
+		void normalize();
 
 		Quaternion getInverse();
-		Quaternion invert();
+		void invert();
 
-		Quaternion rotate(Vector3 rotation);
-		Quaternion rotate(Quaternion rotation);
-
+		void rotate(Vector3 rotation);
+		
 		void addScaledVector(const Vector3 &vect, float scale);
 
 		Matrix3 ToMatrix();

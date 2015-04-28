@@ -7,6 +7,7 @@
 #include "Object.h"
 #include "GameObject.h"
 #include "AggregateGameObject.h"
+#include "RigidBodyObject.h"
 
 class RubeGoldberg
 {
@@ -23,6 +24,7 @@ public:
 	void drawConnections();
 	void clearConnections();
 
+	// AGGREGATE OBJECT CONSTRUCTORS ============================================
 	string createAggTetrahedron(string name);
 	string createAggTetrahedron(string name, Physics::Vector3 position);
 	string createAggTetrahedron(string name, Physics::Vector3 position, Physics::Vector3 dimensions);
@@ -38,6 +40,20 @@ public:
 	string createAggDiamond(string name, Physics::Vector3 position, Physics::Vector3 dimensions);
 	string createAggDiamond(string name, Physics::Vector3 position, Physics::Vector3 dimensions, Physics::Vector4 color);
 
+	// RIGID BODY CONSTRUCTORS ================================================
+	string createRigidSphere(string name);
+	string createRigidSphere(string name, Physics::Vector3 position);
+	string createRigidSphere(string name, Physics::Vector3 position, float radius);
+	string createRigidSphere(string name, Physics::Vector3 position, float radius, Physics::Vector4 color);
+
+	string createRigidBox(string name);
+	string createRigidBox(string name, Physics::Vector3 position);
+	string createRigidBox(string name, Physics::Vector3 position, Physics::Vector3 dimensions);
+	string createRigidBox(string name, Physics::Vector3 position, Physics::Vector3 dimensions, Physics::Vector4 color);
+
+
+
+
 
 	inline GLFWwindow* getGLFWwindow() { return GraphicsManager::GetInstance()->getGLFWWindow(); }
 
@@ -49,13 +65,9 @@ private:
 
 	Map<string, AggregateGameObject*> m_aggregateObjects;
 
-	//GameObject* m_testObject;
-
-	//Physics::Vector3 m_testPosition;
+	Map<string, RigidBodyObject*> m_rigidBodyObjects;
 
 	string	m_groundPlane;
-//			m_testCube,
-//			m_testParticle;
 
 	double	m_LastFrameTime;
 

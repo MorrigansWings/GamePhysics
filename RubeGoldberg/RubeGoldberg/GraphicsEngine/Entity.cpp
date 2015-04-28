@@ -29,9 +29,16 @@ void Entity::preRender( const RenderData* pData )
 	mModel = glm::translate(mModel, vec3(m_Pos.x, m_Pos.y, m_Pos.z));
 	mModel = glm::scale(mModel, vec3(m_Scale.x, m_Scale.y, m_Scale.z));
 
-	mModel = glm::rotate(mModel, m_Rot.x, vec3(1.0f, 0.0f, 0.0f));
-	mModel = glm::rotate(mModel, m_Rot.y, vec3(0.0f, 1.0f, 0.0f));
-	mModel = glm::rotate(mModel, m_Rot.z, vec3(0.0f, 0.0f, 1.0f));
+	if (m_useRotationMatrix)
+	{
+		mModel = mModel * m_RotationMatrix;
+	}
+	else
+	{
+		mModel = glm::rotate(mModel, m_Rot.x, vec3(1.0f, 0.0f, 0.0f));
+		mModel = glm::rotate(mModel, m_Rot.y, vec3(0.0f, 1.0f, 0.0f));
+		mModel = glm::rotate(mModel, m_Rot.z, vec3(0.0f, 0.0f, 1.0f));
+	}
 
 	mModelView = pData->View * mModel;
 	mModelViewProj = pData->ViewProj * mModel;

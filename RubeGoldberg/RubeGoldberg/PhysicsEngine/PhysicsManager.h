@@ -6,6 +6,7 @@
 #include <Arc/Map.h>
 
 #include "Particle.h"
+#include "RigidBody.h"
 
 class ParticleContact;
 class ParticleForceGenerator;
@@ -51,6 +52,16 @@ public:
 	bool hasParticle(string &name) { return m_particleSet.containsKey(name); }
 	Arc::ArrayList<Particle*> getParticles() { return m_particleSet.getValues(); }
 
+	string createRigidBody(string &name);
+	string createRigidBody(string &name, Physics::Vector3 pos);
+	string createRigidBody(string &name, Physics::Vector3 pos, Physics::Quaternion orient);
+
+	RigidBody* getRigidBody(string name) { return hasRigidBody(name) ? m_rigidBodySet[name] : nullptr; }
+	Physics::Vector3 getRigidBodyPosition(string &name) { return hasRigidBody(name) ? m_rigidBodySet[name]->getPosition() : Physics::Vector3(0); }
+	Physics::Quaternion getRigidBodyOrientation(string &name) { return hasRigidBody(name) ? m_rigidBodySet[name]->getOrientation() : Physics::Quaternion(); }
+	bool hasRigidBody(string &name) { return m_rigidBodySet.containsKey(name); }
+	Arc::ArrayList<RigidBody*> getRigidBodies() { return m_rigidBodySet.getValues(); }
+
 	bool applyGravity(string &name);
 
 	void addContact(ParticleContact* cont) { m_contacts.add(cont); }
@@ -66,6 +77,10 @@ private:
 	// Particle Set and Registry
 	Arc::Map<string, Particle*> m_particleSet;
 	Arc::Map<string, ParticleForceGenerator*> m_particleForceRegistry;
+
+	// Rigid Body Set and Registry
+	Arc::Map<string, RigidBody*> m_rigidBodySet;
+	Arc::Map<string, RigidBodyForceGenerator*> m_rigidBodyForceRegistry;
 
 	// Force Generators
 	//typedef std::vector<ForceRegistration> Registry;

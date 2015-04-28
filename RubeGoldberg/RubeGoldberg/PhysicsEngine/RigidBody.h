@@ -5,33 +5,36 @@
 #include "Matrices.h"
 #include "Quaternion.h"
 
-namespace Physics{
-
+namespace Physics
+{
 	class RigidBody
 	{
 	public:
 		RigidBody()
-			: position(Physics::Vector3(0.0f))
-			, velocity(Physics::Vector3(0.0f))
-			, acceleration(Physics::Vector3(0.0f))
+			: orientation(Quaternion())
+			, inverseInertiaTensor(Matrix3())
+			, position(Vector3(0.0f))
+			, velocity(Vector3(0.0f))
+			, rotation(Vector3(0.0f))
+			, angularVelocity(Vector3(0.0f))
+			, acceleration(Vector3(0.0f))
 			, mass(1.0f)
 			, inverseMass((mass > 0) ? (1.0f / mass) : 0.0f) // If mass is 0, set inverse mass to 0
-			// SET DEFAULTS FOR ORIENTATION, ANGULAR VELOCITY AND INVERSE INERTIA TENSOR!!!
+			, linearDamping(0.999f)
+			, angularDamping(0.999f)
 		{}
 
-		RigidBody(Physics::Vector3 pos, Physics::Vector3 vel, Physics::Vector3 acc,
-			float damp, float ma,
-			Quaternion orient, Vector3 aVel, Matrix3 invTensor)
-			: position(pos)
-			, velocity(vel)
-			//, acceleration(acc)
-			//, damping(damp)
-			, mass(ma)
-			, inverseMass((mass > 0) ? (1.0f / mass) : 0.0f)
-			, orientation(orient)
-			, angularVelocity(aVel)
-			, inverseInertiaTensor(invTensor)
-		{}
+		//RigidBody(Vector3 pos, Vector3 vel, Vector3 acc,
+		//			float ma, Quaternion orient, Vector3 aVel, Matrix3 invTensor)
+		//	: position(pos)
+		//	, velocity(vel)
+		//	, acceleration(acc)
+		//	, mass(ma)
+		//	, inverseMass((mass > 0) ? (1.0f / mass) : 0.0f)
+		//	, orientation(orient)
+		//	, angularVelocity(aVel)
+		//	, inverseInertiaTensor(invTensor)
+		//{}
 
 		~RigidBody(){};
 

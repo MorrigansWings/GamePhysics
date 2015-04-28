@@ -205,6 +205,41 @@ string PhysicsManager::createParticle(string name, Vector3 pos)
 	else return "";
 }
 
+string PhysicsManager::createRigidBody(string &name)
+{
+	if (!m_rigidBodySet.containsKey(name))
+	{
+		m_rigidBodySet.add(name, new RigidBody());
+		return name;
+	}
+	else return "";
+}
+
+string PhysicsManager::createRigidBody(string &name, Physics::Vector3 pos)
+{
+	if (!m_rigidBodySet.containsKey(name))
+	{
+		RigidBody* newbody = new RigidBody();
+		newbody->setPosition(pos);
+		m_rigidBodySet.add(name, newbody);
+		return name;
+	}
+	else return "";
+}
+
+string PhysicsManager::createRigidBody(string &name, Physics::Vector3 pos, Physics::Quaternion orient)
+{
+	if (!m_rigidBodySet.containsKey(name))
+	{
+		RigidBody* newbody = new RigidBody();
+		newbody->setPosition(pos);
+		newbody->setOrientation(orient);
+		m_rigidBodySet.add(name, newbody);
+		return name;
+	}
+	else return "";
+}
+
 bool PhysicsManager::applyGravity(string &name)
 {
 	if (m_particleSet.containsKey(name) && m_particleForceRegistry.containsKey("gravity"))

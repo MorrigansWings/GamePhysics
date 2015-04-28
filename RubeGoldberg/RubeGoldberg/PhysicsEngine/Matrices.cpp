@@ -4,8 +4,10 @@ using namespace Physics;
 
 Matrix3 Matrix3::operator*(float value)
 {
+	Matrix3 result;
 	for (int i = 0; i < 9; ++i)
-		data[i] *= value;
+		result.data[i] *= value;
+	return result;
 }
 
 Vector3 Matrix3::operator*(const Vector3 &rhs)
@@ -75,7 +77,7 @@ void Matrix3::setComponents(const Vector3 &one, const Vector3 &two, const Vector
 }
 
 
-void Matrix3::setInertiaTensorCoefficients(float ix, float iy, float iz, float ixy = 0.0f, float ixz = 0.0f, float iyz = 0.0f)
+void Matrix3::setInertiaTensorCoefficients(float ix, float iy, float iz, float ixy, float ixz, float iyz)
 {
 	data[0] = ix;
 	data[1] = data[3] = -ixy;
@@ -130,7 +132,7 @@ Matrix3 Matrix3::getInverse()
 {
 	Matrix3 result;
 	float det = getDeterminant();
-	if (det == 0) return;
+	if (det == 0) return Matrix3();
 	
 	det = (1.0f) / det;
 
@@ -256,28 +258,6 @@ Vector3 Matrix4::transformInverseDirection(const Vector3 &vector) const
 					vector.x * data[2] + vector.y * data[6] + vector.z * data[10] );
 }
 
-Matrix4 Matrix4::getTranslationWithRotation(Matrix3 &base, Vector3 &trans)
-{
-	Matrix4 result;
-
-	result.data[0] = base.data[0];
-	result.data[1] = base.data[1];
-	result.data[2] = base.data[2];
-	result.data[3] = trans.x;
-
-	result.data[4] = base.data[3];
-	result.data[5] = base.data[4];
-	result.data[6] = base.data[5];
-	result.data[7] = trans.y;
-
-	result.data[8] = base.data[6];
-	result.data[9] = base.data[7];
-	result.data[10] = base.data[8];
-	result.data[11] = trans.z;
-	
-	return result;
-}
-
 float Matrix4::getDeterminant() const
 {
 	return -data[8] * data[5] * data[2] +
@@ -304,4 +284,31 @@ glm::mat4 Matrix4::GLM()
 						data[4],	data[5],	data[6],	data[7],
 						data[8],	data[9],	data[10],	data[11],
 						0.0f,		0.0f,		0.0f,		1.0f );	
+}
+
+Matrix4 Matrix4::getRotationMatrix(Matrix3 &base)
+{
+	return getTranslationWithRotation(base, Vector3(0.0f));
+}
+
+Matrix4 Matrix4::getTranslationWithRotation(Matrix3 &base, Vector3 &trans)
+{
+	Matrix4 result;
+
+	result.data[0] = base.data[0];
+	result.data[1] = base.data[1];
+	result.data[2] = base.data[2];
+	result.data[3] = trans.x;
+
+	result.data[4] = base.data[3];
+	result.data[5] = base.data[4];
+	result.data[6] = base.data[5];
+	result.data[7] = trans.y;
+
+	result.data[8] = base.data[6];
+	result.data[9] = base.data[7];
+	result.data[10] = base.data[8];
+	result.data[11] = trans.z;
+
+	return result;
 }

@@ -94,6 +94,11 @@ public:
 	string createPlane(string name, vec2 dimensions, vec3 position);
 	string createPlane(string name, vec2 dimensions, vec3 position, vec4 color);
 
+	string createSphere(string name);
+	string createSphere(string name, float radius);
+	string createSphere(string name, float radius, vec3 position);
+	string createSphere(string name, float radius, vec3 position, vec4 color);
+
 	string createCube(string name);
 	string createCube(string name, vec3 position);
 	string createCube(string name, vec3 position, vec3 dimensions);
@@ -103,6 +108,7 @@ public:
 	void updateEntityPosition(string name, vec3 pos);
 	void updateEntityRotation(string name, vec3 rot);
 	void updateEntityScale(string name, vec3 scale);
+	void updateEntityOrientation(string name, mat4 orient);
 	//void updateEntityColor(string name, vec4 col);
 
 	void updateLineEnds(string name, vec3 endOne, vec3 endTwo);

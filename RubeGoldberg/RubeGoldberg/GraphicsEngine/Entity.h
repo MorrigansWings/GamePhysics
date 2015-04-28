@@ -24,6 +24,7 @@ public:
 		  m_Rot		(0.0f, 0.0f, 0.0f),
 		  m_Scale	(1.0f, 1.0f, 1.0f),
 		  m_Color(0.5f, 0.5f, 0.5f, 1.0f),
+		  m_RotationMatrix(mat4()), // set initial rotation  matrix to identity
 		  m_LightingAffected(true)
 	{ }
 
@@ -69,6 +70,11 @@ public:
 	inline vec3 getScale( void ) const { return m_Scale; }
 	inline void setScale( vec3 scale ) { m_Scale = scale; }
 
+	inline mat4 getRotationMatrix( void ) const { return m_RotationMatrix; }
+	inline void setRotationMatrix( mat4 rot ) { m_RotationMatrix = rot; }
+
+	inline void setUseRotationMatrix(bool value) { m_useRotationMatrix = value; }
+
 	inline bool isLightingAffected( void ) const { return m_LightingAffected; }
 	inline void setLightingAffected( bool lightingAffected ) { m_LightingAffected = lightingAffected; }
 	
@@ -82,9 +88,12 @@ protected:
 							m_Rot,
 							m_Scale;
 
-	bool					m_LightingAffected;
+	bool					m_LightingAffected,
+							m_useRotationMatrix;
 
 	vec4					m_Color;
+
+	mat4					m_RotationMatrix;
 
 };
 

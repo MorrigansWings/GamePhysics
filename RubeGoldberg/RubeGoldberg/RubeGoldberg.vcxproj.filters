@@ -186,6 +186,9 @@
     <ClCompile Include="PhysicsEngine\Collision\CollisionDetection_Narrow.cpp">
       <Filter>Project\PhysicsEngine\Collision\RigidBody Collision</Filter>
     </ClCompile>
+    <ClCompile Include="RubeGoldberg\RigidBodyObject.cpp">
+      <Filter>Project\RubeGoldberg\GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PhysicsEngine\PhysicsManager.h">
@@ -340,6 +343,9 @@
     </ClInclude>
     <ClInclude Include="RubeGoldberg\RigidBodyObject.h">
       <Filter>Project\RubeGoldberg\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\ForceGenerators\RigidBodyForceGenerator.h">
+      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

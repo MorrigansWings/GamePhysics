@@ -34,13 +34,16 @@ void RubeGoldberg::setup(int framerate, float groundHeight, float groundX, float
 	mp_GraphicsManager->setLineThickness(5.0f);
 
 	// TEST AGG_CUBE
-	createAggCube("TEST_AGG_CUBE", Physics::Vector3(3.0f, 3.0f, 3.0f));
+	//createAggCube("TEST_AGG_CUBE", Physics::Vector3(3.0f, 3.0f, 3.0f));
 
 	// TEST AGG_TETRAHEDRON
-	createAggTetrahedron("TEST_AGG_TETRA", Physics::Vector3(-3.0f, 3.0f, 3.0f));
+	//createAggTetrahedron("TEST_AGG_TETRA", Physics::Vector3(-3.0f, 3.0f, 3.0f));
 
 	// TEST AGG_DIAMOND
-	createAggDiamond("TEST_AGG_DIAMOND", Physics::Vector3(0.0f, 3.0f, 3.0f));
+	//createAggDiamond("TEST_AGG_DIAMOND", Physics::Vector3(0.0f, 3.0f, 3.0f));
+
+	// TEST RIGID BODY - SPHERE
+
 
 }
 
@@ -83,12 +86,12 @@ void RubeGoldberg::fixedUpdate(float fixedDeltaTime)
 	mp_PhysicsManager->update(fixedDeltaTime);
 
 	// Update objects in map
-	for (auto iter = m_gameObjects.itBegin(); iter != m_gameObjects.itEnd(); ++iter)
-		iter->second->update();
+	//for (auto iter = m_gameObjects.itBegin(); iter != m_gameObjects.itEnd(); ++iter)
+	//	iter->second->update();
 
 	// Update aggregate objects
-	for (auto iter = m_aggregateObjects.itBegin(); iter != m_aggregateObjects.itEnd(); ++iter)
-		iter->second->update();
+	//for (auto iter = m_aggregateObjects.itBegin(); iter != m_aggregateObjects.itEnd(); ++iter)
+	//	iter->second->update();
 }
 
 
@@ -406,4 +409,42 @@ string RubeGoldberg::createAggDiamond(string name, Physics::Vector3 position, Ph
 	m_aggregateObjects.add(name, aggObj);
 	return name;
 }
+
+// RIGID BODY SPHERE CONSTRUCTION =====================================
+string RubeGoldberg::createRigidSphere(string name)
+{
+	if (m_rigidBodyObjects.containsKey(name))
+		return "";
+	return createRigidSphere(name, Physics::Vector3(0.0f));
+}
+
+string RubeGoldberg::createRigidSphere(string name, Physics::Vector3 position)
+{
+	if (m_rigidBodyObjects.containsKey(name))
+		return "";
+	return createRigidSphere(name, position, 0.5f);
+}
+
+string RubeGoldberg::createRigidSphere(string name, Physics::Vector3 position, float radius)
+{
+	if (m_rigidBodyObjects.containsKey(name))
+		return "";
+	return createRigidSphere(name, position, radius, Physics::Vector4(0.5f));
+}
+
+string RubeGoldberg::createRigidSphere(string name, Physics::Vector3 position, float radius, Physics::Vector4 color)
+{
+	if (m_rigidBodyObjects.containsKey(name))
+		return "";
+
+	// create physics object
+
+	// create graphics object
+	
+
+
+}
+
+
+
 

@@ -210,7 +210,7 @@ void Contact::applyPositionChange(Vector3 linearChange[2], Vector3 angularChange
 	{
 		// The linear and angular movements required are in proportion to
 		// the two inverse inertias.
-		float sign = (i == 0) ? 1 : -1;
+		float sign = (i == 0.0f) ? 1.0f : -1.0f;
 		angularMove[i] = sign * penetration * (angularInertia[i] / totalInertia);
 		linearMove[i] = sign * penetration * (linearInertia[i] / totalInertia);
 
@@ -472,7 +472,7 @@ void ContactResolver::adjustVelocities(Contact *contacts, unsigned numContacts, 
 						// with the second body in a contact.
 						contacts[i].contactVelocity += 
 										contacts[i].contactToWorld.transformTranspose(deltaVel)
-										* (b ? -1 : 1);
+										* (b ? -1.0f : 1.0f);
 						contacts[i].calculateDesiredDeltaVelocity(duration);
 					}
 				}
