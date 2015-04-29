@@ -12,10 +12,10 @@ public:
 	void init(string name, string rigidBody, string entity);
 
 	virtual void update();
-	virtual void applyGravity(){ mp_PhysicsManager->applyGravity(m_rigidBodyName); }
+	virtual void applyGravity(){ mp_PhysicsManager->applyRigidBodyGravity(m_rigidBodyName); }
 
 	inline string getRigidBodyName() { return m_rigidBodyName; }
-	inline void setRigidBodyName(string name) { m_rigidBodyName = mp_PhysicsManager->hasParticle(name) ? name : m_rigidBodyName; }
+	inline void setRigidBodyName(string name) { m_rigidBodyName = mp_PhysicsManager->hasRigidBody(name) ? name : m_rigidBodyName; }
 
 	inline string getEntityName() { return m_entityName; }
 	inline void setEntityName(string name) { m_entityName = mp_GraphicsManager->hasEntity(name) ? name : m_entityName; }

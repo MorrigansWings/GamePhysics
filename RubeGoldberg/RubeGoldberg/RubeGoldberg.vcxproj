@@ -36,6 +36,7 @@
     <ClCompile Include="GraphicsEngine\Texture.cpp" />
     <ClCompile Include="PhysicsEngine\Collision\CollisionDetection_Narrow.cpp" />
     <ClCompile Include="PhysicsEngine\Collision\RigidBodyContact.cpp" />
+    <ClCompile Include="PhysicsEngine\ForceGenerators\RigidBodyGravityGenerator.cpp" />
     <ClCompile Include="PhysicsEngine\Matrices.cpp" />
     <ClCompile Include="PhysicsEngine\Quaternion.cpp" />
     <ClCompile Include="PhysicsEngine\RigidBody.cpp" />
@@ -84,6 +85,7 @@
     <ClInclude Include="PhysicsEngine\Collision\CollisionPrimitive.h" />
     <ClInclude Include="PhysicsEngine\Collision\RigidBodyContact.h" />
     <ClInclude Include="PhysicsEngine\ForceGenerators\RigidBodyForceGenerator.h" />
+    <ClInclude Include="PhysicsEngine\ForceGenerators\RigidBodyGravityGenerator.h" />
     <ClInclude Include="PhysicsEngine\Matrices.h" />
     <ClInclude Include="PhysicsEngine\Quaternion.h" />
     <ClInclude Include="PhysicsEngine\RigidBody.h" />

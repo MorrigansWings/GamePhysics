@@ -11,6 +11,9 @@
 #include "Collision/CableParticleConnection.h"
 #include "Collision/RodParticleConnection.h"
 
+#include "ForceGenerators/RigidBodyForceGenerator.h"
+#include "ForceGenerators/RigidBodyGravityGenerator.h"
+
 PhysicsManager* PhysicsManager::s_Instance = nullptr;
 
 PhysicsManager::PhysicsManager()
@@ -21,7 +24,11 @@ PhysicsManager::PhysicsManager()
 	GravityForceGenerator* gravity = new GravityForceGenerator(2.0f); // scale gravity by 2
 	m_particleForceRegistry.add("gravity", gravity);
 
-	m_maxPasses = 50;
+	// Set up force generators for rigid bodies
+	RigidBodyGravityGenerator* rbGravity = new RigidBodyGravityGenerator(2.0f);
+	m_rigidBodyForceRegistry.add("gravity", rbGravity);
+
+	m_maxPasses = 10;
 }
 
 PhysicsManager::~PhysicsManager()
@@ -55,11 +62,15 @@ void PhysicsManager::update(float duration)
 	for (auto iter = m_particleSet.itBegin(); iter != m_particleSet.itEnd(); ++iter)
 		iter->second->clearAccumulation();
 
+	for (auto iter = m_rigidBodySet.itBegin(); iter != m_rigidBodySet.itEnd(); ++iter)
+		iter->second->clearAccumulators();
+
 	// Generate forces via generators
 	updateForces(duration);
 
-	// Integrate particle positions
+	// Integrate positions
 	integrateParticles(duration);
+	integrateRigidBodies(duration);
 
 	// Compute set of all particles in contact
 	generateCollisions();
@@ -86,11 +97,27 @@ void PhysicsManager::updateForces(float duration)
 
 		generator->updateForce(particle, duration);
 	}
+
+	for (unsigned int i = 0; i < m_rigidBodyForceRegistrations.getSize(); ++i)
+	{
+		//std::cout << "PHYSICSMANAGER:updateForces: Attempting to update generator " << i << std::endl; 
+		RigidBodyForceGenerator* generator = m_rigidBodyForceRegistrations[i].generator;
+		RigidBody* body = m_rigidBodyForceRegistrations[i].body;
+
+		generator->updateForce(body, duration);
+	}
+
 }
 
 void PhysicsManager::integrateParticles(float duration)
 {
 	for (auto iter = m_particleSet.itBegin(); iter != m_particleSet.itEnd(); ++iter)
+		iter->second->integrate(duration);
+}
+
+void PhysicsManager::integrateRigidBodies(float duration)
+{
+	for (auto iter = m_rigidBodySet.itBegin(); iter != m_rigidBodySet.itEnd(); ++iter)
 		iter->second->integrate(duration);
 }
 
@@ -101,6 +128,7 @@ void PhysicsManager::generateCollisions()
 		//std::cout << "PHYSICSMANAGER:generateCollisions(): Generating collisions with generator: " << iter->first << std::endl;
 		iter->second->AddContact(s_Instance);
 	}
+
 }
 
 void PhysicsManager::resolveCollisions(float duration)
@@ -248,6 +276,19 @@ bool PhysicsManager::applyGravity(string &name)
 		newForce.generator = m_particleForceRegistry["gravity"];
 		newForce.particle = m_particleSet[name];
 		m_forceRegistrations.add(newForce);
+		return true;
+	}
+	return false;
+}
+
+bool PhysicsManager::applyRigidBodyGravity(string &name)
+{
+	if (m_rigidBodySet.containsKey(name) && m_rigidBodyForceRegistry.containsKey("gravity"))
+	{
+		RigidBodyForceRegistration newForce;
+		newForce.generator = m_rigidBodyForceRegistry["gravity"];
+		newForce.body = m_rigidBodySet[name];
+		m_rigidBodyForceRegistrations.add(newForce);
 		return true;
 	}
 	return false;

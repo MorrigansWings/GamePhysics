@@ -12,10 +12,20 @@ class ParticleContact;
 class ParticleForceGenerator;
 class ParticleContactGenerator;
 
+class RigidBodyContact;
+class RigidBodyForceGenerator;
+class RigidBodyContactGenerator;
+
 struct ForceRegistration
 {
 	Particle *particle;
 	ParticleForceGenerator *generator;
+};
+
+struct RigidBodyForceRegistration
+{
+	RigidBody *body;
+	RigidBodyForceGenerator *generator;
 };
 
 enum ConnectionType
@@ -38,6 +48,7 @@ public:
 	void update(float duration);
 	void updateForces(float duration);
 	void integrateParticles(float duration);
+	void integrateRigidBodies(float duration);
 	void generateCollisions();
 	void resolveCollisions(float duration);
 
@@ -63,6 +74,7 @@ public:
 	Arc::ArrayList<RigidBody*> getRigidBodies() { return m_rigidBodySet.getValues(); }
 
 	bool applyGravity(string &name);
+	bool applyRigidBodyGravity(string &name);
 
 	void addContact(ParticleContact* cont) { m_contacts.add(cont); }
 
@@ -74,13 +86,10 @@ public:
 private:
 	static PhysicsManager* s_Instance;
 
+	// Particle code! ==================================================
 	// Particle Set and Registry
 	Arc::Map<string, Particle*> m_particleSet;
 	Arc::Map<string, ParticleForceGenerator*> m_particleForceRegistry;
-
-	// Rigid Body Set and Registry
-	Arc::Map<string, RigidBody*> m_rigidBodySet;
-	Arc::Map<string, RigidBodyForceGenerator*> m_rigidBodyForceRegistry;
 
 	// Force Generators
 	//typedef std::vector<ForceRegistration> Registry;
@@ -89,6 +98,18 @@ private:
 	// Contact Set
 	Arc::Map<string, ParticleContactGenerator*> m_particleContactRegistry;
 	Arc::ArrayList<ParticleContact*> m_contacts;
+
+	// Rigid Body code! ==================================================
+	// Rigid Body Set and Registry
+	Arc::Map<string, RigidBody*> m_rigidBodySet;
+	Arc::Map<string, RigidBodyForceGenerator*> m_rigidBodyForceRegistry;
+
+	// Rigid Body Force Generators
+	Arc::ArrayList<RigidBodyForceRegistration> m_rigidBodyForceRegistrations;
+
+	// Rigid Body Contact Set
+	Arc::Map<string, RigidBodyContactGenerator*> m_rigidBodyContactRegistry;
+	Arc::ArrayList<RigidBodyContact*> m_rigidBodyContacts;
 
 	float	m_groundHeight,
 			m_groundXBounds,

@@ -52,6 +52,9 @@
     <Filter Include="Project\PhysicsEngine\Collision\RigidBody Collision">
       <UniqueIdentifier>{5ecda8c0-d217-4546-bad8-c39d58bc3df4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\PhysicsEngine\ForceGenerators\RigidBody Force Generators">
+      <UniqueIdentifier>{ade7e622-8914-4d33-aa7d-36a3737f6761}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -144,9 +147,6 @@
     <ClCompile Include="GraphicsEngine\ResourceManager.cpp">
       <Filter>Project\GraphicsEngine\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsEngine\ForceGenerators\SpringForceGenerator.cpp">
-      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsEngine\ForceGenerators\BungeeForceGenerator.cpp">
       <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
     </ClCompile>
@@ -188,6 +188,12 @@
     </ClCompile>
     <ClCompile Include="RubeGoldberg\RigidBodyObject.cpp">
       <Filter>Project\RubeGoldberg\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\ForceGenerators\SpringForceGenerator.cpp">
+      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\ForceGenerators\RigidBodyGravityGenerator.cpp">
+      <Filter>Project\PhysicsEngine\ForceGenerators\RigidBody Force Generators</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -345,7 +351,10 @@
       <Filter>Project\RubeGoldberg\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsEngine\ForceGenerators\RigidBodyForceGenerator.h">
-      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
+      <Filter>Project\PhysicsEngine\ForceGenerators\RigidBody Force Generators</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\ForceGenerators\RigidBodyGravityGenerator.h">
+      <Filter>Project\PhysicsEngine\ForceGenerators\RigidBody Force Generators</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

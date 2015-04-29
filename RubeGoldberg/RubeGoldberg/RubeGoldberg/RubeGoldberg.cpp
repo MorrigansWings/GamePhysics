@@ -43,7 +43,13 @@ void RubeGoldberg::setup(int framerate, float groundHeight, float groundX, float
 	//createAggDiamond("TEST_AGG_DIAMOND", Physics::Vector3(0.0f, 3.0f, 3.0f));
 
 	// TEST RIGID BODY - SPHERE
+	createRigidSphere("TEST_RIGIDBODY_SPHERE", Physics::Vector3(0.0f, 10.0f, 0.0f));
 
+	// TEST RIGID BODY - SPHERE GRAVITY
+	createRigidSphere("TEST_RIGIDBODY_SPHERE_GRAVITY", Physics::Vector3(3.0f, 10.0f, 0.0f));
+	m_rigidBodyObjects["TEST_RIGIDBODY_SPHERE_GRAVITY"]->applyGravity();
+
+	// apply gravity to all rigid bodies
 
 }
 
@@ -92,6 +98,10 @@ void RubeGoldberg::fixedUpdate(float fixedDeltaTime)
 	// Update aggregate objects
 	//for (auto iter = m_aggregateObjects.itBegin(); iter != m_aggregateObjects.itEnd(); ++iter)
 	//	iter->second->update();
+
+	// Update rigid body objects
+	for (auto iter = m_rigidBodyObjects.itBegin(); iter != m_rigidBodyObjects.itEnd(); ++iter)
+		iter->second->update();
 }
 
 
@@ -429,7 +439,7 @@ string RubeGoldberg::createRigidSphere(string name, Physics::Vector3 position, f
 {
 	if (m_rigidBodyObjects.containsKey(name))
 		return "";
-	return createRigidSphere(name, position, radius, Physics::Vector4(0.5f));
+	return createRigidSphere(name, position, radius, Physics::Vector4(0.5f, 0.5f, 0.5f, 1.0f));
 }
 
 string RubeGoldberg::createRigidSphere(string name, Physics::Vector3 position, float radius, Physics::Vector4 color)
@@ -438,11 +448,21 @@ string RubeGoldberg::createRigidSphere(string name, Physics::Vector3 position, f
 		return "";
 
 	// create physics object
+	string rigidbody = mp_PhysicsManager->createRigidBody(name, position);
 
 	// create graphics object
-	
+	string entity = mp_GraphicsManager->createSphere(name, radius, position.GLM(), color.GLM());
 
+	// create rigid body!
+	RigidBodyObject* body = new RigidBodyObject();
+	body->setGraphicsManager(mp_GraphicsManager);
+	body->setPhysicsManager(mp_PhysicsManager);
+	body->setName(name);
+	body->setEntityName(entity);
+	body->setRigidBodyName(rigidbody);
+	m_rigidBodyObjects.add(name, body);
 
+	return name;
 }
 
 

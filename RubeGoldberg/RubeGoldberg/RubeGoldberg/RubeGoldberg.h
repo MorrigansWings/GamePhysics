@@ -51,10 +51,6 @@ public:
 	string createRigidBox(string name, Physics::Vector3 position, Physics::Vector3 dimensions);
 	string createRigidBox(string name, Physics::Vector3 position, Physics::Vector3 dimensions, Physics::Vector4 color);
 
-
-
-
-
 	inline GLFWwindow* getGLFWwindow() { return GraphicsManager::GetInstance()->getGLFWWindow(); }
 
 private:

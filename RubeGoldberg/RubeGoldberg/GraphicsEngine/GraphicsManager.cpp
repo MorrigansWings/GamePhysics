@@ -462,13 +462,12 @@ string GraphicsManager::createSphere(string name, float radius, vec3 position, v
 	Entity* mp_Entity;
 	Model* pModel = mp_ResourceManager->getModel("sphere");
 
-	mp_Entity = New Entity(position, vec3(0.0f), vec3(radius*2.0f, radius*2.0f, radius*2.0f), color);
+	mp_Entity = New Entity(position, vec3(0.0f), vec3(radius, radius, radius), color);
 	mp_Entity->addModel(pModel);
 	mp_Entity->setUseRotationMatrix(true);
 	mp_SceneManager->getCurrentScene()->addEntity(name + "-entity", mp_Entity);
 	return name + "-entity";
 }
-
 
 string GraphicsManager::createCube(string name)
 {
