@@ -13,9 +13,7 @@ namespace Physics
 
 	enum ColliderType
 	{
-		HALF_SPACE = 0,
-		PLANE,
-		SPHERE,
+		SPHERE = 0,
 		BOX,
 		PRIMITIVE
 	};
@@ -27,9 +25,6 @@ namespace Physics
 		friend class IntersectionTests;
 		friend class CollisionDetector;
 
-		//CollisionPrimitive()
-		//	: type(PRIMITIVE)
-		//{}
 		CollisionPrimitive(ColliderType t)
 			: type(t)
 		{}
@@ -41,10 +36,9 @@ namespace Physics
 		}
 		inline const Matrix4& getTransform() const { return transform; }
 
-		inline bool isHalfSpace() { return type == HALF_SPACE; }
-		inline bool isPlane() { return type == PLANE; }
 		inline bool isSphere() { return type == SPHERE; }
 		inline bool isBox() { return type == BOX; }
+		inline ColliderType getType() { return type; }
 
 		RigidBody *body;
 		Matrix4 offset;

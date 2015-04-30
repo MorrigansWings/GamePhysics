@@ -54,6 +54,8 @@ public:
 	void integrateRigidBodies(float duration);
 	void generateCollisions();
 	void generateRigidBodyCollisions();
+	void generateRigidBodyObjectCollisions();
+	void generateRigidBodyGroundCollisions();
 	void resolveCollisions(float duration);
 	void resolveRigidBodyCollisions(float duration);
 

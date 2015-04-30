@@ -183,6 +183,32 @@ static inline Vector3 contactPoint(	const Vector3 &pOne, const Vector3 &dOne, fl
 	}
 }
 
+unsigned CollisionDetector::sphereAndHalfSpace(	const CollisionSphere &sphere,
+												const CollisionPlane &plane,
+												CollisionData *data)
+{
+	// Make sure we have contacts
+	if (data->contactsLeft <= 0) return 0;
+
+	// Cache the sphere position
+	Vector3 position = sphere.getAxis(3);
+
+	// Find the distance from the plane
+	float ballDistance = Vector3::dot(plane.direction, position) - sphere.radius - plane.offset;
+
+	if (ballDistance >= 0) return 0;
+
+	// Create the contact - it has a normal in the plane direction.
+	Contact* contact = data->contacts;
+	contact->contactNormal = plane.direction;
+	contact->penetration = -ballDistance;
+	contact->contactPoint = (position - plane.direction) * (ballDistance + sphere.radius);
+	contact->setBodyData(sphere.body, nullptr, data->friction, data->restitution);
+
+	data->addContacts(1);
+	return 1;
+}
+
 unsigned CollisionDetector::sphereAndTruePlane(	const CollisionSphere &sphere,
 												const CollisionPlane &plane, 
 												CollisionData *data)
@@ -215,32 +241,6 @@ unsigned CollisionDetector::sphereAndTruePlane(	const CollisionSphere &sphere,
 	contact->contactNormal = normal;
 	contact->penetration = penetration;
 	contact->contactPoint = (position - plane.direction) * centreDistance;
-	contact->setBodyData(sphere.body, nullptr, data->friction, data->restitution);
-
-	data->addContacts(1);
-	return 1;
-}
-
-unsigned CollisionDetector::sphereAndHalfSpace(	const CollisionSphere &sphere,
-												const CollisionPlane &plane,
-												CollisionData *data)
-{
-	// Make sure we have contacts
-	if (data->contactsLeft <= 0) return 0;
-
-	// Cache the sphere position
-	Vector3 position = sphere.getAxis(3);
-
-	// Find the distance from the plane
-	float ballDistance = Vector3::dot(plane.direction, position) - sphere.radius - plane.offset;
-
-	if (ballDistance >= 0) return 0;
-
-	// Create the contact - it has a normal in the plane direction.
-	Contact* contact = data->contacts;
-	contact->contactNormal = plane.direction;
-	contact->penetration = -ballDistance;
-	contact->contactPoint = (position - plane.direction) * (ballDistance + sphere.radius);
 	contact->setBodyData(sphere.body, nullptr, data->friction, data->restitution);
 
 	data->addContacts(1);

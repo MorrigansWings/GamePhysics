@@ -154,9 +154,17 @@ void PhysicsManager::generateRigidBodyCollisions()
 
 	// Set up collision data structure
 	m_data.reset(MAX_CONTACTS);
+
+	// Check ground collision
+	generateRigidBodyGroundCollisions();
+
+	// Check object collisions
+	generateRigidBodyObjectCollisions();
 	
-	
-	// Check collision with ground first
+}
+
+void PhysicsManager::generateRigidBodyGroundCollisions()
+{
 	for (auto iter = m_colliders.itBegin(); iter != m_colliders.itEnd(); ++iter)
 	{
 		if (!m_data.hasMoreContacts()) return;
@@ -174,26 +182,60 @@ void PhysicsManager::generateRigidBodyCollisions()
 			CollisionDetector::boxAndHalfSpace(*box, *mp_groundCollisionPlane, &m_data);
 		}
 	}
+}
 
+void PhysicsManager::generateRigidBodyObjectCollisions()
+{
 	// Check stuff against other stuff!
-	//for (auto iter = m_colliders.itBegin(); iter != m_colliders.itEnd(); ++iter)
-	//{
-	//	if (!m_data.hasMoreContacts()) return;
-	//	// Check against ground plane
-	//	CollisionSphere* sphereOne = iter->second;
-	//	sphereOne->calculateInternals();
-	//
-	//	// Check one sphere against all others except itself
-	//	for (auto iterSecond = m_colliders.itBegin(); iterSecond != m_colliders.itEnd(); ++iterSecond)
-	//	{
-	//		CollisionSphere* sphereTwo = iterSecond->second;
-	//		if (sphereTwo != sphereOne)
-	//		{
-	//			sphereTwo->calculateInternals();
-	//			CollisionDetector::sphereAndSphere(*sphereOne, *sphereTwo, &m_data);
-	//		}
-	//	}
-	//}
+	for (auto iter = m_colliders.itBegin(); iter != m_colliders.itEnd(); ++iter)
+	{
+		for (auto iterSecond = m_colliders.itBegin(); iterSecond != m_colliders.itEnd(); ++iterSecond)
+		{
+			if (!m_data.hasMoreContacts()) return;
+
+			CollisionPrimitive* first = iter->second;
+
+			CollisionPrimitive* second = iterSecond->second;
+
+			if (first != second)
+			{
+				ColliderType typeOne, typeTwo;
+				// set up collision objects
+				typeOne = first->getType();
+				typeTwo = second->getType();
+
+				// update internals for each
+				first->calculateInternals();
+				second->calculateInternals();
+
+				// Check for boxes first
+				if (typeOne == BOX || typeTwo == BOX)
+				{
+					if (typeOne != BOX)
+					{
+						// swap objects if first is not sphere
+						CollisionPrimitive* temp = first;
+						first = second;
+						second = temp;
+					}
+
+					switch (second->getType())
+					{
+					case SPHERE:
+						CollisionDetector::boxAndSphere(*static_cast<CollisionBox*>(first), *static_cast<CollisionSphere*>(second), &m_data);
+						break;
+					case BOX:
+						CollisionDetector::boxAndBox(*static_cast<CollisionBox*>(first), *static_cast<CollisionBox*>(second), &m_data);
+						break;
+					}
+				}
+				else // No boxes! must be sphere on sphere
+				{
+					CollisionDetector::sphereAndSphere(*static_cast<CollisionSphere*>(first), *static_cast<CollisionSphere*>(second), &m_data);
+				}
+			}
+		}
+	}
 }
 
 void PhysicsManager::resolveCollisions(float duration)

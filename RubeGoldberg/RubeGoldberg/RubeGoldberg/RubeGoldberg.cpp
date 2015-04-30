@@ -56,7 +56,7 @@ void RubeGoldberg::setup(int framerate, float groundHeight, float groundX, float
 		mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_SPHERE_ON_SPHERE_COLLIDER"), string("TEST_RIGIDBODY_SPHERE_ON_SPHERE")));
 
 	// TEST RIGID BODY - BOX ON SPHERE
-	createRigidBox("TEST_RIGIDBODY_BOX_ON_SPHERE", Physics::Vector3(0.0f, 25.0f, 0.0f));
+	createRigidBox("TEST_RIGIDBODY_BOX_ON_SPHERE", Physics::Vector3(0.5f, 25.0f, 0.0f));
 	m_rigidBodyObjects["TEST_RIGIDBODY_BOX_ON_SPHERE"]->setColliderName(
 		mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_BOX_ON_SPHERE_COLLIDER"), string("TEST_RIGIDBODY_BOX_ON_SPHERE")));
 	
