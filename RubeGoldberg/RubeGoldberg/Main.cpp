@@ -7,6 +7,7 @@
 #include <Arc/MemoryTracker.h>
 
 #include <SDL/SDL.h>
+
 #undef main
 
 void glfwError( int error, const char* description )

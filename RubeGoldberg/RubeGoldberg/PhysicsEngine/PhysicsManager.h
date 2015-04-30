@@ -7,6 +7,8 @@
 
 #include "Particle.h"
 #include "RigidBody.h"
+#include "Collision/CollisionPrimitive.h"
+#include "Collision/CollisionDetection_Narrow.h"
 
 class ParticleContact;
 class ParticleForceGenerator;
@@ -47,10 +49,13 @@ public:
 
 	void update(float duration);
 	void updateForces(float duration);
+	void updateRigidBodyForces(float duration);
 	void integrateParticles(float duration);
 	void integrateRigidBodies(float duration);
 	void generateCollisions();
+	void generateRigidBodyCollisions();
 	void resolveCollisions(float duration);
+	void resolveRigidBodyCollisions(float duration);
 
 	void singlePassCollisions(float duration);
 	void multiPassCollisions(float duration);
@@ -83,8 +88,14 @@ public:
 	string addCable(string &name, string first, string second);
 	string addSpring(string &name, string particle, string anchor);
 
+	bool hasSphereCollider(string &name) { return m_sphereColliders.containsKey(name); }
+	string addCollisionSphere(string &name, string &bodyName);
+	string addCollisionSphere(string &name, string &bodyName, float radius);
+	//string addCollisionSphere(string &name, string &bodyName, float radius, Matrix4 offset);
+
 private:
 	static PhysicsManager* s_Instance;
+	const static unsigned MAX_CONTACTS = 256;
 
 	// Particle code! ==================================================
 	// Particle Set and Registry
@@ -100,16 +111,22 @@ private:
 	Arc::ArrayList<ParticleContact*> m_contacts;
 
 	// Rigid Body code! ==================================================
-	// Rigid Body Set and Registry
+	// Rigid Body Set, Collision Primitive set, and Registry
 	Arc::Map<string, RigidBody*> m_rigidBodySet;
+	Arc::Map<string, CollisionSphere*> m_sphereColliders;
 	Arc::Map<string, RigidBodyForceGenerator*> m_rigidBodyForceRegistry;
 
 	// Rigid Body Force Generators
 	Arc::ArrayList<RigidBodyForceRegistration> m_rigidBodyForceRegistrations;
 
-	// Rigid Body Contact Set
-	Arc::Map<string, RigidBodyContactGenerator*> m_rigidBodyContactRegistry;
-	Arc::ArrayList<RigidBodyContact*> m_rigidBodyContacts;
+	// Rigid Body Contacts
+	//Arc::Map<string, RigidBodyContactGenerator*> m_rigidBodyContactRegistry;
+	//Arc::ArrayList<RigidBodyContact*> m_rigidBodyContacts;
+	Contact m_rigidBodyContacts[MAX_CONTACTS];
+	CollisionData m_data;
+	ContactResolver* mp_contactResolver;
+
+	CollisionPlane* mp_groundCollisionPlane;
 
 	float	m_groundHeight,
 			m_groundXBounds,

@@ -50,39 +50,45 @@ void PhysicsManager::setupGround(float height, float xbounds, float ybounds)
 	//m_groundXBounds = xbounds; // currently ignored! will be good for planes with edges
 	//m_groundYBounds = ybounds; // that you can fall off off
 
-	// create ground collision generator
+	// create ground collision generator for particles
 	GroundContactGenerator* ground = new GroundContactGenerator();
 	ground->setGroundHeight(m_groundHeight);
 	m_particleContactRegistry.add("ground", ground);
+
+	// Create ground collision plane for rigid body collision
+	mp_groundCollisionPlane = new CollisionPlane();
+	mp_groundCollisionPlane->direction = Vector3(0.0f, 1.0f, 0.0f);
+	mp_groundCollisionPlane->offset = 0.0f;
 }
 
 void PhysicsManager::update(float duration)
 {
 	// Clear force accumulators
-	for (auto iter = m_particleSet.itBegin(); iter != m_particleSet.itEnd(); ++iter)
-		iter->second->clearAccumulation();
-
+	//for (auto iter = m_particleSet.itBegin(); iter != m_particleSet.itEnd(); ++iter)
+	//	iter->second->clearAccumulation();
 	for (auto iter = m_rigidBodySet.itBegin(); iter != m_rigidBodySet.itEnd(); ++iter)
 		iter->second->clearAccumulators();
 
 	// Generate forces via generators
-	updateForces(duration);
+	//updateForces(duration);
+	updateRigidBodyForces(duration);
 
 	// Integrate positions
-	integrateParticles(duration);
+	//integrateParticles(duration);
 	integrateRigidBodies(duration);
 
 	// Compute set of all particles in contact
-	generateCollisions();
+	//generateCollisions();
+	generateRigidBodyCollisions();
 
-	singlePassCollisions(duration);
+	//singlePassCollisions(duration);
 	//multiPassCollisions(duration);
 
 	// clear contacts after resolution
-	for (unsigned int i = 0; i < m_contacts.getSize(); ++i)
-		m_contacts.removeAt(i);
-
-	m_contacts.clear();
+	//for (unsigned int i = 0; i < m_contacts.getSize(); ++i)
+	//	m_contacts.removeAt(i);
+	//
+	//m_contacts.clear();
 
 }
 
@@ -97,7 +103,10 @@ void PhysicsManager::updateForces(float duration)
 
 		generator->updateForce(particle, duration);
 	}
+}
 
+void PhysicsManager::updateRigidBodyForces(float duration)
+{
 	for (unsigned int i = 0; i < m_rigidBodyForceRegistrations.getSize(); ++i)
 	{
 		//std::cout << "PHYSICSMANAGER:updateForces: Attempting to update generator " << i << std::endl; 
@@ -106,7 +115,6 @@ void PhysicsManager::updateForces(float duration)
 
 		generator->updateForce(body, duration);
 	}
-
 }
 
 void PhysicsManager::integrateParticles(float duration)
@@ -129,6 +137,27 @@ void PhysicsManager::generateCollisions()
 		iter->second->AddContact(s_Instance);
 	}
 
+}
+
+void PhysicsManager::generateRigidBodyCollisions()
+{
+	// brute force - check everything!
+
+	// Set up collision data structure
+	m_data.reset(MAX_CONTACTS);
+	m_data.friction = 0.9f;
+	m_data.restitution = 0.6f;
+	m_data.tolerance = 0.1f;
+	
+	// Check Spheres first
+	for (auto iter = m_sphereColliders.itBegin(); iter != m_sphereColliders.itEnd(); ++iter)
+	{
+		if (!m_data.hasMoreContacts()) return;
+		// Check against ground plane
+		CollisionSphere* sphere = iter->second;
+		CollisionDetector::sphereAndHalfSpace(*sphere, *mp_groundCollisionPlane, &m_data);
+		m_data.addContacts
+	}
 }
 
 void PhysicsManager::resolveCollisions(float duration)
@@ -392,4 +421,28 @@ string PhysicsManager::addSpring(string &name, string particle, string anchor)
 	registration.particle = partPart;
 	m_forceRegistrations.add(registration);
 	return name;
+}
+
+string PhysicsManager::addCollisionSphere(string &name, string &bodyName)
+{
+	return addCollisionSphere(name, bodyName, 0.5f);
+}
+
+string PhysicsManager::addCollisionSphere(string &name, string &bodyName, float radius)
+{
+	if (!hasRigidBody(bodyName) && !hasSphereCollider(name))
+	{
+		RigidBody* body = getRigidBody(bodyName);
+		if (body != nullptr)
+		{
+			CollisionSphere* sphere = new CollisionSphere();
+			sphere->body = body;
+			sphere->radius = radius;
+
+			m_sphereColliders.add(name, sphere);
+			return name;
+		}
+		else return "";
+	}
+	else return "";
 }

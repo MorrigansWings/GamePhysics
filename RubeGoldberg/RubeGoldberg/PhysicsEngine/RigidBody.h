@@ -24,18 +24,6 @@ namespace Physics
 			, angularDamping(0.999f)
 		{}
 
-		//RigidBody(Vector3 pos, Vector3 vel, Vector3 acc,
-		//			float ma, Quaternion orient, Vector3 aVel, Matrix3 invTensor)
-		//	: position(pos)
-		//	, velocity(vel)
-		//	, acceleration(acc)
-		//	, mass(ma)
-		//	, inverseMass((mass > 0) ? (1.0f / mass) : 0.0f)
-		//	, orientation(orient)
-		//	, angularVelocity(aVel)
-		//	, inverseInertiaTensor(invTensor)
-		//{}
-
 		~RigidBody(){};
 
 		void calculateDerivedData();
