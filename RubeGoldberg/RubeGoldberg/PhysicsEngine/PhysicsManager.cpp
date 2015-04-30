@@ -32,6 +32,10 @@ PhysicsManager::PhysicsManager()
 	m_data.contactArray = m_rigidBodyContacts;
 	m_data.contacts = m_rigidBodyContacts;
 
+	m_data.friction = 0.9f;
+	m_data.restitution = 0.6f;
+	m_data.tolerance = 0.1f;
+
 	m_maxPasses = 10;
 }
 
@@ -142,7 +146,6 @@ void PhysicsManager::generateCollisions()
 		//std::cout << "PHYSICSMANAGER:generateCollisions(): Generating collisions with generator: " << iter->first << std::endl;
 		iter->second->AddContact(s_Instance);
 	}
-
 }
 
 void PhysicsManager::generateRigidBodyCollisions()
@@ -151,9 +154,7 @@ void PhysicsManager::generateRigidBodyCollisions()
 
 	// Set up collision data structure
 	m_data.reset(MAX_CONTACTS);
-	m_data.friction = 0.9f;
-	m_data.restitution = 0.6f;
-	m_data.tolerance = 0.1f;
+	
 	
 	// Check Spheres first
 	for (auto iter = m_colliders.itBegin(); iter != m_colliders.itEnd(); ++iter)
@@ -163,6 +164,27 @@ void PhysicsManager::generateRigidBodyCollisions()
 		CollisionSphere* sphere = iter->second;
 		sphere->calculateInternals();
 		CollisionDetector::sphereAndHalfSpace(*sphere, *mp_groundCollisionPlane, &m_data);
+	}
+
+	// Check spheres against other spheres!
+	for (auto iter = m_colliders.itBegin(); iter != m_colliders.itEnd(); ++iter)
+	{
+		if (!m_data.hasMoreContacts()) return;
+		// Check against ground plane
+		CollisionSphere* sphereOne = iter->second;
+		sphereOne->calculateInternals();
+
+		// Check one sphere against all others except itself
+		for (auto iterSecond = m_colliders.itBegin(); iterSecond != m_colliders.itEnd(); ++iterSecond)
+		{
+			CollisionSphere* sphereTwo = iterSecond->second;
+			if (sphereTwo != sphereOne)
+			{
+				sphereTwo->calculateInternals();
+				CollisionDetector::sphereAndSphere(*sphereOne, *sphereTwo, &m_data);
+			}
+		}
+
 	}
 }
 

@@ -43,16 +43,23 @@ void RubeGoldberg::setup(int framerate, float groundHeight, float groundX, float
 	//createAggDiamond("TEST_AGG_DIAMOND", Physics::Vector3(0.0f, 3.0f, 3.0f));
 
 	// TEST RIGID BODY - SPHERE
-	createRigidSphere("TEST_RIGIDBODY_SPHERE", Physics::Vector3(0.0f, 10.0f, 0.0f));
+	//createRigidSphere("TEST_RIGIDBODY_SPHERE", Physics::Vector3(0.0f, 10.0f, 0.0f));
 
 	// TEST RIGID BODY - SPHERE GRAVITY
-	createRigidSphere("TEST_RIGIDBODY_SPHERE_GRAVITY", Physics::Vector3(3.0f, 5.0f, 0.0f));
-	m_rigidBodyObjects["TEST_RIGIDBODY_SPHERE_GRAVITY"]->applyGravity();
-	string colliderName = mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_SPHERE_GRAVITY_COLLIDER"), string("TEST_RIGIDBODY_SPHERE_GRAVITY"));
-	m_rigidBodyObjects["TEST_RIGIDBODY_SPHERE_GRAVITY"]->setSphereColliderName(colliderName);
+	createRigidSphere("TEST_RIGIDBODY_SPHERE_GRAVITY", Physics::Vector3(0.0f, 5.0f, 0.0f));
+	m_rigidBodyObjects["TEST_RIGIDBODY_SPHERE_GRAVITY"]->setSphereColliderName(
+				mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_SPHERE_GRAVITY_COLLIDER"), string("TEST_RIGIDBODY_SPHERE_GRAVITY")));
 
+	// TEST RIGID BODY - SPHERE ON SPHERE
+	createRigidSphere("TEST_RIGIDBODY_SPHERE_ON_SPHERE", Physics::Vector3(0.0f, 15.0f, 0.0f));
+	m_rigidBodyObjects["TEST_RIGIDBODY_SPHERE_ON_SPHERE"]->setSphereColliderName(
+		mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_SPHERE_ON_SPHERE_COLLIDER"), string("TEST_RIGIDBODY_SPHERE_ON_SPHERE")));
+	
 	// apply gravity to all rigid bodies
-
+	for (auto iter = m_rigidBodyObjects.itBegin(); iter != m_rigidBodyObjects.itEnd(); ++iter)
+	{
+		iter->second->applyGravity();
+	}
 }
 
 void RubeGoldberg::start()
