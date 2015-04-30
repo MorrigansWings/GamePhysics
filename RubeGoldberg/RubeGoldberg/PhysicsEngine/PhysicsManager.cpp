@@ -161,6 +161,7 @@ void PhysicsManager::generateRigidBodyCollisions()
 		if (!m_data.hasMoreContacts()) return;
 		// Check against ground plane
 		CollisionSphere* sphere = iter->second;
+		sphere->calculateInternals();
 		CollisionDetector::sphereAndHalfSpace(*sphere, *mp_groundCollisionPlane, &m_data);
 	}
 }

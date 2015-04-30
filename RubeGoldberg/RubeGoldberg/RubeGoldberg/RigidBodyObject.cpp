@@ -6,7 +6,7 @@ void RigidBodyObject::init(string name, string rigidBody, string entity)
 {
 	m_name = name;
 
-	if (mp_PhysicsManager->hasParticle(rigidBody))
+	if (mp_PhysicsManager->hasRigidBody(rigidBody))
 		m_rigidBodyName = rigidBody;
 
 	if (mp_GraphicsManager->hasEntity(entity))

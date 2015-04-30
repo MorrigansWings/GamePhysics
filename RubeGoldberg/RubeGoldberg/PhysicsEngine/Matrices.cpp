@@ -275,7 +275,7 @@ Vector3 Matrix4::getRowVector(int i) const
 
 Vector3 Matrix4::getColumnVector(int i) const
 {
-	return Vector3(data[i], data[i + 3], data[i + 6]);
+	return Vector3(data[i], data[i + 4], data[i + 8]);
 }
 
 glm::mat4 Matrix4::GLM()

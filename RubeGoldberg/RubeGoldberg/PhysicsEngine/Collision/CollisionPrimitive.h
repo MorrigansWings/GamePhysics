@@ -19,7 +19,9 @@ namespace Physics
 		friend class CollisionDetector;
 
 		inline void calculateInternals() { transform = body->getTransform() * offset; }
-		inline Vector3 getAxis(unsigned index) const { return transform.getColumnVector(index); }
+		inline Vector3 getAxis(unsigned index) const { 
+			return transform.getColumnVector(index); 
+		}
 		inline const Matrix4& getTransform() const { return transform; }
 
 		RigidBody *body;
