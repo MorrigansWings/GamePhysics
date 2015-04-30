@@ -156,36 +156,44 @@ void PhysicsManager::generateRigidBodyCollisions()
 	m_data.reset(MAX_CONTACTS);
 	
 	
-	// Check Spheres first
+	// Check collision with ground first
 	for (auto iter = m_colliders.itBegin(); iter != m_colliders.itEnd(); ++iter)
 	{
 		if (!m_data.hasMoreContacts()) return;
 		// Check against ground plane
-		CollisionSphere* sphere = iter->second;
-		sphere->calculateInternals();
-		CollisionDetector::sphereAndHalfSpace(*sphere, *mp_groundCollisionPlane, &m_data);
-	}
-
-	// Check spheres against other spheres!
-	for (auto iter = m_colliders.itBegin(); iter != m_colliders.itEnd(); ++iter)
-	{
-		if (!m_data.hasMoreContacts()) return;
-		// Check against ground plane
-		CollisionSphere* sphereOne = iter->second;
-		sphereOne->calculateInternals();
-
-		// Check one sphere against all others except itself
-		for (auto iterSecond = m_colliders.itBegin(); iterSecond != m_colliders.itEnd(); ++iterSecond)
+		if (iter->second->isSphere())
 		{
-			CollisionSphere* sphereTwo = iterSecond->second;
-			if (sphereTwo != sphereOne)
-			{
-				sphereTwo->calculateInternals();
-				CollisionDetector::sphereAndSphere(*sphereOne, *sphereTwo, &m_data);
-			}
+			CollisionSphere* sphere = static_cast<CollisionSphere*>(iter->second);
+			sphere->calculateInternals();
+			CollisionDetector::sphereAndHalfSpace(*sphere, *mp_groundCollisionPlane, &m_data);
 		}
-
+		else if (iter->second->isBox())
+		{
+			CollisionBox* box = static_cast<CollisionBox*>(iter->second);
+			box->calculateInternals();
+			CollisionDetector::boxAndHalfSpace(*box, *mp_groundCollisionPlane, &m_data);
+		}
 	}
+
+	// Check stuff against other stuff!
+	//for (auto iter = m_colliders.itBegin(); iter != m_colliders.itEnd(); ++iter)
+	//{
+	//	if (!m_data.hasMoreContacts()) return;
+	//	// Check against ground plane
+	//	CollisionSphere* sphereOne = iter->second;
+	//	sphereOne->calculateInternals();
+	//
+	//	// Check one sphere against all others except itself
+	//	for (auto iterSecond = m_colliders.itBegin(); iterSecond != m_colliders.itEnd(); ++iterSecond)
+	//	{
+	//		CollisionSphere* sphereTwo = iterSecond->second;
+	//		if (sphereTwo != sphereOne)
+	//		{
+	//			sphereTwo->calculateInternals();
+	//			CollisionDetector::sphereAndSphere(*sphereOne, *sphereTwo, &m_data);
+	//		}
+	//	}
+	//}
 }
 
 void PhysicsManager::resolveCollisions(float duration)
@@ -459,7 +467,7 @@ string PhysicsManager::addCollisionSphere(string &name, string &bodyName)
 
 string PhysicsManager::addCollisionSphere(string &name, string &bodyName, float radius)
 {
-	if (hasRigidBody(bodyName) && !hasSphereCollider(name))
+	if (hasRigidBody(bodyName) && !hasCollider(name))
 	{
 		RigidBody* body = getRigidBody(bodyName);
 		if (body != nullptr)
@@ -469,6 +477,30 @@ string PhysicsManager::addCollisionSphere(string &name, string &bodyName, float 
 			sphere->radius = radius;
 
 			m_colliders.add(name, sphere);
+			return name;
+		}
+		else return "";
+	}
+	else return "";
+}
+
+string PhysicsManager::addCollisionBox(string &name, string &bodyName)
+{
+	return addCollisionBox(name, bodyName, Vector3(0.5f));
+}
+
+string PhysicsManager::addCollisionBox(string &name, string &bodyName, Vector3 halfSize)
+{
+	if (hasRigidBody(bodyName) && !hasCollider(name))
+	{
+		RigidBody* body = getRigidBody(bodyName);
+		if (body != nullptr)
+		{
+			CollisionBox* box = new CollisionBox();
+			box->body = body;
+			box->halfSize = halfSize;
+
+			m_colliders.add(name, box);
 			return name;
 		}
 		else return "";

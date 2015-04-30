@@ -47,13 +47,18 @@ void RubeGoldberg::setup(int framerate, float groundHeight, float groundX, float
 
 	// TEST RIGID BODY - SPHERE GRAVITY
 	createRigidSphere("TEST_RIGIDBODY_SPHERE_GRAVITY", Physics::Vector3(0.0f, 5.0f, 0.0f));
-	m_rigidBodyObjects["TEST_RIGIDBODY_SPHERE_GRAVITY"]->setSphereColliderName(
+	m_rigidBodyObjects["TEST_RIGIDBODY_SPHERE_GRAVITY"]->setColliderName(
 				mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_SPHERE_GRAVITY_COLLIDER"), string("TEST_RIGIDBODY_SPHERE_GRAVITY")));
 
 	// TEST RIGID BODY - SPHERE ON SPHERE
 	createRigidSphere("TEST_RIGIDBODY_SPHERE_ON_SPHERE", Physics::Vector3(0.0f, 15.0f, 0.0f));
-	m_rigidBodyObjects["TEST_RIGIDBODY_SPHERE_ON_SPHERE"]->setSphereColliderName(
+	m_rigidBodyObjects["TEST_RIGIDBODY_SPHERE_ON_SPHERE"]->setColliderName(
 		mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_SPHERE_ON_SPHERE_COLLIDER"), string("TEST_RIGIDBODY_SPHERE_ON_SPHERE")));
+
+	// TEST RIGID BODY - BOX ON SPHERE
+	createRigidBox("TEST_RIGIDBODY_BOX_ON_SPHERE", Physics::Vector3(0.0f, 25.0f, 0.0f));
+	m_rigidBodyObjects["TEST_RIGIDBODY_BOX_ON_SPHERE"]->setColliderName(
+		mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_BOX_ON_SPHERE_COLLIDER"), string("TEST_RIGIDBODY_BOX_ON_SPHERE")));
 	
 	// apply gravity to all rigid bodies
 	for (auto iter = m_rigidBodyObjects.itBegin(); iter != m_rigidBodyObjects.itEnd(); ++iter)
@@ -474,6 +479,43 @@ string RubeGoldberg::createRigidSphere(string name, Physics::Vector3 position, f
 	return name;
 }
 
+// RIGID BODY BOX CONSTRUCTION =========================================
+string RubeGoldberg::createRigidBox(string name)
+{
+	return createRigidBox(name, Physics::Vector3(0.0f));
+}
 
+string RubeGoldberg::createRigidBox(string name, Physics::Vector3 position)
+{
+	return createRigidBox(name, position, Physics::Vector3(1.0f));
+}
+
+string RubeGoldberg::createRigidBox(string name, Physics::Vector3 position, Physics::Vector3 dimensions)
+{
+	return createRigidBox(name, position, dimensions, Physics::Vector4(0.5f, 0.5f, 0.5f, 1.0f));
+}
+
+string RubeGoldberg::createRigidBox(string name, Physics::Vector3 position, Physics::Vector3 dimensions, Physics::Vector4 color)
+{
+	if (m_rigidBodyObjects.containsKey(name))
+		return "";
+
+	// create physics object
+	string rigidbody = mp_PhysicsManager->createRigidBody(name, position);
+
+	// create graphics object
+	string entity = mp_GraphicsManager->createCube(name, position.GLM(), dimensions.GLM(), color.GLM());
+
+	// create rigid body!
+	RigidBodyObject* body = new RigidBodyObject();
+	body->setGraphicsManager(mp_GraphicsManager);
+	body->setPhysicsManager(mp_PhysicsManager);
+	body->setName(name);
+	body->setEntityName(entity);
+	body->setRigidBodyName(rigidbody);
+	m_rigidBodyObjects.add(name, body);
+
+	return name;
+}
 
 

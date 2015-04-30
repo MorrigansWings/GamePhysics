@@ -23,8 +23,8 @@ public:
 	inline string getRigidBodyName() { return m_rigidBodyName; }
 	inline void setRigidBodyName(string name) { m_rigidBodyName = mp_PhysicsManager->hasRigidBody(name) ? name : m_rigidBodyName; }
 
-	inline string getSphereColliderName() { return m_colliderName; }
-	inline void setSphereColliderName(string name) { m_colliderName = mp_PhysicsManager->hasSphereCollider(name) ? name : m_colliderName; }
+	inline string getColliderName() { return m_colliderName; }
+	inline void setColliderName(string name) { m_colliderName = mp_PhysicsManager->hasCollider(name) ? name : m_colliderName; }
 
 	inline Physics::Vector3 getPosition() { return m_position; }
 	inline void setPosition(Physics::Vector3 newPos) { m_position = newPos; }
