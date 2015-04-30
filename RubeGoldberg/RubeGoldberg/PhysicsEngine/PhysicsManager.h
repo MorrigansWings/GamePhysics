@@ -88,7 +88,7 @@ public:
 	string addCable(string &name, string first, string second);
 	string addSpring(string &name, string particle, string anchor);
 
-	bool hasSphereCollider(string &name) { return m_sphereColliders.containsKey(name); }
+	bool hasSphereCollider(string &name) { return m_colliders.containsKey(name); }
 	string addCollisionSphere(string &name, string &bodyName);
 	string addCollisionSphere(string &name, string &bodyName, float radius);
 	//string addCollisionSphere(string &name, string &bodyName, float radius, Matrix4 offset);
@@ -113,7 +113,7 @@ private:
 	// Rigid Body code! ==================================================
 	// Rigid Body Set, Collision Primitive set, and Registry
 	Arc::Map<string, RigidBody*> m_rigidBodySet;
-	Arc::Map<string, CollisionSphere*> m_sphereColliders;
+	Arc::Map<string, CollisionSphere*> m_colliders;
 	Arc::Map<string, RigidBodyForceGenerator*> m_rigidBodyForceRegistry;
 
 	// Rigid Body Force Generators

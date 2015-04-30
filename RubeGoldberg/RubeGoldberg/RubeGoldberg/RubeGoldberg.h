@@ -1,5 +1,5 @@
-#ifndef _KATAMARI_GAME_
-#define _KATAMARI_GAME_
+#ifndef _RUBEGOLDBERG_H
+#define _RUBEGOLDBERG_H_
 
 #include "../GraphicsEngine/GraphicsManager.h"
 #include "../PhysicsEngine/PhysicsManager.h"
@@ -75,4 +75,4 @@ private:
 
 };
 
-#endif //_KATAMARI_GAME_
+#endif // _RUBEGOLDBERG_H_

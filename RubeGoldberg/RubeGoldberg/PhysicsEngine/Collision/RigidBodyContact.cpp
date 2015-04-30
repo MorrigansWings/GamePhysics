@@ -14,8 +14,8 @@ void Contact::setBodyData(RigidBody *one, RigidBody *two, float friction, float 
 void Contact::calculateInternals(float duration)
 {
 	// swap if first body is null. If still null after, exit
-	if (body[0] != nullptr) swapBodies();
-	if (body[0] != nullptr) return;
+	if (body[0] == nullptr) swapBodies();
+	if (body[0] == nullptr) return;
 
 	// generate contact basis
 	calculateContactBasis();

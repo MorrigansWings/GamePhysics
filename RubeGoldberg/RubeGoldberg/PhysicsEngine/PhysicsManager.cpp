@@ -25,8 +25,12 @@ PhysicsManager::PhysicsManager()
 	m_particleForceRegistry.add("gravity", gravity);
 
 	// Set up force generators for rigid bodies
-	RigidBodyGravityGenerator* rbGravity = new RigidBodyGravityGenerator(2.0f);
+	RigidBodyGravityGenerator* rbGravity = new RigidBodyGravityGenerator();
 	m_rigidBodyForceRegistry.add("gravity", rbGravity);
+
+	mp_contactResolver = new ContactResolver(1);
+	m_data.contactArray = m_rigidBodyContacts;
+	m_data.contacts = m_rigidBodyContacts;
 
 	m_maxPasses = 10;
 }
@@ -83,7 +87,9 @@ void PhysicsManager::update(float duration)
 
 	//singlePassCollisions(duration);
 	//multiPassCollisions(duration);
-
+	std::cout << "RESOLVING CONTACTS! COUNT: " << m_data.contactCount << std::endl;
+	mp_contactResolver->resolveContacts(m_rigidBodyContacts, m_data.contactCount, duration);
+	
 	// clear contacts after resolution
 	//for (unsigned int i = 0; i < m_contacts.getSize(); ++i)
 	//	m_contacts.removeAt(i);
@@ -150,13 +156,12 @@ void PhysicsManager::generateRigidBodyCollisions()
 	m_data.tolerance = 0.1f;
 	
 	// Check Spheres first
-	for (auto iter = m_sphereColliders.itBegin(); iter != m_sphereColliders.itEnd(); ++iter)
+	for (auto iter = m_colliders.itBegin(); iter != m_colliders.itEnd(); ++iter)
 	{
 		if (!m_data.hasMoreContacts()) return;
 		// Check against ground plane
 		CollisionSphere* sphere = iter->second;
 		CollisionDetector::sphereAndHalfSpace(*sphere, *mp_groundCollisionPlane, &m_data);
-		m_data.addContacts
 	}
 }
 
@@ -291,6 +296,7 @@ string PhysicsManager::createRigidBody(string &name, Physics::Vector3 pos, Physi
 		RigidBody* newbody = new RigidBody();
 		newbody->setPosition(pos);
 		newbody->setOrientation(orient);
+		newbody->calculateDerivedData();
 		m_rigidBodySet.add(name, newbody);
 		return name;
 	}
@@ -430,7 +436,7 @@ string PhysicsManager::addCollisionSphere(string &name, string &bodyName)
 
 string PhysicsManager::addCollisionSphere(string &name, string &bodyName, float radius)
 {
-	if (!hasRigidBody(bodyName) && !hasSphereCollider(name))
+	if (hasRigidBody(bodyName) && !hasSphereCollider(name))
 	{
 		RigidBody* body = getRigidBody(bodyName);
 		if (body != nullptr)
@@ -439,7 +445,7 @@ string PhysicsManager::addCollisionSphere(string &name, string &bodyName, float 
 			sphere->body = body;
 			sphere->radius = radius;
 
-			m_sphereColliders.add(name, sphere);
+			m_colliders.add(name, sphere);
 			return name;
 		}
 		else return "";

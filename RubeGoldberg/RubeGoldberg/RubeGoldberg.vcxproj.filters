@@ -55,6 +55,12 @@
     <Filter Include="Project\PhysicsEngine\ForceGenerators\RigidBody Force Generators">
       <UniqueIdentifier>{ade7e622-8914-4d33-aa7d-36a3737f6761}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\PhysicsEngine\Collision\Particle Collision">
+      <UniqueIdentifier>{4dfd3bb3-b984-492e-bf95-0a5e19433e12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\PhysicsEngine\ForceGenerators\Particle Force Generators">
+      <UniqueIdentifier>{bfc75a64-96eb-48cd-9e3e-b8a8edc31164}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -68,12 +74,6 @@
     </ClCompile>
     <ClCompile Include="PhysicsEngine\Particle.cpp">
       <Filter>Project\PhysicsEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsEngine\ForceGenerators\DragForceGenerator.cpp">
-      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.cpp">
-      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
     </ClCompile>
     <ClCompile Include="RubeGoldberg\RubeGoldberg.cpp">
       <Filter>Project\RubeGoldberg</Filter>
@@ -147,23 +147,8 @@
     <ClCompile Include="GraphicsEngine\ResourceManager.cpp">
       <Filter>Project\GraphicsEngine\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsEngine\ForceGenerators\BungeeForceGenerator.cpp">
-      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsEngine\Collision\ParticleContact.cpp">
-      <Filter>Project\PhysicsEngine\Collision</Filter>
-    </ClCompile>
     <ClCompile Include="RubeGoldberg\GameObject.cpp">
       <Filter>Project\RubeGoldberg\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsEngine\Collision\GroundContactGenerator.cpp">
-      <Filter>Project\PhysicsEngine\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsEngine\Collision\CableParticleConnection.cpp">
-      <Filter>Project\PhysicsEngine\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsEngine\Collision\RodParticleConnection.cpp">
-      <Filter>Project\PhysicsEngine\Collision</Filter>
     </ClCompile>
     <ClCompile Include="RubeGoldberg\AggregateGameObject.cpp">
       <Filter>Project\RubeGoldberg\GameObjects</Filter>
@@ -189,11 +174,32 @@
     <ClCompile Include="RubeGoldberg\RigidBodyObject.cpp">
       <Filter>Project\RubeGoldberg\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsEngine\ForceGenerators\SpringForceGenerator.cpp">
-      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsEngine\ForceGenerators\RigidBodyGravityGenerator.cpp">
       <Filter>Project\PhysicsEngine\ForceGenerators\RigidBody Force Generators</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Collision\CableParticleConnection.cpp">
+      <Filter>Project\PhysicsEngine\Collision\Particle Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Collision\GroundContactGenerator.cpp">
+      <Filter>Project\PhysicsEngine\Collision\Particle Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Collision\ParticleContact.cpp">
+      <Filter>Project\PhysicsEngine\Collision\Particle Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\Collision\RodParticleConnection.cpp">
+      <Filter>Project\PhysicsEngine\Collision\Particle Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\ForceGenerators\BungeeForceGenerator.cpp">
+      <Filter>Project\PhysicsEngine\ForceGenerators\Particle Force Generators</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\ForceGenerators\DragForceGenerator.cpp">
+      <Filter>Project\PhysicsEngine\ForceGenerators\Particle Force Generators</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.cpp">
+      <Filter>Project\PhysicsEngine\ForceGenerators\Particle Force Generators</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine\ForceGenerators\SpringForceGenerator.cpp">
+      <Filter>Project\PhysicsEngine\ForceGenerators\Particle Force Generators</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -205,15 +211,6 @@
     </ClInclude>
     <ClInclude Include="PhysicsEngine\Particle.h">
       <Filter>Project\PhysicsEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsEngine\ForceGenerators\DragForceGenerator.h">
-      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.h">
-      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsEngine\ForceGenerators\ParticleForceGenerator.h">
-      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
     </ClInclude>
     <ClInclude Include="RubeGoldberg\RubeGoldberg.h">
       <Filter>Project\RubeGoldberg</Filter>
@@ -293,35 +290,11 @@
     <ClInclude Include="GraphicsEngine\ResourceManager.h">
       <Filter>Project\GraphicsEngine\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsEngine\ForceGenerators\SpringForceGenerator.h">
-      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsEngine\ForceGenerators\BungeeForceGenerator.h">
-      <Filter>Project\PhysicsEngine\ForceGenerators</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsEngine\Collision\ParticleContact.h">
-      <Filter>Project\PhysicsEngine\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsEngine\Collision\ParticleContactGenerator.h">
-      <Filter>Project\PhysicsEngine\Collision</Filter>
-    </ClInclude>
     <ClInclude Include="RubeGoldberg\Object.h">
       <Filter>Project\RubeGoldberg\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="RubeGoldberg\GameObject.h">
       <Filter>Project\RubeGoldberg\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsEngine\Collision\GroundContactGenerator.h">
-      <Filter>Project\PhysicsEngine\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsEngine\Collision\ParticleConnection.h">
-      <Filter>Project\PhysicsEngine\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsEngine\Collision\CableParticleConnection.h">
-      <Filter>Project\PhysicsEngine\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsEngine\Collision\RodParticleConnection.h">
-      <Filter>Project\PhysicsEngine\Collision</Filter>
     </ClInclude>
     <ClInclude Include="RubeGoldberg\AggregateGameObject.h">
       <Filter>Project\RubeGoldberg\GameObjects</Filter>
@@ -355,6 +328,39 @@
     </ClInclude>
     <ClInclude Include="PhysicsEngine\ForceGenerators\RigidBodyGravityGenerator.h">
       <Filter>Project\PhysicsEngine\ForceGenerators\RigidBody Force Generators</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\CableParticleConnection.h">
+      <Filter>Project\PhysicsEngine\Collision\Particle Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\GroundContactGenerator.h">
+      <Filter>Project\PhysicsEngine\Collision\Particle Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\ParticleConnection.h">
+      <Filter>Project\PhysicsEngine\Collision\Particle Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\ParticleContact.h">
+      <Filter>Project\PhysicsEngine\Collision\Particle Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\ParticleContactGenerator.h">
+      <Filter>Project\PhysicsEngine\Collision\Particle Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\Collision\RodParticleConnection.h">
+      <Filter>Project\PhysicsEngine\Collision\Particle Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\ForceGenerators\BungeeForceGenerator.h">
+      <Filter>Project\PhysicsEngine\ForceGenerators\Particle Force Generators</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\ForceGenerators\DragForceGenerator.h">
+      <Filter>Project\PhysicsEngine\ForceGenerators\Particle Force Generators</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\ForceGenerators\GravityForceGenerator.h">
+      <Filter>Project\PhysicsEngine\ForceGenerators\Particle Force Generators</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\ForceGenerators\ParticleForceGenerator.h">
+      <Filter>Project\PhysicsEngine\ForceGenerators\Particle Force Generators</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\ForceGenerators\SpringForceGenerator.h">
+      <Filter>Project\PhysicsEngine\ForceGenerators\Particle Force Generators</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

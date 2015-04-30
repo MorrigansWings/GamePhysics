@@ -43,7 +43,6 @@ namespace Physics
 		Vector3 calculateFrictionImpulse(Matrix3 *inverseInertiaTensor);
 	};
 
-
 	class ContactResolver
 	{
 	public:

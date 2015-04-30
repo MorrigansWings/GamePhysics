@@ -232,8 +232,7 @@ unsigned CollisionDetector::sphereAndHalfSpace(	const CollisionSphere &sphere,
 	Vector3 position = sphere.getAxis(3);
 
 	// Find the distance from the plane
-	float ballDistance = Vector3::dot(plane.direction, position) -
-		sphere.radius - plane.offset;
+	float ballDistance = Vector3::dot(plane.direction, position) - sphere.radius - plane.offset;
 
 	if (ballDistance >= 0) return 0;
 
