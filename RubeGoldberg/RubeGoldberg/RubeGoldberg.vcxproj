@@ -37,6 +37,7 @@
     <ClCompile Include="PhysicsEngine\Collision\CollisionDetection_Narrow.cpp" />
     <ClCompile Include="PhysicsEngine\Collision\RigidBodyContact.cpp" />
     <ClCompile Include="PhysicsEngine\ForceGenerators\RigidBodyGravityGenerator.cpp" />
+    <ClCompile Include="PhysicsEngine\ForceGenerators\RigidBodySpringGenerator.cpp" />
     <ClCompile Include="PhysicsEngine\Matrices.cpp" />
     <ClCompile Include="PhysicsEngine\Quaternion.cpp" />
     <ClCompile Include="PhysicsEngine\RigidBody.cpp" />
@@ -86,6 +87,7 @@
     <ClInclude Include="PhysicsEngine\Collision\RigidBodyContact.h" />
     <ClInclude Include="PhysicsEngine\ForceGenerators\RigidBodyForceGenerator.h" />
     <ClInclude Include="PhysicsEngine\ForceGenerators\RigidBodyGravityGenerator.h" />
+    <ClInclude Include="PhysicsEngine\ForceGenerators\RigidBodySpringGenerator.h" />
     <ClInclude Include="PhysicsEngine\Matrices.h" />
     <ClInclude Include="PhysicsEngine\Quaternion.h" />
     <ClInclude Include="PhysicsEngine\RigidBody.h" />
@@ -187,17 +189,21 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../Libraries/GL/include;../Libraries/Arc/include;../Libraries/SDL/include;../Libraries/GLM/include;GraphicsEngine;PhysicsEngine;RubeGoldberg</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>../Libraries/GL/lib;../Libraries/Arc/lib;../Libraries/SDL/lib/x86;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ArcCore.lib;ArcData.lib;SDL.lib;SDL_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>libcmt;msvcrt</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

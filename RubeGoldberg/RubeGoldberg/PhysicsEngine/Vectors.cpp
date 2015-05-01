@@ -35,7 +35,7 @@ const std::string Vector2::ToString()
 {
 	std::stringstream output;
 	output << "{ " << this->x << ", ";
-	output << this->y << "}" << std::endl;
+	output << this->y << "}";
 	return output.str();
 }
 
@@ -306,7 +306,7 @@ const std::string Vector3::ToString()
 	std::stringstream output;
 	output << "{ " << this->x << ", ";
 	output << this->y << ", ";
-	output << this->z << "}" << std::endl;
+	output << this->z << "}";
 	return output.str();
 }
 

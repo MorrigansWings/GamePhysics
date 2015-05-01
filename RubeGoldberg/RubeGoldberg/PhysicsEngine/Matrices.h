@@ -12,10 +12,13 @@ namespace Physics
 	public:
 		float	data[9];
 
-		Matrix3()
+		Matrix3() 
 		{
 			for (int i = 0; i < 9; ++i)
 				data[i] = 0.0f;
+			//data[0] = 1.0f;
+			//data[4] = 1.0f;
+			//data[8] = 1.0f;
 		}
 
 		Matrix3(float value)

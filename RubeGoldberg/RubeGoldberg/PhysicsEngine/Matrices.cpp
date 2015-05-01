@@ -120,12 +120,19 @@ Matrix3 Matrix3::getTranspose()
 
 float Matrix3::getDeterminant()
 {
-	return -data[8] * data[5] * data[2] +
-			data[4] * data[9] * data[2] +
-			data[8] * data[1] * data[6] -
-			data[0] * data[9] * data[6] -
-			data[4] * data[1] * data[10] +
-			data[0] * data[5] * data[10];
+	float t4 =  data[0] * data[4];
+	float t6 =  data[0] * data[5];
+	float t8 =  data[1] * data[3];
+	float t10 = data[2] * data[3];
+	float t12 = data[1] * data[6];
+	float t14 = data[2] * data[6];
+
+	return	  t4 * data[8] 
+			- t6 * data[7] 
+			- t8 * data[8] 
+			+ t10 * data[7] 
+			+ t12 * data[5] 
+			- t14 * data[4];
 }
 
 Matrix3 Matrix3::getInverse()
@@ -136,37 +143,16 @@ Matrix3 Matrix3::getInverse()
 	
 	det = (1.0f) / det;
 
-	result.data[0] =  (-this->data[9] * this->data[6] + this->data[5] * this->data[10]);
-	result.data[4] =  ( this->data[8] * this->data[6] - this->data[4] * this->data[10]);
-	result.data[8] =  (-this->data[8] * this->data[5] + this->data[4] * this->data[9]);
-
-	result.data[1] =  ( this->data[9] * this->data[2] - this->data[1] * this->data[10]);
-	result.data[5] =  (-this->data[8] * this->data[2] + this->data[0] * this->data[10]);
-	result.data[9] =  ( this->data[8] * this->data[1] - this->data[0] * this->data[9]);
-
-	result.data[2] =  (-this->data[5] * this->data[2] + this->data[1] * this->data[6]);
-	result.data[6] =  ( this->data[4] * this->data[2] - this->data[0] * this->data[6]);
-	result.data[10] = (-this->data[4] * this->data[1] + this->data[0] * this->data[5]);
-
-	result.data[3] = (this->data[9] *  this->data[6] *  this->data[3]
-					- this->data[5] *  this->data[10] * this->data[3]
-					- this->data[9] *  this->data[2] *  this->data[7]
-					+ this->data[1] *  this->data[10] * this->data[7]
-					+ this->data[5] *  this->data[2] *  this->data[11]
-					- this->data[1] *  this->data[6] *  this->data[11]);
-	result.data[7] = (-this->data[8] * this->data[6] *  this->data[3]
-					+ this->data[4] *  this->data[10] * this->data[3]
-					+ this->data[8] *  this->data[2] *  this->data[7]
-					- this->data[0] *  this->data[10] * this->data[7]
-					- this->data[4] *  this->data[2] *  this->data[11]
-					+ this->data[0] *  this->data[6] *  this->data[11]);
-	result.data[11] = (this->data[8] * this->data[5] *  this->data[3]
-					- this->data[4] *  this->data[9] *  this->data[3]
-					- this->data[8] *  this->data[1] *  this->data[7]
-					+ this->data[0] *  this->data[9] *  this->data[7]
-					+ this->data[4] *  this->data[1] *  this->data[11]
-					- this->data[0] *  this->data[5] *  this->data[11]);
-	return result * det;
+	result.data[0] =  (data[4] * data[8] - data[5] * data[7]) * det;
+	result.data[1] = -(data[1] * data[8] - data[2] * data[7]) * det;
+	result.data[2] =  (data[1] * data[5] - data[2] * data[4]) * det;
+	result.data[3] = -(data[3] * data[8] - data[5] * data[6]) * det;
+	result.data[4] =  (data[0] * data[8] - data[2] * data[6]) * det;
+	result.data[5] = -(data[0] * data[5] - data[2] * data[3]) * det;
+	result.data[6] =  (data[3] * data[7] - data[4] * data[6]) * det;
+	result.data[7] = -(data[0] * data[7] - data[1] * data[6]) * det;
+	result.data[8] =  (data[0] * data[4] - data[1] * data[3]) * det;
+	return result;
 }
 
 void Matrix3::setInverse(const Matrix3 &mat)

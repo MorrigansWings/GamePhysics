@@ -109,6 +109,7 @@ public:
 	void updateEntityRotation(string name, vec3 rot);
 	void updateEntityScale(string name, vec3 scale);
 	void updateEntityOrientation(string name, mat4 orient);
+	void updateEntityTransform(string name, mat4 transform);
 	//void updateEntityColor(string name, vec4 col);
 
 	void updateLineEnds(string name, vec3 endOne, vec3 endTwo);

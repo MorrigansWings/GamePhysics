@@ -33,6 +33,7 @@ namespace Physics
 		void addVelocity(const Vector3 &deltaVel) { velocity += deltaVel; }
 		void addRotation(const Vector3 &deltaRot) { rotation += deltaRot; }
 		void addForce(const Vector3 &force) { forceAccum += force; }
+		void addForceAtPoint(const Vector3 &force, const Vector3 &point);
 
 		Vector3 convertPointToLocalSpace(const Vector3 &point) const;
 		Vector3 convertPointToWorldSpace(const Vector3 &point) const;
@@ -43,6 +44,7 @@ namespace Physics
 		/*  Getters and Setters  */
 		Matrix4		getTransform() { return transform; }
 		Matrix3		getInertiaTensor() { return inverseInertiaTensor.getInverse(); }
+		Matrix3		getInertiaTensorWorld() { return inverseInertiaTensorWorld.getInverse(); }
 		Matrix3		getInverseInertiaTensor() { return inverseInertiaTensor; }
 		Matrix3		getInverseInertiaTensorWorld() { return inverseInertiaTensorWorld; }
 		Quaternion	getOrientation() { return orientation; }
@@ -60,10 +62,12 @@ namespace Physics
 		float		getAngularDamping() { return angularDamping; }
 
 		inline void setTransform(Matrix4 trans) { transform = trans; }
+		void setInertiaTensor(float radius);
+		void setInertiaTensor(Vector3 halfSize);
 		inline void setInertiaTensor(Matrix3 &tensor) { inverseInertiaTensor = tensor.getInverse(); }
 		inline void setInverseInertiaTensor(Matrix3 itensor){ inverseInertiaTensor = itensor; }
 		inline void setInverseInertiaTensorWorld(Matrix3 itensor) { inverseInertiaTensorWorld = itensor; }
-		inline void setOrientation(Quaternion orient) { orientation = orient; }
+		inline void setOrientation(Quaternion orient) { orientation = orient.getNormalized(); }
 		inline void setPosition(Vector3 pos) { position = pos; }
 		inline void setVelocity(Vector3 vel) { velocity = vel; }
 		inline void setRotation(Vector3 rot) { rotation = rot; }

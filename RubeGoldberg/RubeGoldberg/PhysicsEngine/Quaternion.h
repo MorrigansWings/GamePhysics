@@ -1,7 +1,7 @@
 #ifndef QUATERNION_H
 #define QUATERNION_H
 
-#include <string.h>
+#include <string>
 #include <glm/glm.hpp>
 #include "Vectors.h"
 #include "Matrices.h"
@@ -66,6 +66,8 @@ namespace Physics
 		void addScaledVector(const Vector3 &vect, float scale);
 
 		Matrix3 ToMatrix();
+
+		const std::string toString();
 
 
 	};

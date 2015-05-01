@@ -145,10 +145,10 @@ void Contact::applyVelocityChange(Vector3 velocityChange[2], Vector3 rotationCha
 
 	// We will calculate the impulse for each contact axis
 	Vector3 impulseContact;
-	//if (friction == 0.0f)
+	if (friction == 0.0f)
 		impulseContact = calculateFrictionlessImpulse(inverseInertiaTensor);
-	//else
-	//	impulseContact = calculateFrictionImpulse(inverseInertiaTensor);
+	else
+		impulseContact = calculateFrictionImpulse(inverseInertiaTensor);
 
 	// Convert impulse to world coordinates
 	Vector3 impulse = contactToWorld.transform(impulseContact);

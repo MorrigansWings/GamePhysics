@@ -436,6 +436,7 @@ string GraphicsManager::createPlane(string name, vec2 dimensions, vec3 position,
 	mp_Entity = New Entity(position, vec3(0.0f), vec3(1.0f), color);
 	mp_Entity->addModel(pModel);
 	mp_Entity->setUseRotationMatrix(true);
+	//mp_Entity->setUseTransform(true);
 	mp_SceneManager->getCurrentScene()->addEntity(name + "-entity", mp_Entity);
 
 	return name + "-entity";
@@ -465,9 +466,11 @@ string GraphicsManager::createSphere(string name, float radius, vec3 position, v
 	mp_Entity = New Entity(position, vec3(0.0f), vec3(radius, radius, radius), color);
 	mp_Entity->addModel(pModel);
 	mp_Entity->setUseRotationMatrix(true);
+	//mp_Entity->setUseTransform(true);
 	mp_SceneManager->getCurrentScene()->addEntity(name + "-entity", mp_Entity);
 	return name + "-entity";
 }
+
 
 string GraphicsManager::createCube(string name)
 {
@@ -492,6 +495,7 @@ string GraphicsManager::createCube(string name, vec3 position, vec3 dimensions, 
 	mp_Entity = New Entity(position, vec3(0.0f), dimensions, color);
 	mp_Entity->addModel(pModel);
 	mp_Entity->setUseRotationMatrix(true);
+	//mp_Entity->setUseTransform(true);
 	mp_SceneManager->getCurrentScene()->addEntity(name + "-entity", mp_Entity);
 
 	return name + "-entity";
@@ -543,6 +547,18 @@ void GraphicsManager::updateEntityOrientation(string name, mat4 orient)
 	{
 		// set new position
 		mp_thing->setRotationMatrix(orient);
+	}
+}
+
+void GraphicsManager::updateEntityTransform(string name, mat4 transform)
+{
+	// get entity from list
+	Entity* mp_thing = mp_SceneManager->getCurrentScene()->getEntity(name);
+
+	if (mp_thing != nullptr)
+	{
+		// set new transform
+		mp_thing->setTransformMatrix(transform);
 	}
 }
 

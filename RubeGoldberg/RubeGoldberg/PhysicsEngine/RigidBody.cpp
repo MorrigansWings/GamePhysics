@@ -130,6 +130,17 @@ void RigidBody::clearAccumulators()
 	torqueAccum.clear();
 }
 
+void RigidBody::addForceAtPoint(const Vector3 &force,
+	const Vector3 &point)
+{
+	// Convert to coordinates relative to center of mass.
+	Vector3 pt = point;
+	pt -= position;
+
+	forceAccum += force;
+	torqueAccum += Vector3::cross(pt, force);
+}
+
 Vector3 RigidBody::convertPointToLocalSpace(const Vector3 &point) const
 {
 	return transform.transformInverse(point);
@@ -148,4 +159,20 @@ Vector3 RigidBody::convertDirectionToLocalSpace(const Vector3 &direction) const
 Vector3 RigidBody::convertDirectionToWorldSpace(const Vector3 &direction) const
 {
 	return transform.transformDirection(direction);
+}
+
+void RigidBody::setInertiaTensor(float radius)
+{
+	// Set starting inertia tensor
+	Matrix3 tensor;
+	float coefficient = 0.4f * mass * radius * radius;
+	tensor.setInertiaTensorCoefficients(coefficient, coefficient, coefficient);
+	setInertiaTensor(tensor);
+}
+
+void RigidBody::setInertiaTensor(Vector3 halfSize)
+{
+	Matrix3 tensor;
+	tensor.setBlockInertiaTensor(halfSize, mass);
+	setInertiaTensor(tensor);
 }

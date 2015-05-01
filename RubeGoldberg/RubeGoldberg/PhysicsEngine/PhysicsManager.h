@@ -76,6 +76,9 @@ public:
 	string createRigidBody(string &name, Physics::Vector3 pos);
 	string createRigidBody(string &name, Physics::Vector3 pos, Physics::Quaternion orient);
 
+	void setRigidBodyDimensions(string &name, float radius);
+	void setRigidBodyDimensions(string &name, Physics::Vector3 dimensions);
+
 	RigidBody* getRigidBody(string name) { return hasRigidBody(name) ? m_rigidBodySet[name] : nullptr; }
 	Physics::Vector3 getRigidBodyPosition(string &name) { return hasRigidBody(name) ? m_rigidBodySet[name]->getPosition() : Physics::Vector3(0); }
 	Physics::Quaternion getRigidBodyOrientation(string &name) { return hasRigidBody(name) ? m_rigidBodySet[name]->getOrientation() : Physics::Quaternion(); }

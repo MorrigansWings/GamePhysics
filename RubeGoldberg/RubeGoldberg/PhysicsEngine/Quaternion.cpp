@@ -1,5 +1,7 @@
 #include "Quaternion.h"
 
+#include <sstream>
+
 using namespace Physics;
 
 Quaternion Quaternion::operator*(Quaternion &rhs)
@@ -101,4 +103,14 @@ Matrix3 Quaternion::ToMatrix()
 	result.data[5] =		  (2.0f * this->y * this->z) - (2.0f * this->x * this->w);
 	result.data[8] =  1.0f - ((2.0f * (this->x * this->x)) + (2.0f * (this->y * this->y)));
 	return result;
+}
+
+const std::string Quaternion::toString()
+{
+	std::stringstream output;
+	output << "{ " << this->w << ", ";
+	output << this->x << ", ";
+	output << this->y << ", ";
+	output << this->z << "}" << std::endl;
+	return output.str();
 }

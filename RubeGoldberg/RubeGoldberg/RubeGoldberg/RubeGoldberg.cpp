@@ -53,16 +53,34 @@ void RubeGoldberg::setup(int framerate, float groundHeight, float groundX, float
 	m_rigidBodyObjects["TEST_RIGIDBODY_SPHERE_GRAVITY"]->setColliderName(
 				mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_SPHERE_GRAVITY_COLLIDER"), string("TEST_RIGIDBODY_SPHERE_GRAVITY")));
 
-	// TEST RIGID BODY - SPHERE ON SPHERE
+	//// TEST RIGID BODY - SPHERE ON SPHERE
 	createRigidSphere("TEST_RIGIDBODY_SPHERE_ON_SPHERE", Physics::Vector3(0.0f, 15.0f, 0.0f));
 	m_rigidBodyObjects["TEST_RIGIDBODY_SPHERE_ON_SPHERE"]->setColliderName(
 		mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_SPHERE_ON_SPHERE_COLLIDER"), string("TEST_RIGIDBODY_SPHERE_ON_SPHERE")));
 
 	// TEST RIGID BODY - BOX ON SPHERE
-	createRigidBox("TEST_RIGIDBODY_BOX_ON_SPHERE", Physics::Vector3(0.5f, 25.0f, 0.0f));
+	createRigidBox("TEST_RIGIDBODY_BOX_ON_SPHERE", Physics::Vector3(0.75f, 20.0f, 0.0f));
 	m_rigidBodyObjects["TEST_RIGIDBODY_BOX_ON_SPHERE"]->setColliderName(
 		mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_BOX_ON_SPHERE_COLLIDER"), string("TEST_RIGIDBODY_BOX_ON_SPHERE")));
 	
+	// TEST RIGID BODY - BOX ON BOX
+	createRigidBox("TEST_RIGIDBODY_BOX_ON_BOX", Physics::Vector3(-0.75f, 30.0f, 0.0f));
+	m_rigidBodyObjects["TEST_RIGIDBODY_BOX_ON_BOX"]->setColliderName(
+		mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_BOX_ON_BOX_COLLIDER"), string("TEST_RIGIDBODY_BOX_ON_BOX")));
+
+	createRigidBox("TEST_RIGIDBODY_BOX_ON_BOX_2", Physics::Vector3(-0.75f, 30.0f, 0.0f));
+	m_rigidBodyObjects["TEST_RIGIDBODY_BOX_ON_BOX_2"]->setColliderName(
+		mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_BOX_ON_BOX_2_COLLIDER"), string("TEST_RIGIDBODY_BOX_ON_BOX_2")));
+
+	createRigidBox("TEST_RIGIDBODY_BOX_ON_BOX_3", Physics::Vector3(0.0f, 30.0f, 0.75f));
+	m_rigidBodyObjects["TEST_RIGIDBODY_BOX_ON_BOX"]->setColliderName(
+		mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_BOX_ON_BOX_3_COLLIDER"), string("TEST_RIGIDBODY_BOX_ON_BOX_3")));
+
+	createRigidBox("TEST_RIGIDBODY_BOX_ON_BOX", Physics::Vector3(-0.75f, 30.0f, -0.75f));
+	m_rigidBodyObjects["TEST_RIGIDBODY_BOX_ON_BOX"]->setColliderName(
+		mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_BOX_ON_BOX_3_COLLIDER"), string("TEST_RIGIDBODY_BOX_ON_BOX_3")));
+
+
 	// apply gravity to all rigid bodies
 	for (auto iter = m_rigidBodyObjects.itBegin(); iter != m_rigidBodyObjects.itEnd(); ++iter)
 	{
@@ -466,6 +484,7 @@ string RubeGoldberg::createRigidSphere(string name, Physics::Vector3 position, f
 
 	// create physics object
 	string rigidbody = mp_PhysicsManager->createRigidBody(name, position);
+	mp_PhysicsManager->setRigidBodyDimensions(rigidbody, radius);
 
 	// create graphics object
 	string entity = mp_GraphicsManager->createSphere(name, radius, position.GLM(), color.GLM());
@@ -505,6 +524,7 @@ string RubeGoldberg::createRigidBox(string name, Physics::Vector3 position, Phys
 
 	// create physics object
 	string rigidbody = mp_PhysicsManager->createRigidBody(name, position);
+	mp_PhysicsManager->setRigidBodyDimensions(rigidbody, dimensions * 0.5f);
 
 	// create graphics object
 	string entity = mp_GraphicsManager->createCube(name, position.GLM(), dimensions.GLM(), color.GLM());

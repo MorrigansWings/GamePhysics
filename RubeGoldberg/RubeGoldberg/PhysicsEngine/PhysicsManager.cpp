@@ -32,7 +32,7 @@ PhysicsManager::PhysicsManager()
 	m_data.contactArray = m_rigidBodyContacts;
 	m_data.contacts = m_rigidBodyContacts;
 
-	m_data.friction = 0.9f;
+	m_data.friction = 0.1f;
 	m_data.restitution = 0.6f;
 	m_data.tolerance = 0.1f;
 
@@ -116,7 +116,8 @@ void PhysicsManager::update(float duration)
 
 	//singlePassCollisions(duration);
 	//multiPassCollisions(duration);
-	std::cout << "RESOLVING CONTACTS! COUNT: " << m_data.contactCount << std::endl;
+	//std::cout << "RESOLVING CONTACTS! COUNT: " << m_data.contactCount << std::endl;
+	mp_contactResolver->setIterations(m_data.contactCount * 4);
 	mp_contactResolver->resolveContacts(m_rigidBodyContacts, m_data.contactCount, duration);
 	
 	// clear contacts after resolution
@@ -423,6 +424,22 @@ string PhysicsManager::createRigidBody(string &name, Physics::Vector3 pos, Physi
 		return name;
 	}
 	else return "";
+}
+
+void PhysicsManager::setRigidBodyDimensions(string &name, float radius)
+{
+	if (!hasRigidBody(name)) return;
+
+	//RigidBody* body = getRigidBody(name);
+	//body->setInertiaTensor(radius);
+}
+
+void PhysicsManager::setRigidBodyDimensions(string &name, Physics::Vector3 dimensions)
+{
+	if (!hasRigidBody(name)) return;
+
+	//RigidBody* body = getRigidBody(name);
+	//body->setInertiaTensor(dimensions);
 }
 
 bool PhysicsManager::applyGravity(string &name)

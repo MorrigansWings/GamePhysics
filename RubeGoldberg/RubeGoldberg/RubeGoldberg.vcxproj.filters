@@ -201,6 +201,9 @@
     <ClCompile Include="PhysicsEngine\ForceGenerators\SpringForceGenerator.cpp">
       <Filter>Project\PhysicsEngine\ForceGenerators\Particle Force Generators</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsEngine\ForceGenerators\RigidBodySpringGenerator.cpp">
+      <Filter>Project\PhysicsEngine\ForceGenerators\RigidBody Force Generators</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PhysicsEngine\PhysicsManager.h">
@@ -361,6 +364,9 @@
     </ClInclude>
     <ClInclude Include="PhysicsEngine\ForceGenerators\SpringForceGenerator.h">
       <Filter>Project\PhysicsEngine\ForceGenerators\Particle Force Generators</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine\ForceGenerators\RigidBodySpringGenerator.h">
+      <Filter>Project\PhysicsEngine\ForceGenerators\RigidBody Force Generators</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

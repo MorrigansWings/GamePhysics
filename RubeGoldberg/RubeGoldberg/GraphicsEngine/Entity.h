@@ -73,7 +73,11 @@ public:
 	inline mat4 getRotationMatrix( void ) const { return m_RotationMatrix; }
 	inline void setRotationMatrix( mat4 rot ) { m_RotationMatrix = rot; }
 
+	inline mat4 getTransformMatrix(void) const { return m_transform; }
+	inline void setTransformMatrix(mat4 trans) { m_transform = trans; }
+
 	inline void setUseRotationMatrix(bool value) { m_useRotationMatrix = value; }
+	inline void setUseTransform(bool val) { m_useTransformMatrix = val; }
 
 	inline bool isLightingAffected( void ) const { return m_LightingAffected; }
 	inline void setLightingAffected( bool lightingAffected ) { m_LightingAffected = lightingAffected; }
@@ -89,11 +93,13 @@ protected:
 							m_Scale;
 
 	bool					m_LightingAffected,
-							m_useRotationMatrix;
+							m_useRotationMatrix,
+							m_useTransformMatrix;
 
 	vec4					m_Color;
 
 	mat4					m_RotationMatrix;
+	mat4					m_transform;
 
 };
 
