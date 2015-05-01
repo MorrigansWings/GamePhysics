@@ -69,6 +69,31 @@ void PhysicsManager::setupGround(float height, float xbounds, float ybounds)
 	mp_groundCollisionPlane->offset = 0.0f;
 }
 
+void PhysicsManager::setupBounds(Physics::Vector2 dimensions)
+{
+	// create 4 sides for a bounding box!
+	CollisionPlane* left = new CollisionPlane();
+	left->direction = Vector3(1.0f, 0.0f, 0.0f);
+	left->offset = -dimensions.x;
+	mp_boundingBoxSides.add(left);
+
+	CollisionPlane* right = new CollisionPlane();
+	right->direction = Vector3(-1.0f, 0.0f, 0.0f);
+	right->offset = -dimensions.x;
+	mp_boundingBoxSides.add(right);
+
+	CollisionPlane* far = new CollisionPlane();
+	far->direction = Vector3(0.0f, 0.0f, -1.0f);
+	far->offset = -dimensions.y;
+	mp_boundingBoxSides.add(far);
+
+	CollisionPlane* near = new CollisionPlane();
+	near->direction = Vector3(0.0f, 0.0f, 1.0f);
+	near->offset = -dimensions.y;
+	mp_boundingBoxSides.add(near);
+
+}
+
 void PhysicsManager::update(float duration)
 {
 	// Clear force accumulators
@@ -158,6 +183,9 @@ void PhysicsManager::generateRigidBodyCollisions()
 	// Check ground collision
 	generateRigidBodyGroundCollisions();
 
+	// Check bounding box collision
+	generateRigidBodyBoundingCollisions();
+
 	// Check object collisions
 	generateRigidBodyObjectCollisions();
 	
@@ -180,6 +208,27 @@ void PhysicsManager::generateRigidBodyGroundCollisions()
 			CollisionBox* box = static_cast<CollisionBox*>(iter->second);
 			box->calculateInternals();
 			CollisionDetector::boxAndHalfSpace(*box, *mp_groundCollisionPlane, &m_data);
+		}
+	}
+}
+
+void PhysicsManager::generateRigidBodyBoundingCollisions()
+{
+	for (unsigned int i = 0; i < mp_boundingBoxSides.getSize(); ++i)
+	{
+		for (auto objectIter = m_colliders.itBegin(); objectIter != m_colliders.itEnd(); ++objectIter)
+		{
+			if (!m_data.hasMoreContacts()) return;
+
+			switch (objectIter->second->getType())
+			{
+			case SPHERE:
+				CollisionDetector::sphereAndHalfSpace(*static_cast<CollisionSphere*>(objectIter->second), *mp_boundingBoxSides[i], &m_data);
+				break;
+			case BOX:
+				CollisionDetector::boxAndHalfSpace(*static_cast<CollisionBox*>(objectIter->second), *mp_boundingBoxSides[i], &m_data);
+				break;
+			}
 		}
 	}
 }

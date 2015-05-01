@@ -46,6 +46,7 @@ public:
 	~PhysicsManager();
 
 	void setupGround(float height, float xbounds, float ybounds);
+	void setupBounds(Physics::Vector2 dimensions);
 
 	void update(float duration);
 	void updateForces(float duration);
@@ -54,8 +55,9 @@ public:
 	void integrateRigidBodies(float duration);
 	void generateCollisions();
 	void generateRigidBodyCollisions();
-	void generateRigidBodyObjectCollisions();
 	void generateRigidBodyGroundCollisions();
+	void generateRigidBodyBoundingCollisions();
+	void generateRigidBodyObjectCollisions();
 	void resolveCollisions(float duration);
 	void resolveRigidBodyCollisions(float duration);
 
@@ -130,6 +132,7 @@ private:
 	ContactResolver* mp_contactResolver;
 
 	CollisionPlane* mp_groundCollisionPlane;
+	Arc::ArrayList<CollisionPlane*> mp_boundingBoxSides;
 
 	float	m_groundHeight,
 			m_groundXBounds,

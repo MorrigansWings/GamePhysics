@@ -30,6 +30,9 @@ void RubeGoldberg::setup(int framerate, float groundHeight, float groundX, float
 									Physics::Vector3(0.0f, groundHeight, 0.0f).GLM(),
 									Physics::Vector4(0.1f, 0.5f, 0.1f, 1.0f).GLM());
 
+	// set up invisible bounding box!
+	mp_PhysicsManager->setupBounds(Physics::Vector2(10.0f, 10.0f));
+
 	// Set line width and display test lines
 	mp_GraphicsManager->setLineThickness(5.0f);
 
