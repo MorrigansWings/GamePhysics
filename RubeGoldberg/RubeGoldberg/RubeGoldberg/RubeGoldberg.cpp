@@ -1,4 +1,5 @@
 #include "RubeGoldberg.h"
+#include <random>
 
 using namespace Physics;
 
@@ -26,10 +27,16 @@ void RubeGoldberg::setup(int framerate, float groundHeight, float groundX, float
 	// Set up ground plane
 	mp_PhysicsManager->setupGround(0.0f, m_WorldX / 2.0f, m_WorldZ / 2.0f);
 	m_groundPlane = mp_GraphicsManager->createPlane("ground_plane",
-									Physics::Vector2(m_WorldX, m_WorldZ).GLM(),
-									Physics::Vector3(0.0f, groundHeight, 0.0f).GLM(),
-									Physics::Vector4(0.1f, 0.5f, 0.1f, 1.0f).GLM());
+		Physics::Vector2(m_WorldX, m_WorldZ).GLM(),
+		Physics::Vector3(0.0f, groundHeight, 0.0f).GLM(),
+		Physics::Vector4(0.1f, 0.5f, 0.1f, 1.0f).GLM());
 
+	setupBonusScene();
+	
+}
+
+void RubeGoldberg::setupTest()
+{
 	// set up invisible bounding box!
 	mp_PhysicsManager->setupBounds(Physics::Vector2(10.0f, 10.0f));
 
@@ -51,7 +58,7 @@ void RubeGoldberg::setup(int framerate, float groundHeight, float groundX, float
 	// TEST RIGID BODY - SPHERE GRAVITY
 	createRigidSphere("TEST_RIGIDBODY_SPHERE_GRAVITY", Physics::Vector3(0.0f, 5.0f, 0.0f));
 	m_rigidBodyObjects["TEST_RIGIDBODY_SPHERE_GRAVITY"]->setColliderName(
-				mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_SPHERE_GRAVITY_COLLIDER"), string("TEST_RIGIDBODY_SPHERE_GRAVITY")));
+		mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_SPHERE_GRAVITY_COLLIDER"), string("TEST_RIGIDBODY_SPHERE_GRAVITY")));
 
 	//// TEST RIGID BODY - SPHERE ON SPHERE
 	createRigidSphere("TEST_RIGIDBODY_SPHERE_ON_SPHERE", Physics::Vector3(0.0f, 15.0f, 0.0f));
@@ -62,24 +69,91 @@ void RubeGoldberg::setup(int framerate, float groundHeight, float groundX, float
 	createRigidBox("TEST_RIGIDBODY_BOX_ON_SPHERE", Physics::Vector3(0.75f, 20.0f, 0.0f));
 	m_rigidBodyObjects["TEST_RIGIDBODY_BOX_ON_SPHERE"]->setColliderName(
 		mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_BOX_ON_SPHERE_COLLIDER"), string("TEST_RIGIDBODY_BOX_ON_SPHERE")));
-	
+
 	// TEST RIGID BODY - BOX ON BOX
 	createRigidBox("TEST_RIGIDBODY_BOX_ON_BOX", Physics::Vector3(-0.75f, 30.0f, 0.0f));
 	m_rigidBodyObjects["TEST_RIGIDBODY_BOX_ON_BOX"]->setColliderName(
 		mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_BOX_ON_BOX_COLLIDER"), string("TEST_RIGIDBODY_BOX_ON_BOX")));
 
-	createRigidBox("TEST_RIGIDBODY_BOX_ON_BOX_2", Physics::Vector3(-0.75f, 30.0f, 0.0f));
-	m_rigidBodyObjects["TEST_RIGIDBODY_BOX_ON_BOX_2"]->setColliderName(
-		mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_BOX_ON_BOX_2_COLLIDER"), string("TEST_RIGIDBODY_BOX_ON_BOX_2")));
+	//createRigidBox("TEST_RIGIDBODY_BOX_ON_BOX_2", Physics::Vector3(-0.75f, 30.0f, 0.0f));
+	//m_rigidBodyObjects["TEST_RIGIDBODY_BOX_ON_BOX_2"]->setColliderName(
+	//	mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_BOX_ON_BOX_2_COLLIDER"), string("TEST_RIGIDBODY_BOX_ON_BOX_2")));
+	//
+	//createRigidBox("TEST_RIGIDBODY_BOX_ON_BOX_3", Physics::Vector3(0.0f, 30.0f, 0.75f));
+	//m_rigidBodyObjects["TEST_RIGIDBODY_BOX_ON_BOX"]->setColliderName(
+	//	mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_BOX_ON_BOX_3_COLLIDER"), string("TEST_RIGIDBODY_BOX_ON_BOX_3")));
+	//
+	//createRigidBox("TEST_RIGIDBODY_BOX_ON_BOX", Physics::Vector3(-0.75f, 30.0f, -0.75f));
+	//m_rigidBodyObjects["TEST_RIGIDBODY_BOX_ON_BOX"]->setColliderName(
+	//	mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_BOX_ON_BOX_3_COLLIDER"), string("TEST_RIGIDBODY_BOX_ON_BOX_3")));
 
-	createRigidBox("TEST_RIGIDBODY_BOX_ON_BOX_3", Physics::Vector3(0.0f, 30.0f, 0.75f));
-	m_rigidBodyObjects["TEST_RIGIDBODY_BOX_ON_BOX"]->setColliderName(
-		mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_BOX_ON_BOX_3_COLLIDER"), string("TEST_RIGIDBODY_BOX_ON_BOX_3")));
 
-	createRigidBox("TEST_RIGIDBODY_BOX_ON_BOX", Physics::Vector3(-0.75f, 30.0f, -0.75f));
-	m_rigidBodyObjects["TEST_RIGIDBODY_BOX_ON_BOX"]->setColliderName(
-		mp_PhysicsManager->addCollisionSphere(string("TEST_RIGIDBODY_BOX_ON_BOX_3_COLLIDER"), string("TEST_RIGIDBODY_BOX_ON_BOX_3")));
+	// apply gravity to all rigid bodies
+	for (auto iter = m_rigidBodyObjects.itBegin(); iter != m_rigidBodyObjects.itEnd(); ++iter)
+	{
+		iter->second->applyGravity();
+	}
+}
 
+void RubeGoldberg::setupBonusScene()
+{
+	// setup random number generator
+	
+
+	// set up invisible bounding box!
+	mp_PhysicsManager->setupBounds(Physics::Vector2(10.0f, 10.0f));
+
+	// spawn spheres
+	for (int i = 0; i < 60; ++i)
+	{
+		stringstream ss;
+		ss << "SPHERE_" << i;
+		string sphereName = ss.str();
+		ss << "_COLLIDER";
+		string colliderName = ss.str();
+
+		Physics::Vector3 position = Physics::Vector3(0.0f);
+		position.x = -9.0f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (18.0f)));
+		position.y = 15.0f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (5.0f)));
+		position.z = -9.0f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (18.0f)));
+		
+		createRigidSphere(sphereName, position);
+		m_rigidBodyObjects[sphereName]->setColliderName(
+			mp_PhysicsManager->addCollisionSphere(string(colliderName), string(sphereName)));
+	}
+
+	// spawn unmoveable boxes in grid with random heights
+	for (int x = 1; x < 5; ++x)
+	{
+		for (int z = 1; z < 5; ++z)
+		{
+			Physics::Vector3 scale = Physics::Vector3(1.5f);
+			scale.y = 2.0f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (4.0f)));
+
+			Physics::Vector3 position = Physics::Vector3(0.0f);
+			position.x = x * 4.0f;
+			position.y = scale.y / 2.0f;
+			position.z = z * 4.0f;
+
+			// offset position to center
+			position.x -= 10.0f;
+			position.z -= 10.0f;
+
+			std::cout << "Creating tower " << (z - 1) * 4 + x << " at " << position.ToString() << std::endl;
+
+			stringstream ss;
+			ss << "TOWER_" << (z - 1) * 4 + x;
+			string towerName = ss.str();
+			ss << "_COLLIDER";
+			string colliderName = ss.str();
+
+			createRigidBox(towerName, position, scale);
+			m_rigidBodyObjects[towerName]->setColliderName(
+				mp_PhysicsManager->addCollisionBox(string(colliderName), string(towerName), (scale * 0.5f)));
+			//mp_PhysicsManager->turnOffPhysics(towerName);
+
+		}
+	}
 
 	// apply gravity to all rigid bodies
 	for (auto iter = m_rigidBodyObjects.itBegin(); iter != m_rigidBodyObjects.itEnd(); ++iter)

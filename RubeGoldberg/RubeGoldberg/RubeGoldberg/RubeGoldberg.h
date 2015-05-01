@@ -17,6 +17,9 @@ public:
 
 	void setup(int framerate, float groundHeight, float groundx, float groundZ);
 
+	void setupTest();
+	void setupBonusScene();
+
 	void start();
 	void update(float deltaTime);
 	void fixedUpdate(float deltaTime);

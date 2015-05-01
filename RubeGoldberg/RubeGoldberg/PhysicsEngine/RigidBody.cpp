@@ -97,6 +97,8 @@ void RigidBody::calculateDerivedData()
 
 void RigidBody::integrate(float duration)
 {
+	if (!physicsEnabled) return;
+
 	// Calculate linear acceleration from force
 	lastFrameAcceleration = acceleration;
 	lastFrameAcceleration.addScaledVector(forceAccum, inverseMass);

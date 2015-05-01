@@ -69,33 +69,35 @@ void PhysicsManager::setupGround(float height, float xbounds, float ybounds)
 	mp_groundCollisionPlane->offset = 0.0f;
 }
 
-void PhysicsManager::setupBounds(Physics::Vector2 dimensions)
+void PhysicsManager::setupBounds(Physics::Vector2 halfSize)
 {
 	// create 4 sides for a bounding box!
 	CollisionPlane* left = new CollisionPlane();
 	left->direction = Vector3(1.0f, 0.0f, 0.0f);
-	left->offset = -dimensions.x;
+	left->offset = -halfSize.x;
 	mp_boundingBoxSides.add(left);
 
 	CollisionPlane* right = new CollisionPlane();
 	right->direction = Vector3(-1.0f, 0.0f, 0.0f);
-	right->offset = -dimensions.x;
+	right->offset = -halfSize.x;
 	mp_boundingBoxSides.add(right);
 
 	CollisionPlane* far = new CollisionPlane();
 	far->direction = Vector3(0.0f, 0.0f, -1.0f);
-	far->offset = -dimensions.y;
+	far->offset = -halfSize.y;
 	mp_boundingBoxSides.add(far);
 
 	CollisionPlane* near = new CollisionPlane();
 	near->direction = Vector3(0.0f, 0.0f, 1.0f);
-	near->offset = -dimensions.y;
+	near->offset = -halfSize.y;
 	mp_boundingBoxSides.add(near);
 
 }
 
 void PhysicsManager::update(float duration)
 {
+	if (!m_physicsEnabled) return;
+
 	// Clear force accumulators
 	//for (auto iter = m_particleSet.itBegin(); iter != m_particleSet.itEnd(); ++iter)
 	//	iter->second->clearAccumulation();
@@ -614,4 +616,18 @@ string PhysicsManager::addCollisionBox(string &name, string &bodyName, Vector3 h
 		else return "";
 	}
 	else return "";
+}
+
+void PhysicsManager::turnOffPhysics(string &name)
+{
+	RigidBody* body = getRigidBody(name);
+	if (body != nullptr)
+		body->setPhysicsEnabled(false);
+}
+
+void PhysicsManager::turnOnPhysics(string &name)
+{
+	RigidBody* body = getRigidBody(name);
+	if (body != nullptr)
+		body->setPhysicsEnabled(true);
 }

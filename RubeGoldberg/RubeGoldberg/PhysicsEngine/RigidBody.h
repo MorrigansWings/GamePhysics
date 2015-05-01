@@ -81,6 +81,7 @@ namespace Physics
 		inline void setDamping(float linear, float angular) { linearDamping = linear; angularDamping = angular; }
 		inline void setLinearDamping(float linear) { linearDamping = linear; }
 		inline void setAngularDamping(float angular) { angularDamping = angular; }
+		inline void setPhysicsEnabled(bool value) { physicsEnabled = value; }
 
 	private:
 		Quaternion orientation;
@@ -107,6 +108,8 @@ namespace Physics
 				torqueAccum,
 				acceleration,
 				lastFrameAcceleration;
+
+		bool	physicsEnabled;
 
 	};
 }

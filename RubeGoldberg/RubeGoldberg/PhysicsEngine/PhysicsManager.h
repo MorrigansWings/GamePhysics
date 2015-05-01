@@ -101,6 +101,12 @@ public:
 	string addCollisionBox(string &name, string &bodyName);
 	string addCollisionBox(string &name, string &bodyName, Physics::Vector3 halfSize);
 
+	void turnOffPhysics(string &name);
+	void turnOnPhysics(string &name);
+
+	void turnOffAllPhysics() { m_physicsEnabled = false; }
+	void turnOnAllPhysics() { m_physicsEnabled = true; }
+
 private:
 	static PhysicsManager* s_Instance;
 	const static unsigned MAX_CONTACTS = 256;
@@ -142,6 +148,8 @@ private:
 			m_groundYBounds;
 
 	int m_maxPasses;
+
+	bool m_physicsEnabled;
 
 };
 
